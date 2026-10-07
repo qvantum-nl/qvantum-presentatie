@@ -1,0 +1,30 @@
+:root{
+/* Web scale — exact brand values. Hierarchy comes from size jumps, not weight. */
+--fs-h1:60px;--lh-h1:68px;
+--fs-h2:42px;--lh-h2:48px;
+--fs-h3:32px;--lh-h3:40px;
+--fs-h4:24px;--lh-h4:30px;
+--fs-h5:20px;--lh-h5:24px;
+--fs-body-lg:18px;--lh-body-lg:28px;
+--fs-body:15px;--lh-body:22px;
+--fs-small:13px;--lh-small:20px;
+--fs-label:12px;--lh-label:18px;--ls-label:1.2px;
+--fs-stat:80px;--lh-stat:84px;
+
+/* Two weights only — Host Grotesk ships Regular and SemiBold. */
+--fw-regular:400;/* @kind font */
+--fw-semibold:600;/* @kind font */
+
+/* Never italic anywhere in this brand. */
+--font-style-emphasis:normal;/* @kind font */
+}
+.q-h1{font:var(--fw-regular) var(--fs-h1)/var(--lh-h1) var(--font-sans);letter-spacing:0;color:var(--text-heading);margin:0}
+.q-h2{font:var(--fw-regular) var(--fs-h2)/var(--lh-h2) var(--font-sans);letter-spacing:0;color:var(--text-heading);margin:0}
+.q-h3{font:var(--fw-regular) var(--fs-h3)/var(--lh-h3) var(--font-sans);color:var(--text-heading);margin:0}
+.q-h4{font:var(--fw-semibold) var(--fs-h4)/var(--lh-h4) var(--font-sans);color:var(--text-heading);margin:0}
+.q-h5{font:var(--fw-semibold) var(--fs-h5)/var(--lh-h5) var(--font-sans);color:var(--text-heading);margin:0}
+.q-body{font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-body);margin:0}
+.q-body-lg{font:var(--fw-regular) var(--fs-body-lg)/var(--lh-body-lg) var(--font-sans);color:var(--text-body);margin:0}
+.q-small{font:var(--fw-regular) var(--fs-small)/var(--lh-small) var(--font-sans);color:var(--text-muted);margin:0}
+.q-label{font:var(--fw-semibold) var(--fs-label)/var(--lh-label) var(--font-sans);letter-spacing:var(--ls-label);text-transform:uppercase;margin:0}
+.q-stat{font:var(--fw-regular) var(--fs-stat)/var(--lh-stat) var(--font-sans);margin:0}

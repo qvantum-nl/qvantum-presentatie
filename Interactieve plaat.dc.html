@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/colors.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/typography.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/radius.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/motion.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/base.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/styles.css">
+<script src="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/_ds_bundle.js"></script>
+<style>html,body{margin:0;height:100%;background:#0B0B0C;overflow:hidden}a{color:#3164FD}a:hover{color:#1E4BD8}#map svg g{transition:opacity 450ms cubic-bezier(.4,0,.2,1)}@keyframes pflow{to{stroke-dashoffset:-72}}@keyframes pflowBack{to{stroke-dashoffset:72}}@keyframes pflowAlt{0%{stroke-dashoffset:0}50%{stroke-dashoffset:-72}100%{stroke-dashoffset:0}}@media (prefers-reduced-motion:reduce){#map svg *{animation-duration:0s!important}}</style>
+</helmet>
+<div style="position:fixed;inset:0;background:#0B0B0C;font-family:'Host Grotesk',sans-serif;color:#FFFFFF">
+  <div data-screen-label="Plaat" style="position:absolute;left:50%;top:50%;width:1920px;height:1080px;margin-left:-960px;margin-top:-540px;transform:{{ stageTransform }};overflow:hidden;background:#0B0B0C">
+    <div style="position:absolute;inset:0;background-image:url('assets/img/v2-wave-dark.jpg');background-size:cover;background-position:62% 40%;opacity:.28;pointer-events:none"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 35% 50%, rgba(11,11,12,0) 30%, rgba(11,11,12,.55) 100%);pointer-events:none"></div>
+    <div id="map" ref="{{ mapRef }}" style="position:absolute;inset:0"></div>
+
+    <div style="position:absolute;left:0;top:0;width:{{ mapW }};height:1080px;pointer-events:none">
+      <sc-for list="{{ hotspots }}" as="h" hint-placeholder-count="0">
+        <button onClick="{{ h.go }}" aria-label="{{ h.label }}" style="position:absolute;left:{{ h.x }};top:{{ h.y }};width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:4px solid #FFFFFF;background:#232222;color:#FFFFFF;font-family:inherit;font-size:24px;font-weight:600;cursor:pointer;pointer-events:auto;display:{{ h.display }};align-items:center;justify-content:center;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:#91877A" style-active="background:#91877A">{{ h.n }}</button>
+      </sc-for>
+    </div>
+
+    <div style="position:absolute;left:0;top:0;width:1160px;height:1080px;pointer-events:none;opacity:{{ srcOpacity }};transition:opacity 300ms ease-out 450ms">
+      <sc-for list="{{ srcLabels }}" as="l" hint-placeholder-count="0">
+        <div onPointerDown="{{ l.drag }}" style="pointer-events: {{ markerPE }}; cursor: {{ markerCursor }}; touch-action: none; position: absolute; left: {{ l.x }}; top: {{ l.y }}; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: #FFFFFF; border: 2px solid #232222; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; color: #232222">{{ l.m }}</div>
+      </sc-for>
+      <div style="position:absolute;left:{{ wko.x }};top:{{ wko.y }};transform:{{ wko.tf }};width:300px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:10px;color:#FFFFFF;padding:14px 18px;font-size:20px;line-height:26px;text-wrap:pretty">
+        <div style="font-weight:600">{{ s.seasonal }}</div>
+        <div>{{ s.seasonalBody }}</div>
+      </div>
+    </div>
+
+    <button onClick="{{ goHome }}" aria-label="Home" style="position:absolute;left:64px;top:40px;padding:0;border:none;background:transparent;cursor:pointer;display:flex;opacity:{{ headOpacity }};pointer-events:{{ headPE }};transition:opacity 400ms ease-out"><img src="assets/qvantum-logo-white.svg" alt="Qvantum" style="height:60px;width:auto;display:block"></button>
+    <div style="position:absolute;left:64px;top:56px;display:flex;flex-direction:column;gap:20px;opacity:{{ headOpacity }};transition:opacity 400ms ease-out;pointer-events:none">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:84px">
+        <div style="font-size:20px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ s.kicker }}</div>
+        <div style="font-size:72px;line-height:80px">{{ s.title }}</div>
+        <div style="font-size:26px;line-height:36px;max-width:560px;color:#E5E6DF;margin-top:8px">{{ s.sub }}</div>
+      </div>
+
+    </div>
+
+    <sc-if value="{{ summer }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;right:824px;top:56px;display:flex;flex-direction:column;gap:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:10px;color:#FFFFFF;padding:20px 24px;font-size:20px;line-height:24px">
+        <div style="font-size:20px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ s.summer }}</div>
+        <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#3164FD;border-radius:2px"></span>{{ s.coldToHomes }}</div>
+        <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#C41230;border-radius:2px"></span>{{ s.heatToGround }}</div>
+      </div>
+    </sc-if>
+    <div style="position:absolute;left:64px;bottom:150px;display:flex;flex-direction:column;gap:14px;font-size:20px;line-height:24px;color:#E5E6DF;opacity:{{ headOpacity }};transition:opacity 400ms ease-out;pointer-events:none">
+      <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#C41230;border-radius:2px"></span>{{ s.legSupply }}</div>
+      <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#3164FD;border-radius:2px"></span>{{ s.legReturn }}</div>
+      <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#F2B705;border-radius:2px"></span>{{ s.legPower }}</div>
+    </div>
+    <div style="position:absolute;left:0;bottom:40px;width:{{ mapW }};display:flex;justify-content:center;transition:width 500ms ease-out">
+      <div style="display:flex;gap:8px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:12px;padding:8px;align-items:center">
+        <sc-for list="{{ nav }}" as="c" hint-placeholder-count="0">
+          <button onClick="{{ c.go }}" style="min-height:56px;padding:0 20px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};font-family:inherit;font-size:22px;font-weight:600;cursor:pointer;display:flex;gap:10px;align-items:center;white-space:nowrap;transition:background-color 120ms cubic-bezier(.4,0,.2,1)">
+            <span style="color:{{ c.numColor }}">{{ c.num }}</span><span style="display:{{ c.shortDisplay }}">{{ c.short }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <button onClick="{{ close }}" aria-label="{{ s.back }}" style="position:absolute;left:8px;top:8px;width:74px;height:74px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(20,20,22,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#FFFFFF;cursor:pointer;display:{{ closeDisplay }};align-items:center;justify-content:center;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:rgba(20,20,22,.9)" style-active="background:rgba(20,20,22,.9)"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 7l20 20M27 7L7 27"></path></svg></button>
+    <div style="position:absolute;right:0;top:0;width:760px;height:1080px;background:rgba(20,20,22,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-left:1px solid rgba(255,255,255,.18);color:#FFFFFF;transform:{{ panelTransform }};transition:transform 550ms cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;padding:40px 72px 40px 72px;box-sizing:border-box;gap:22px;overflow:hidden">
+      <div style="display:flex;justify-content:flex-end;align-items:center;padding-right:{{ headPadR }}">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="font-size:20px;font-weight:600;color:#C9BFB2;margin-right:8px">{{ c.count }}</div>
+          <button onClick="{{ prev }}" style="min-height:56px;padding:0 20px;border:none;border-radius:8px;background:rgba(255,255,255,.14);color:#FFFFFF;font-family:inherit;font-size:24px;font-weight:600;cursor:pointer;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:#D6D7CE" style-active="background:#D6D7CE">{{ s.prev }}</button>
+          <button onClick="{{ next }}" style="min-height:56px;padding:0 20px;border:none;border-radius:8px;background:rgba(255,255,255,.14);color:#FFFFFF;font-family:inherit;font-size:24px;font-weight:600;cursor:pointer;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:#D6D7CE" style-active="background:#D6D7CE">{{ s.next }}</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div style="font-size:20px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ c.label }}</div>
+        <div style="font-size:56px;line-height:64px;text-wrap:pretty">{{ c.title }}</div>
+        <div style="font-size:26px;line-height:38px;text-wrap:pretty">{{ c.body }}</div>
+      </div>
+      <sc-if value="{{ showPhases }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:8px">
+          <sc-for list="{{ phases }}" as="p" hint-placeholder-count="3">
+            <button onClick="{{ p.go }}" style="flex:1;min-height:64px;padding:0 16px;border:none;border-radius:8px;background:{{ p.bg }};color:{{ p.fg }};font-family:inherit;font-size:22px;font-weight:600;cursor:pointer;display:flex;gap:10px;align-items:center;justify-content:center;white-space:nowrap;transition:background-color 120ms cubic-bezier(.4,0,.2,1)"><span>{{ p.n }}</span><span>{{ p.t }}</span></button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ phaseNote }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:24px;line-height:34px;background:rgba(255,255,255,.12);border-radius:10px;padding:18px 22px;text-wrap:pretty">{{ phaseNote }}</div>
+      </sc-if>
+      <sc-if value="{{ showCool }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ openCool }}" style="display:flex;align-items:center;gap:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:16px 20px;color:#FFFFFF;text-align:left;font-family:inherit;color:#232222;cursor:pointer;width:100%;min-height:92px" style-active="background:#E5E6DF">
+          <div style="display:flex;gap:20px;align-items:baseline;flex:none"><div style="display:flex;flex-direction:column"><div style="font-size:36px;line-height:40px;color:#FFFFFF">37 °C</div><div style="font-size:14px;color:#C9BFB2">{{ s.coolOut }}</div></div><div style="display:flex;flex-direction:column"><div style="font-size:36px;line-height:40px;color:#C41230">25 °C</div><div style="font-size:14px;color:#C9BFB2">{{ s.coolIn }}</div></div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;min-width:0;flex:1"><div style="font-size:15px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#C9BFB2;text-wrap:pretty">{{ s.coolChartKicker }}</div><div style="font-size:18px;line-height:24px;color:#3164FD">{{ s.coolChartTap }}</div></div>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 17l5-6 4 4 5-8 4 5"></path></svg>
+        </button>
+      </sc-if>
+      <sc-if value="{{ showChart }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:14px;background:#F4F4F4;border-radius:12px;padding:20px 22px 16px;color:#232222;flex:0 1 auto;min-height:0">
+          <div style="height:180px;display:flex;align-items:flex-end;gap:4px;border-bottom:2px solid #232222;position:relative">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="0">
+              <div style="flex:1;height:{{ b.h }};background:{{ b.c }}"></div>
+            </sc-for>
+            <svg viewBox="0 0 240 180" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+              <polyline points="{{ loadPts }}" fill="none" stroke="#002656" stroke-width="3.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"></polyline>
+            </svg>
+          </div>
+          <div style="display:flex;gap:22px;font-size:19px;flex-wrap:wrap;color:#232222">
+            <div style="display:flex;gap:8px;align-items:center"><span style="width:18px;height:18px;background:#B7D9FF"></span>{{ s.offpeak }}</div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="width:18px;height:18px;background:#C9D5FE"></span>{{ s.normal }}</div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="width:18px;height:18px;background:#FFD1BC"></span>{{ s.peak }}</div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="width:22px;height:3px;background:#002656"></span>{{ s.hpLoad }}</div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showSources }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-size:20px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ s.sources }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;column-gap:24px">
+            <sc-for list="{{ srcLabels }}" as="l" hint-placeholder-count="0">
+              <div style="display:flex;gap:12px;align-items:center;font-size:22px;line-height:28px;padding:6px 0;border-top:1px solid rgba(255,255,255,.2)"><span style="flex:none;width:32px;height:32px;border-radius:50%;border:2px solid #232222;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600">{{ l.m }}</span>{{ l.t }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hasPoints }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ pointsShown }}" as="p" hint-placeholder-count="0">
+          <div style="font-size:23px;line-height:30px;padding:11px 0;border-top:1px solid rgba(255,255,255,.2)">{{ p }}</div>
+        </sc-for>
+      </div>
+      </sc-if>
+      <div style="display:flex;gap:16px;margin-top:auto;align-items:flex-end">
+        <sc-if value="{{ c.hasNote }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:22px;line-height:30px;font-weight:600;background:rgba(255,255,255,.12);border-radius:10px;padding:16px 20px">{{ c.note }}</div>
+        </sc-if>
+        <sc-for list="{{ products }}" as="q" hint-placeholder-count="0">
+          <button onClick="{{ q.go }}" aria-label="{{ q.aria }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:14px 18px;color:#FFFFFF 12px;flex:1 1 0;max-width:180px;min-width:0;box-sizing:border-box;font-family:inherit;color:#232222;cursor:{{ q.cursor }};transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:{{ q.hoverBg }}" style-active="background:{{ q.hoverBg }}">
+            <div style="display:flex;align-items:flex-end;justify-content:center;background:#F4F4F4;border-radius:8px;padding:8px 12px;overflow:hidden;box-sizing:border-box;width:100%"><div style="width:{{ q.w }};max-width:100%;height:{{ imgH }};background-image:url('{{ q.src }}');background-size:contain;background-repeat:no-repeat;background-position:center bottom"></div></div>
+            <div style="font-size:22px;font-weight:600;color:#FFFFFF">{{ q.name }}</div>
+            <div style="display:{{ q.linkDisplay }};font-size:17px;line-height:20px;color:#8FB8FF">{{ s.more }}</div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <sc-if value="{{ coolOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeCool }}" style="position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:30;background:rgba(35,34,34,.72);display:flex;align-items:center;justify-content:center;cursor:pointer">
+        <div style="width:1500px;max-height:980px;background:#FFFFFF;border-radius:12px;padding:40px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;color:#232222">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px">
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:18px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ s.coolChartKicker }}</div><div style="font-size:44px;line-height:52px">{{ s.coolChartTitle }}</div><div style="font-size:22px;line-height:30px;color:#C9BFB2">{{ s.coolChartSub }}</div></div>
+            <div style="display:flex;gap:40px;flex:none"><div style="display:flex;flex-direction:column;align-items:flex-end"><div style="font-size:64px;line-height:68px;white-space:nowrap">37 °C</div><div style="font-size:18px;color:#C9BFB2">{{ s.coolOut }}</div></div><div style="display:flex;flex-direction:column;align-items:flex-end"><div style="font-size:64px;line-height:68px;color:#C41230;white-space:nowrap">25 °C</div><div style="font-size:18px;color:#C9BFB2">{{ s.coolIn }}</div></div></div>
+          </div>
+          <div style="display:flex;gap:16px">
+            <div style="display:flex;flex-direction:column;justify-content:space-between;height:400px;font-size:16px;color:#C9BFB2;text-align:right;width:52px;flex:none"><span>40 °C</span><span>30 °C</span><span>20 °C</span><span>10 °C</span></div>
+            <svg viewBox="0 0 600 150" preserveAspectRatio="none" width="100%" style="flex:1;min-width:0;width:100%;height:400px;display:block;overflow:visible">
+              <line x1="0" y1="0" x2="600" y2="0" stroke="#DEDFD8" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="0" y1="50" x2="600" y2="50" stroke="#DEDFD8" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="0" y1="100" x2="600" y2="100" stroke="#DEDFD8" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="0" y1="150" x2="600" y2="150" stroke="#FFFFFF" stroke-width="1.5" vector-effect="non-scaling-stroke"></line>
+              <polyline points="{{ coolOutPts }}" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+              <polyline points="{{ coolInPts }}" fill="none" stroke="#C41230" stroke-width="4" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+            </svg>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:18px;color:#C9BFB2;padding-left:68px"><sc-for list="{{ coolDays }}" as="d" hint-placeholder-count="6"><span>{{ d }}</span></sc-for></div>
+          <div style="display:flex;gap:32px;font-size:20px;flex-wrap:wrap"><div style="display:flex;gap:10px;align-items:center"><span style="width:28px;height:3px;background:#232222"></span>{{ s.coolLegOut }}</div><div style="display:flex;gap:10px;align-items:center"><span style="width:28px;height:4px;background:#C41230"></span>{{ s.coolLegIn }}</div><div style="margin-left:auto;color:#C9BFB2">{{ s.coolSource }}</div></div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;markersVerplaatsbaar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { sel: null, k: 1, hot: [], ready: false };
+  lang = (() => { const l = new URLSearchParams(location.search).get('lang') || 'nl'; return ['nl', 'uk', 'de', 'se', 'pl', 'fr'].includes(l) ? l : 'nl'; })();
+  // Teksten komen uit i18n/plate.js (zes talen); tot die geladen is, de NL-fallback hieronder.
+  T = null;
+  T_NL = { S: { L: [], ventNotes: ['', ''], netNotes: ['', '', ''], ventPhases: ['', ''], coolPhases: ['', ''], netPhases: ['', '', ''], coolDays: [] }, C: [{}, {}, {}, {}, {}, {}, {}, {}] };
+  get S() { return (this.T || this.T_NL).S; }
+  get C() { const C = (this.T || this.T_NL).C; return this.C_NL.map((c, i) => ({ ...c, ...C[i] })); }
+  COOL_OUT = [[0,19],[4,16],[8,20],[11,29],[12,31],[13,29.5],[15,30],[18,27],[21,24],[24,22],[28,20],[32,21],[34,22],[36,22],[38,21],[40,24],[42,22],[44,21],[48,20],[52,19],[55,19.5],[57,23],[59,26],[61,25],[63,23.5],[66,23],[70,21],[72,19],[76,15],[80,20],[82,28],[84,31],[86,32],[88,31],[90,30],[92,27],[94,24],[96,21],[100,18],[102,18],[104,24],[106,33],[108,36],[109,37],[110,36],[112,34],[114,32],[116,30],[118,27],[120,24],[122,22],[124,22],[128,26],[130,31],[132,33],[134,29],[136,27],[138,26],[140,24],[142,22]];
+  COOL_IN = [[0,23.8],[6,23.6],[12,23.9],[18,24.1],[24,23.8],[30,23.7],[36,24.0],[42,24.2],[48,23.9],[54,23.8],[60,24.3],[66,24.1],[72,23.8],[78,23.7],[84,24.5],[88,24.8],[94,24.4],[100,23.9],[104,24.2],[108,25.0],[112,25.2],[116,24.8],[120,24.4],[124,24.2],[128,25.1],[132,25.3],[136,25.0],[140,24.9],[142,24.8]];
+  coolPts(a) { return a.map(([h, t]) => (h / 142 * 600).toFixed(1) + ',' + ((40 - t) / 30 * 150).toFixed(1)).join(' '); }
+  mapRef = React.createRef();
+  vb = [-360, 0, 3555.6, 2000];
+  // Koppeling naar de productinfo in de Beurspresentatie (via postMessage naar het bovenliggende venster)
+  ROUTES = { QA: 'product:qa', QG: 'product:qg', 'QG-C': 'product:qgc', QE: 'product:qeng', 'QE + QS': 'acc:qs', 'QG-30': 'product:qg30', QH: 'product:qh175', QGm: 'product:qgm', QT: 'acc:qt', SmartControl: 's4', 'Q Service': 'digital:service' };
+  openProduct(name) { const route = this.ROUTES[name]; if (!route || window.self === window.top) return; window.parent.postMessage({ type: 'qv-go', route }, '*'); }
+  C_NL = [
+    { id: 'woning', num: '1',
+      products: [{src:'assets/products/qa.png',name:'QA',w:'110px'}, {src:'assets/products/qg.png',name:'QG',w:'110px'}, {src:'assets/products/qe.png',name:'QE',w:'110px'}],
+      on: ['dh1', 'dh2', 'dh3'], zoom: ['dh1', 'dh2', 'dh3'] },
+    { id: 'shared', num: '2', products: [{src:'assets/products/qg.png',name:'QG',w:'110px'}],
+      on: ['src-boreholes', 'th'], zoom: ['src-boreholes', 'th'] },
+    { id: 'ambient', num: '3', products: [{src:'assets/products/qg.png',name:'QG-C',w:'110px'}],
+      on: ['mr', 'elec-mr', 'mr-link', 'field-mr'], zoom: ['mr', 'elec-mr', 'field-mr'] },
+    { id: 'vent', num: '4',
+      products: [{src:'assets/products/qe.png',name:'QE',w:'110px'}, {src:'assets/products/qeqs.png',name:'QE + QS',w:'110px'}],
+      on: ['pf', 'elec-pf'], zoom: ['pf'] },
+    { id: 'plant', num: '5', products: [{src:'assets/products/qg30.svg',name:'QG-30',w:'170px'}],
+      on: ['hr'], zoom: ['hr'] },
+    { id: 'cool', num: '6', products: [{src:'assets/products/qg.png',name:'QG',w:'110px'}, {src:'assets/products/qg30.svg',name:'QG-30',w:'170px'}],
+      on: ['mr', 'mr-link', 'field-mr', 'hr'], zoom: ['mr', 'field-mr', 'hr'] },
+    { id: 'net', num: '7', products: [{src:'assets/products/qg.png',name:'QG',w:'84px'}, {src:'assets/products/qg30.svg',name:'QG-30',w:'130px'}, {src:'assets/products/qh.png',name:'QH',w:'84px'}, {src:'assets/products/qgm.png',name:'QGm',w:'84px'}],
+      on: ['loop-street', 'loop-flow', 'ec', 'aqua', 'src-pvt', 'src-boreholes', 'th-future', 'field-mr', 'mr-link', 'mr-future', 'hr-future', 'hr', 'mr', 'th', 'dh1', 'dh2', 'dh3'], zoom: ['ground', 'xsrc-ground'] },
+    { id: 'grid', num: '8', products: [{src:'assets/products/qt.png',name:'QT',w:'110px'}, {src:'assets/products/smart-control.svg',name:'SmartControl',w:'110px'}, {src:'assets/products/q-support.svg',name:'Q Service',w:'110px'}],
+      on: ['grid-pylon', 'grid-station', 'grid-cable', 'elec-mr', 'elec-hr', 'src-pvt-trafo', 'src-pvt-0', 'src-pvt-1', 'src-pvt-2', 'src-pvt-3', 'hr', 'mr', 'th', 'dh1', 'dh2', 'dh3', 'ec'], zoom: ['grid-pylon', 'grid-station', 'grid-cable'] },
+  ];
+  componentDidMount() {
+    import('./i18n/plate.js').then(m => { this.T = m.plateFor(this.lang); this.forceUpdate(); });
+    try { const s = JSON.parse(localStorage.getItem('plaat-marker-offsets') || 'null'); if (s) this.setState({ mOff: s }); } catch (_) {}
+    this.fit = () => this.setState({ k: Math.min(window.innerWidth / 1920, window.innerHeight / 1080) });
+    this.fit(); window.addEventListener('resize', this.fit);
+    fetch('illustrations/v3/00-overview.svg', { cache: 'no-cache' }).then(r => r.text()).then(t => {
+      const el = this.mapRef.current; if (!el) return;
+      el.innerHTML = t; const svg = el.querySelector('svg'); this.svg = svg; const bgEl = svg.querySelector('#background'); if (bgEl) bgEl.style.display = 'none';
+      // Hoogspanningsmast: donkergrijs valt weg op het donkere canvas; lichtgrijs met iets dikkere lijnen
+      svg.querySelectorAll('#grid-pylon [stroke="#232222"]').forEach(e => { e.setAttribute('stroke', '#C9CBC2'); e.setAttribute('stroke-width', String(+e.getAttribute('stroke-width') + 1.5)); });
+      svg.querySelectorAll('#grid-pylon [fill="#232222"]').forEach(e => e.setAttribute('fill', '#C9CBC2'));
+      svg.querySelectorAll('#grid-cable polyline, #grid-cable path, #grid-cable line').forEach(e => e.setAttribute('stroke-width', '6'));
+      // Stroming: over elke warmte-/koude-/stroomleiding een gestreepte kopie die langs de lijn beweegt (rood heen, blauw terug, geel heen-en-weer)
+      const FLOW = { '#C41230': ['pflow', 'rgba(255,255,255,.85)'], '#3164FD': ['pflowBack', 'rgba(255,255,255,.85)'], '#F2B705': ['pflowAlt', 'rgba(255,255,255,.9)'] };
+      // Bronveld rijwoningen (src-boreholes): verzamelleidingen lopen twee kanten op; splits ze in de stam zodat rood overal naar de woningen loopt en blauw terug naar het veld
+      const Kc = Math.sqrt(3) / 2, sc = .8, OX = 1600 - 400 / 2 * Kc * .8, OY = 395, Dw = 1600, hr = Dw - 30, hb = Dw - 19, fy = 1200;
+      const Pw = (x, y, z = 0) => [OX + (x - y) * Kc * sc, OY + (x + y) / 2 * sc - z * sc], fx = v => Math.round(v * 10) / 10;
+      const key = pts => pts.map(p => fx(p[0]) + ',' + fx(p[1])).join(' ');
+      const SPLIT = {
+        [key([Pw(170, hr), Pw(410, hr)])]: [[Pw(170, hr), Pw(297, hr)], [Pw(410, hr), Pw(297, hr)]],
+        [key([Pw(187, fy), Pw(407, fy)])]: [[Pw(297, fy), Pw(187, fy)], [Pw(297, fy), Pw(407, fy)]],
+        [key([Pw(181, hb), Pw(421, hb)])]: [[Pw(308, hb), Pw(181, hb)], [Pw(308, hb), Pw(421, hb)]],
+        [key([Pw(198, fy + 11), Pw(418, fy + 11)])]: [[Pw(198, fy + 11), Pw(308, fy + 11)], [Pw(418, fy + 11), Pw(308, fy + 11)]],
+      };
+      svg.querySelectorAll('polyline[stroke], path[stroke], line[stroke]').forEach((e, n) => {
+        const col = (e.getAttribute('stroke') || '').toUpperCase(); let fl = FLOW[col]; if (!fl) return;
+        if (e.getAttribute('stroke-dasharray')) return; // toekomstleidingen (gestippeld) overslaan
+        const w = +e.getAttribute('stroke-width') || 4; if (w < 3) return;
+        // Stijgleiding gebouw 3: warmte komt van het PVT-dak naar beneden, dus richting omkeren
+        // Keten gebouw 3: PVT-dak → stijgleiding omlaag → onderdoor naar buiten → koppelstuk → bronveld (rood); blauw precies andersom.
+        const layer = e.closest('svg > g'); const lid = layer ? layer.id : '';
+        const pts = (e.getAttribute('points') || '').trim().split(/\s+/).map(p => p.split(',').map(Number));
+        const baseSeg = pts.length === 2 && Math.abs(pts[0][0] - pts[1][0]) > .5; // kort stuk van stijgleiding naar gevel: stond al goed
+        const ptsAttr = e.getAttribute('points') || '';
+        const pvtBranch = lid === 'loop-street' && (ptsAttr.startsWith('1807.8,1299 ') || ptsAttr.startsWith('1807.8,1307.8 ')); // aftakking PVT-veld: rood van het veld af
+        const uLoop = lid === 'src-boreholes' && pts.length === 3; // U-lus: rood omhoog uit de bodem, blauw omlaag
+        let rev = (lid === 'cut-mr' && !baseSeg) || lid === 'cut-mrroof' || lid === 'field-mr' || pvtBranch || uLoop;
+        if (lid === 'src-boreholes' && SPLIT[ptsAttr.trim()]) {
+          for (const seg of SPLIT[ptsAttr.trim()]) { const d = e.cloneNode(false); d.setAttribute('points', key(seg)); d.setAttribute('stroke', fl[1]); d.setAttribute('stroke-width', String(Math.max(2, w * .55))); d.setAttribute('stroke-linecap', 'round'); d.setAttribute('stroke-dasharray', '8 64'); d.setAttribute('data-flow', '1'); d.style.animation = 'pflow 2.4s linear infinite'; d.style.animationDelay = ((n % 7) * -.35) + 's'; d.style.pointerEvents = 'none'; e.after(d); }
+          return;
+        }
+        if (rev && fl[0] !== 'pflowAlt') fl = [fl[0] === 'pflow' ? 'pflowBack' : 'pflow', fl[1]];
+        const d = e.cloneNode(false); d.removeAttribute('stroke-dasharray'); d.setAttribute('stroke', fl[1]); d.setAttribute('stroke-width', String(Math.max(2, w * .55))); d.setAttribute('stroke-linecap', 'round');
+        d.setAttribute('stroke-dasharray', '8 64'); d.setAttribute('data-flow', '1'); d.style.animation = fl[0] + ' ' + (col === '#F2B705' ? '3.2s ease-in-out' : '2.4s linear') + ' infinite'; d.style.animationDelay = ((n % 7) * -.35) + 's'; d.style.pointerEvents = 'none';
+        e.after(d);
+      });
+      svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%'); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.setAttribute('viewBox', this.vb.join(' '));
+      this.groups = [...svg.querySelectorAll(':scope > g')];
+      const hot = this.C.map((c, i) => { const b = this.bbox(c.id === 'net' ? ['loop-flow'] : c.id === 'grid' ? ['grid-pylon'] : c.id === 'bodem' ? ['field-mr'] : c.id === 'shared' ? ['src-boreholes'] : c.id === 'wko' ? ['wko-heads'] : c.zoom); if (c.id === 'net') return { i, cx: 1765, cy: 1440 }; return { i, cx: b.x + b.w / 2, cy: c.id === 'grid' ? b.y + b.h * .35 : b.y + b.h / 2 }; });
+      const L = 'ABCDEFGH'.split('').map((t, j) => [t, [['src-pvt-0', 'src-pvt-1', 'src-pvt-2', 'src-pvt-3'], ['field-mr'], ['ec'], ['aqua'], ['xsrc-dc'], ['xsrc-office'], ['xsrc-infra'], ['wko']][j], [.5, .5, .25, .25, .5, .5, .75, .5][j], [.5, .5, .75, .75, .75, .5, .25, .5][j], [0, 0, -12, -12, 0, 0, 12, 0][j], [0, 0, 6, 6, 14, 0, -6, 0][j]]);
+      const srcLabels = L.map(([t, ids, ax, ay, dx, dy], j) => { const b = this.bbox(ids); return { t, m: 'ABCDEFGH'[j], cx: b.x + b.w * ax, cy: b.y + b.h * ay, dx, dy }; });
+      this.setState({ hot, srcLabels, ready: true });
+      try { const sv = JSON.parse(localStorage.getItem('plaat-sel') || 'null'); if (sv && sv.sel != null && this.C[sv.sel]) this.select(sv.sel, sv.phase); } catch (_) {}
+    });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.fit); cancelAnimationFrame(this.raf); }
+  match(id, list) { return list.some(p => id === p || (id.startsWith(p + '-') && !id.endsWith('-future')) || (p === 'src-pvt' && id.startsWith('src-pvt'))); }
+  bbox(ids) {
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    for (const g of this.groups) if (this.match(g.id, ids)) { const b = g.getBBox(); if (!b.width) continue; x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.width); y1 = Math.max(y1, b.y + b.height); }
+    return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+  }
+  select(i, ph) {
+    const phase = ph ?? (i != null && this.C[i].id === 'net' ? 2 : 0); this.setState({ sel: i, phase });
+    try { localStorage.setItem('plaat-sel', JSON.stringify({ sel: i, phase })); } catch (_) {}
+    if (!this.svg) return;
+    const R = 1920 / 1080;
+    let target;
+    if (i == null) { target = [-360, 0, 3555.6, 2000]; }
+    else {
+      const c = this.C[i]; const b = this.bbox(c.id === 'net' && phase < 2 ? ['ground'] : c.id === 'cool' && phase === 1 ? [...c.zoom, 'wko'] : c.zoom); const pad = 1.3, a = 1160 / 1920;
+      const bw = Math.max(b.w * pad, 640), bh = Math.max(b.h * pad, 500);
+      const w = Math.max(bw / a, bh * R), h = w / R;
+      target = [b.x + b.w / 2 - a * w / 2, b.y + b.h / 2 - h / 2, w, h];
+    }
+    const isCool = i != null && this.C[i].id === 'cool';
+    this.svg.querySelectorAll('polyline,polygon').forEach(p => { for (const a of ['stroke', 'fill']) { const k = 'o' + a; if (p.dataset[k] == null) p.dataset[k] = p.getAttribute(a) || ''; const o = p.dataset[k]; p.setAttribute(a, isCool && o === '#C41230' ? '#3164FD' : isCool && o === '#3164FD' ? '#C41230' : o); if (!o) p.removeAttribute(a); } });
+    for (const g of this.groups) {
+      const isNet = i != null && this.C[i].id === 'net';
+      if (i != null && this.C[i].id === 'woning' && (g.id === 'dh2-door' || g.id === 'dh3-door')) { g.style.opacity = '0'; continue; }
+      const isVent = i != null && this.C[i].id === 'vent';
+      if (g.id === 'cut-pf-a' || g.id === 'cut-pf-b') { g.style.opacity = isVent && g.id === (phase === 1 ? 'cut-pf-b' : 'cut-pf-a') ? '1' : '0'; continue; }
+      if (isNet && phase >= 1 && g.id === 'dh2-bore') { g.style.opacity = '0'; continue; }
+      if (isNet && phase === 0) { if (g.id.endsWith('-future') || g.id.startsWith('xsrc-') || g.id === 'loop-flow' || g.id === 'loop-street') { g.style.opacity = '0'; continue; } if (g.id.startsWith('cut-')) { g.style.opacity = '0'; continue; } g.style.opacity = ''; continue; }
+      if (isNet && phase === 1 && g.id.startsWith('xsrc-')) { g.style.opacity = '0'; continue; }
+      if (g.id.endsWith('-future')) { g.querySelectorAll('polyline').forEach(p => { p.style.strokeDasharray = 'none'; }); g.style.opacity = isNet && g.id !== 'th-future' ? '1' : '0'; continue; }
+      if (g.id.startsWith('xsrc-') || g.id === 'loop-flow') { g.style.opacity = isNet ? '1' : '0'; continue; }
+      if (i != null && this.C[i].id === 'grid' && (g.id === 'mr-link' || g.id === 'dh2-bore')) { g.style.opacity = '0.18'; continue; }
+      if (isNet && (g.id === 'dh1-qa' || g.id === 'dh3-duct')) { g.style.opacity = '0'; continue; }
+      if (isNet && g.id === 'src-boreholes') { g.style.opacity = '0.18'; continue; }
+      if (g.id.startsWith('cut-')) { const cf = { plant: ['cut-hr'], ambient: ['cut-mr', 'cut-mrroof'], bodem: ['cut-mr'], woning: ['cut-dh2', 'cut-dh3'], cool: ['cut-mr'], shared: ['cut-thqg'] }; g.style.opacity = i != null && (cf[this.C[i].id] || []).includes(g.id) ? '1' : '0'; continue; }
+      if (g.id.endsWith('-future')) g.querySelectorAll('polyline').forEach(p => { p.style.strokeDasharray = i != null && this.C[i].id === 'net' ? 'none' : ''; });
+      const keep = i == null || this.C[i].id === 'net' || g.id === 'background' || g.id === 'ground' || this.match(g.id, this.C[i].on) || (isCool && phase === 1 && this.match(g.id, ['wko']));
+      g.style.opacity = keep ? '' : (g.id.startsWith('tree') ? '0.35' : '0.18');
+    }
+    this.setState({ vbT: target });
+    const from = this.vb.slice(), t0 = performance.now(), dur = 650;
+    cancelAnimationFrame(this.raf);
+    const step = now => { const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      this.vb = from.map((v, j) => v + (target[j] - v) * e); this.svg.setAttribute('viewBox', this.vb.join(' '));
+      if (p < 1) this.raf = requestAnimationFrame(step); };
+    this.raf = requestAnimationFrame(step);
+  }
+  dragM(m) {
+    return e => {
+      if (!this.props.markersVerplaatsbaar) return;
+      e.preventDefault(); const k = this.state.k, sx = e.clientX, sy = e.clientY, o0 = ((this.state.mOff || {})[m] || [0, 0]).slice();
+      const mv = ev => this.setState(s => ({ mOff: { ...(s.mOff || {}), [m]: [o0[0] + (ev.clientX - sx) / k, o0[1] + (ev.clientY - sy) / k] } }));
+      const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); try { localStorage.setItem('plaat-marker-offsets', JSON.stringify(this.state.mOff)); } catch (_) {} };
+      window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+    };
+  }
+  renderVals() {
+    const { sel, k, hot, vbT, srcLabels = [], phase = 2 } = this.state; const open = sel != null; const n = this.C.length; const S = this.S;
+    const c = open ? this.C[sel] : this.C[0];
+    const sc = 1920 / 3555.6;
+    const tar = [.04,.035,.022,.022,.035,.04,.055,.16,.21,.14,.1,.09,.115,.1,.095,.1,.23,.24,.18,.12,.09,.085,.045,.03];
+    const load = [[0,1.5],[1,1],[2,.3],[3,6.5],[3.5,3.5],[4.5,5],[5,.3],[5.5,2.6],[6,5.8],[6.6,3],[7,0],[12.4,0],[12.7,1.6],[13,0],[14,1.1],[14.4,0],[19,0],[19.1,6],[19.8,5],[20.3,1],[21.5,1],[21.7,2.8],[22,1],[23,.8],[24,1.3]];
+    return {
+      s: S,
+      mapRef: this.mapRef,
+      stageTransform: `scale(${k})`,
+      mapW: open ? '1160px' : '1920px',
+      headOpacity: open ? 0 : 1, headPE: open ? 'none' : 'auto', goHome: () => { if (window.self !== window.top) window.parent.postMessage({ type: 'qv-go', route: 'home' }, '*'); },
+      panelTransform: open ? 'translateX(0)' : 'translateX(101%)',
+      headPadR: window.self !== window.top ? '72px' : '0px',
+      closeDisplay: open ? 'flex' : 'none',
+      hotspots: hot.map(h => ({ n: this.C[h.i].num || '', label: this.C[h.i].title, x: ((h.cx + 360) * sc) + 'px', y: (h.cy * sc) + 'px', display: open || !this.C[h.i].num ? 'none' : 'flex', go: () => this.select(h.i) })),
+      nav: this.C.map((x, i) => ({ num: x.num, short: x.short, go: () => this.select(sel === i ? null : i),
+        bg: sel === i ? '#FFFFFF' : 'transparent', fg: sel === i ? '#232222' : '#FFFFFF', numColor: sel === i ? '#232222' : '#C9BFB2', shortDisplay: !open || sel === i || !x.num ? 'inline' : 'none' })),
+      c: { ...c, count: c.num ? `${c.num} / ${this.C.length}` : '', hasNote: !!c.note },
+      products: c.products.map(q => { const linked = !!this.ROUTES[q.name] && window.self !== window.top; return { ...q, go: () => this.openProduct(q.name), aria: S.info + ' ' + q.name, linkDisplay: linked ? 'block' : 'none', cursor: linked ? 'pointer' : 'default', hoverBg: linked ? '#E5E6DF' : '#F4F4F4' }; }),
+      close: () => this.select(null),
+      prev: () => this.select(((sel ?? 0) - 1 + n) % n),
+      next: () => this.select(((sel ?? -1) + 1) % n),
+      showChart: open && c.id === 'grid', showCool: open && c.id === 'cool', coolOpen: !!this.state.coolOpen, openCool: () => this.setState({ coolOpen: true }), closeCool: () => this.setState({ coolOpen: false }), coolOutPts: this.coolPts(this.COOL_OUT), coolInPts: this.coolPts(this.COOL_IN), coolDays: S.coolDays || [],
+      srcOpacity: open && c.id === 'net' && phase === 2 ? 1 : 0,
+      showPhases: open && (c.id === 'net' || c.id === 'vent'),
+      wko: (() => { const l = srcLabels.find(s => s.m === 'H'); if (!l || !vbT) return { x: '0px', y: '0px', tf: 'none' }; const o = (this.state.mOff || {}).H || [0, 0]; const x = (l.cx - vbT[0]) / vbT[2] * 1920 + l.dx + o[0], y = (l.cy - vbT[1]) / vbT[3] * 1080 + l.dy + o[1]; const flip = false; return { x: (x - 20) + 'px', y: (y + 40) + 'px', tf: 'none' }; })(),
+      phaseNote: open && c.id === 'vent' ? S.ventNotes[phase] : open && c.id === 'cool' ? S.coolNote : open && c.id === 'net' ? S.netNotes[phase] : '',
+      phases: (c.id === 'vent' ? S.ventPhases : c.id === 'cool' ? S.coolPhases : S.netPhases).map((t, j) => ({ t, n: j + 1, go: () => this.select(sel, j), bg: phase === j ? '#FFFFFF' : 'rgba(255,255,255,.14)', fg: phase === j ? '#232222' : '#FFFFFF' })),
+      summer: open && c.id === 'cool',
+      srcLabels: srcLabels.map((l, j) => { const o = (this.state.mOff || {})[l.m] || [0, 0]; return { t: (S.L || [])[j] || '', m: l.m, x: vbT ? ((l.cx - vbT[0]) / vbT[2] * 1920 + l.dx + o[0]) + 'px' : '0px', y: vbT ? ((l.cy - vbT[1]) / vbT[3] * 1080 + l.dy + o[1]) + 'px' : '0px', drag: this.dragM(l.m) }; }),
+      markerPE: this.props.markersVerplaatsbaar ? 'auto' : 'none', markerCursor: this.props.markersVerplaatsbaar ? 'grab' : 'default',
+      showSources: open && c.id === 'net' && phase === 2,
+      pointsShown: open && (c.id === 'cool' || c.id === 'net' || c.id === 'vent' || c.id === 'grid') ? [] : c.points,
+      hasPoints: !(open && (c.id === 'cool' || c.id === 'net' || c.id === 'vent' || c.id === 'grid')),
+      imgH: c.id === 'grid' ? '64px' : '112px',
+      bars: tar.map((t, h) => ({ h: (t / .25 * 100) + '%', c: (h >= 7 && h < 10) || (h >= 16 && h < 19) ? '#FFD1BC' : (h < 7 || h >= 22) ? '#B7D9FF' : '#C9D5FE' })),
+      loadPts: load.map(([h, kw]) => `${(h / 24 * 240).toFixed(1)},${(180 - kw / 7 * 170).toFixed(1)}`).join(' '),
+    };
+  }
+}
+</script>
+</body>
+</html>

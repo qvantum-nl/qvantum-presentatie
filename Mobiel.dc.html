@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"><script src="analytics.js?v=1791372538"></script><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/fonts.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0B0B0C; color: #FFFFFF; font-family: "Host Grotesk", Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #8FB8FF; } a:hover { color: #FFFFFF; }
+    button { font-family: inherit; }
+    * { box-sizing: border-box; }
+  </style>
+</helmet>
+<div style="min-height:100vh;background:#0B0B0C;color:#FFFFFF;max-width:560px;margin:0 auto;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:url('assets/img/v2-wave-dark.jpg') center top/cover no-repeat;opacity:.55;pointer-events:none"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.1) 0%,rgba(11,11,12,.85) 420px,#0B0B0C 700px);pointer-events:none"></div>
+
+  <div style="position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;padding:12px 16px;background:rgba(11,11,12,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)">
+    <div style="display:flex;align-items:center;gap:10px;flex:none">
+      <button onClick="{{ goBack }}" aria-label="{{ back }}" style="display:{{ backDisplay }};align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);color:#FFFFFF;cursor:pointer;padding:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;background:none;border:none;padding:0;cursor:pointer;min-height:44px"><img src="assets/qvantum-logo-white.svg" alt="Qvantum" style="height:26px;display:block"></button>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;flex:1 1 236px;justify-content:flex-end;min-width:0">
+      <sc-for list="{{ langs }}" as="l" hint-placeholder-count="2">
+        <button onClick="{{ l.go }}" style="flex:none;min-width:36px;min-height:36px;padding:0 6px;border-radius:18px;border:1px solid rgba(255,255,255,.22);background:{{ l.bg }};color:{{ l.fg }};font-size:13px;font-weight:600;letter-spacing:.4px;cursor:pointer">{{ l.code }}</button>
+      </sc-for>
+    </div>
+    <div style="flex:1 0 100%;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin:0 -8px -6px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.go }}" style="min-height:40px;border:none;border-radius:10px;background:{{ n.bg }};color:{{ n.fg }};font-size:12px;font-weight:600;cursor:pointer;padding:0 2px;letter-spacing:.2px">{{ n.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:1;padding:0 20px 48px">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:28px;padding-top:56px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="font-size:40px;line-height:44px;font-weight:600;letter-spacing:-.5px;text-wrap:pretty">{{ s.homeTitle }}</div>
+          <div style="font-size:18px;line-height:26px;color:#D8D3CC;text-wrap:pretty">{{ s.homeSub }}</div>
+        </div>
+        <a href="{{ formUrl }}" target="_blank" rel="noopener" data-cta="hubspot-formulier" style="display:{{ formDisplay }};align-items:center;justify-content:center;min-height:52px;padding:0 20px;border-radius:12px;background:#3164FD;color:#FFFFFF;font-size:16px;font-weight:600;text-decoration:none" style-active="background:#2550D6">Neem contact met mij op</a>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <sc-for list="{{ tiles }}" as="tl" hint-placeholder-count="7">
+            <button onClick="{{ tl.go }}" style="grid-column:{{ tl.span }};display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:{{ tl.h }};padding:16px;border-radius:16px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#FFFFFF;text-align:left;cursor:pointer" style-active="background:rgba(255,255,255,.2)">
+              <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#C9BFB2">{{ tl.count }}</div>
+              <div style="font-size:22px;line-height:26px;font-weight:600">{{ tl.label }}</div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isStory }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:30px;padding-top:28px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#C9BFB2">{{ s.storyLabel }}</div>
+          <div style="font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.3px;text-wrap:pretty">{{ s.s1Title }}</div>
+          <div style="font-size:17px;line-height:25px;color:#D8D3CC;text-wrap:pretty">{{ s.s1Sub }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.18)">
+          <sc-for list="{{ s1 }}" as="k" hint-placeholder-count="4">
+            <div style="border-bottom:1px solid rgba(255,255,255,.18)">
+              <button onClick="{{ k.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:12px 0;background:none;border:none;color:#FFFFFF;font-size:18px;font-weight:600;text-align:left;cursor:pointer"><span style="text-wrap:pretty">{{ k.t }}</span><span style="font-size:24px;color:#C9BFB2;flex:none">{{ k.sign }}</span></button>
+              <div style="display:{{ k.display }};padding:0 0 16px;font-size:16px;line-height:24px;color:#D8D3CC;text-wrap:pretty">{{ k.d }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="height:220px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.22);background:url('assets/img/v2-factory.jpg') center/cover no-repeat"></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="font-size:26px;line-height:30px;font-weight:600;text-wrap:pretty">{{ s.s2Title }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <sc-for list="{{ facs }}" as="f" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10)">
+                <div style="font-size:16px;font-weight:600">{{ f.name }}</div>
+                <div style="font-size:14px;line-height:20px;color:#C9BFB2">{{ f.a }}</div>
+                <div style="font-size:14px;line-height:20px;color:#C9BFB2">{{ f.b }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:26px;line-height:30px;font-weight:600;text-wrap:pretty">{{ s.s4Title }}</div>
+          <div style="font-size:16px;line-height:24px;color:#D8D3CC;text-wrap:pretty">{{ s.s4Sub }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.18)">
+          <sc-for list="{{ s4 }}" as="k" hint-placeholder-count="7">
+            <div style="border-bottom:1px solid rgba(255,255,255,.18)">
+              <button onClick="{{ k.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:12px 0;background:none;border:none;color:#FFFFFF;font-size:18px;font-weight:600;text-align:left;cursor:pointer"><span style="text-wrap:pretty">{{ k.t }}</span><span style="font-size:24px;color:#C9BFB2;flex:none">{{ k.sign }}</span></button>
+              <div style="display:{{ k.display }};flex-direction:column;gap:14px;padding:0 0 18px">
+                <div style="height:200px;border-radius:12px;background:#F4F4F4;position:relative;overflow:hidden"><div style="position:absolute;inset:14px;background:url('{{ k.img }}') center/contain no-repeat"></div></div>
+                <div style="font-size:16px;line-height:24px;color:#D8D3CC;text-wrap:pretty">{{ k.d }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:16px;background:#F4F4F4;color:#232222">
+          <div style="font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#6B6B6B">{{ s.s6Tile }}</div>
+          <div style="font-size:22px;line-height:26px;font-weight:600">{{ s.s6Sub }}</div>
+          <div style="font-size:15px;line-height:22px;color:#4A4A4A;text-wrap:pretty">{{ s.s6Body }}</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isImpact }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:28px">
+        <div style="font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.3px;text-wrap:pretty">{{ s.impactTitle }}</div>
+        <div style="height:210px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.22);background:#0B0B0C url('assets/img/s4-plaat-overview-crop.png') center/cover no-repeat"></div>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.18)">
+          <sc-for list="{{ apps }}" as="a" hint-placeholder-count="8">
+            <div style="border-bottom:1px solid rgba(255,255,255,.18)">
+              <button onClick="{{ a.toggle }}" style="width:100%;display:flex;align-items:center;gap:14px;min-height:60px;padding:12px 0;background:none;border:none;color:#FFFFFF;text-align:left;cursor:pointer">
+                <span style="flex:none;width:32px;height:32px;border-radius:16px;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">{{ a.num }}</span>
+                <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;line-height:22px;font-weight:600;text-wrap:pretty">{{ a.short }}</span><span style="font-size:14px;color:#C9BFB2">{{ a.label }}</span></span>
+                <span style="font-size:24px;color:#C9BFB2;flex:none">{{ a.sign }}</span>
+              </button>
+              <div style="display:{{ a.display }};flex-direction:column;gap:14px;padding:0 0 18px 46px">
+                <div style="font-size:20px;line-height:26px;font-weight:600;text-wrap:pretty">{{ a.title }}</div>
+                <div style="font-size:16px;line-height:24px;color:#D8D3CC;text-wrap:pretty">{{ a.body }}</div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <sc-for list="{{ a.points }}" as="pt" hint-placeholder-count="2"><div style="display:flex;gap:10px;font-size:15px;line-height:22px;color:#D8D3CC"><span style="color:#C9BFB2">•</span><span style="text-wrap:pretty">{{ pt }}</span></div></sc-for>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <sc-for list="{{ a.products }}" as="pr" hint-placeholder-count="1">
+                    <button onClick="{{ pr.go }}" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 10px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);color:#FFFFFF;cursor:{{ pr.cursor }};min-width:84px">
+                      <span style="width:64px;height:64px;border-radius:8px;background:#F4F4F4 url('{{ pr.src }}') center bottom 6px/auto 80% no-repeat;display:block"></span>
+                      <span style="font-size:14px;font-weight:600">{{ pr.name }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDigital }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:28px">
+        <div style="font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.3px">{{ s.digitalTitle }}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <sc-for list="{{ digitals }}" as="d" hint-placeholder-count="6">
+            <button onClick="{{ d.toggle }}" style="display:flex;flex-direction:column;gap:0;padding:10px;border-radius:16px;border:1px solid {{ d.border }};background:rgba(255,255,255,.10);color:#FFFFFF;text-align:left;cursor:pointer">
+              <div style="height:110px;border-radius:10px;overflow:hidden;background:url('{{ d.img }}') center/cover no-repeat"></div>
+              <div style="display:flex;flex-direction:column;gap:2px;padding:12px 4px 4px"><div style="font-size:18px;line-height:22px;font-weight:600">{{ d.label }}</div><div style="font-size:13px;line-height:18px;color:#C9BFB2">{{ d.tag }}</div></div>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ dig.show }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:16px;padding:20px;border-radius:16px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10)">
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:24px;line-height:28px;font-weight:600;text-wrap:pretty">{{ dig.title }}</div><div style="font-size:16px;line-height:24px;color:#D8D3CC;text-wrap:pretty">{{ dig.subtitle }}</div></div>
+            <sc-for list="{{ dig.groups }}" as="g" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#C9BFB2">{{ g.h }}</div>
+                <sc-for list="{{ g.b }}" as="b" hint-placeholder-count="3"><div style="display:flex;gap:10px;font-size:15px;line-height:22px"><span style="color:#C9BFB2">•</span><span style="text-wrap:pretty">{{ b }}</span></div></sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAcc }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:28px">
+        <div style="font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.3px">{{ s.accTitle }}</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ accs }}" as="a" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10)">
+              <button onClick="{{ a.toggle }}" style="display:flex;gap:14px;align-items:center;background:none;border:none;padding:0;color:#FFFFFF;text-align:left;cursor:pointer">
+                <span style="flex:none;width:96px;height:96px;border-radius:10px;background:#F4F4F4 url('{{ a.img }}') center/cover no-repeat;display:block"></span>
+                <span style="flex:1;display:flex;flex-direction:column;gap:3px"><span style="font-size:22px;line-height:26px;font-weight:600">{{ a.name }}</span><span style="font-size:14px;line-height:20px;color:#C9BFB2;text-wrap:pretty">{{ a.tag }}</span></span>
+                <span style="font-size:24px;color:#C9BFB2;flex:none;padding-right:6px">{{ a.sign }}</span>
+              </button>
+              <div style="display:{{ a.display }};flex-direction:column;gap:18px;padding:18px 4px 6px">
+                <sc-for list="{{ a.panels }}" as="pn" hint-placeholder-count="2">
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <div style="font-size:18px;line-height:22px;font-weight:600;text-wrap:pretty">{{ pn.title }}</div>
+                    <div style="display:{{ pn.subDisplay }};font-size:15px;line-height:22px;color:#D8D3CC;text-wrap:pretty">{{ pn.sub }}</div>
+                    <sc-for list="{{ pn.bullets }}" as="b" hint-placeholder-count="2"><div style="display:flex;gap:10px;font-size:15px;line-height:22px"><span style="color:#C9BFB2">•</span><span style="text-wrap:pretty">{{ b }}</span></div></sc-for>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isProducts }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:28px">
+        <div style="font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.3px">{{ s.productsTitle }}</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ products }}" as="p" hint-placeholder-count="3">
+            <button onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:0;padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#FFFFFF;text-align:left;cursor:pointer" style-active="background:rgba(255,255,255,.2)">
+              <div style="height:190px;border-radius:10px;background:#000 radial-gradient(ellipse at 50% 45%,rgba(120,130,150,.55) 0%,rgba(0,0,0,0) 62%);position:relative;overflow:hidden">
+                <div style="position:absolute;inset:0;background:url('{{ p.img }}') center 60%/auto 92% no-repeat"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:2px;padding:14px 6px 6px">
+                <div style="font-size:24px;line-height:28px;font-weight:600">{{ p.title }}</div>
+                <div style="font-size:15px;line-height:20px;color:#C9BFB2">{{ p.subtitle }}</div>
+                <div style="font-size:15px;line-height:20px;color:#C9BFB2">{{ p.spec }}</div>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;padding-top:20px">
+        <button onClick="{{ goProducts }}" style="align-self:flex-start;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px 0 10px;border-radius:22px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);color:#FFFFFF;font-size:15px;cursor:pointer"><span style="font-size:18px;line-height:1">‹</span>{{ s.back }}</button>
+        <div style="height:260px;border-radius:16px;background:#000 radial-gradient(ellipse at 50% 45%,rgba(120,130,150,.55) 0%,rgba(0,0,0,0) 62%);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.22)">
+          <div style="position:absolute;inset:0;background:url('{{ prod.img }}') center 60%/auto 92% no-repeat"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:34px;line-height:38px;font-weight:600;letter-spacing:-.3px">{{ prod.title }}</div>
+          <div style="font-size:17px;line-height:24px;color:#C9BFB2">{{ prod.subtitle }}</div>
+          <div style="font-size:17px;line-height:24px;color:#C9BFB2">{{ prod.spec }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,.18)">
+          <sc-for list="{{ prod.bullets }}" as="b" hint-placeholder-count="4">
+            <div style="padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18);font-size:17px;line-height:24px;text-wrap:pretty">{{ b }}</div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ prod.hasSpecs }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#C9BFB2">{{ prod.specTech }}</div>
+            <div style="border-radius:16px;background:#F4F4F4;color:#232222;padding:6px 16px 4px">
+              <div style="display:grid;grid-template-columns:{{ prod.specGrid }};gap:0 10px;font-size:14px;line-height:20px">
+                <div style="padding:12px 0 8px;border-bottom:1px solid #D6D7CE"></div>
+                <sc-for list="{{ prod.specCols }}" as="h" hint-placeholder-count="2"><div style="padding:12px 0 8px;font-weight:600;border-bottom:1px solid #D6D7CE;white-space:nowrap">{{ h }}</div></sc-for>
+              </div>
+              <sc-for list="{{ prod.specRows }}" as="r" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:{{ prod.specGrid }};gap:0 10px;font-size:{{ r.size }};line-height:20px;border-bottom:{{ r.border }}">
+                  <div style="padding:{{ r.pad }};font-weight:{{ r.weight }};color:{{ r.color }};text-transform:{{ r.tt }};letter-spacing:{{ r.ls }};text-wrap:pretty">{{ r.label }}<span style="color:#6B6B6B;font-weight:400;text-transform:none;letter-spacing:0"> {{ r.unit }}</span></div>
+                  <sc-for list="{{ r.vals }}" as="v" hint-placeholder-count="1"><div style="padding:{{ r.pad }};grid-column:{{ v.span }};text-wrap:pretty">{{ v.v }}</div></sc-for>
+                </div>
+              </sc-for>
+              <div style="padding:10px 0 12px;font-size:12px;line-height:16px;color:#6B6B6B;text-wrap:pretty">{{ prod.specFn }}</div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ prod.hasPlates }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#C9BFB2">{{ prod.platesTitle }}</div>
+            <sc-for list="{{ prod.plates }}" as="pl" hint-placeholder-count="1">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="border-radius:16px;background:#E5E6DF;overflow:hidden;border:1px solid rgba(255,255,255,.22);aspect-ratio:16/9"><object data-plate="1" data="{{ pl.svg }}" type="image/svg+xml" style="display:block;width:100%;height:100%;pointer-events:none"></object></div>
+                <div style="font-size:15px;line-height:22px;color:#D8D3CC;text-wrap:pretty">{{ pl.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isPortfolio }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:28px">
+        <div style="font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.3px">{{ s.portfolioTitle }}</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <sc-for list="{{ countries }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.go }}" style="min-height:40px;padding:0 14px;border-radius:20px;border:1px solid rgba(255,255,255,.22);background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ cases }}" as="cs" hint-placeholder-count="3">
+            <button onClick="{{ cs.open }}" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:220px;padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,.22);overflow:hidden;color:#FFFFFF;text-align:left;cursor:pointer;background:#1A1A1C">
+              <div style="position:absolute;inset:0;background:url('{{ cs.a }}') {{ cs.aPos }}/cover no-repeat"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.82) 100%)"></div>
+              <div style="position:relative;display:flex;flex-direction:column;gap:4px">
+                <div style="font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#D8D3CC">{{ cs.size }}</div>
+                <div style="font-size:24px;line-height:28px;font-weight:600">{{ cs.title }}</div>
+                <div style="font-size:15px;line-height:20px;color:#D8D3CC">{{ cs.subtitle }}</div>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;padding-top:20px">
+        <button onClick="{{ goPortfolio }}" style="align-self:flex-start;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px 0 10px;border-radius:22px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);color:#FFFFFF;font-size:15px;cursor:pointer"><span style="font-size:18px;line-height:1">‹</span>{{ s.back }}</button>
+        <div style="height:280px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.22);background:url('{{ cs.a }}') {{ cs.aPos }}/cover no-repeat"></div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:34px;line-height:38px;font-weight:600;letter-spacing:-.3px;text-wrap:pretty">{{ cs.title }}</div>
+          <div style="font-size:17px;line-height:24px;color:#C9BFB2">{{ cs.subtitle }}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <sc-for list="{{ cs.rows }}" as="r" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:4px;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10)">
+              <div style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#C9BFB2">{{ r.l }}</div>
+              <div style="font-size:16px;line-height:22px;font-weight:600;text-wrap:pretty">{{ r.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.18)">
+          <sc-for list="{{ cs.bullets }}" as="b" hint-placeholder-count="3">
+            <div style="padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18);font-size:17px;line-height:24px;text-wrap:pretty">{{ b }}</div>
+          </sc-for>
+        </div>
+        <div style="display:{{ cs.quoteDisplay }};flex-direction:column;gap:10px;padding:20px;border-radius:16px;background:#F4F4F4;color:#232222">
+          <div style="font-size:19px;line-height:27px;text-wrap:pretty">“{{ cs.quote }}”</div>
+          <div style="font-size:14px;color:#6B6B6B">{{ cs.name }}</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22px;padding-top:28px">
+        <div style="font-size:32px;line-height:36px;font-weight:600;letter-spacing:-.3px">{{ s.contactTitle }}</div>
+        <div style="font-size:18px;line-height:26px;color:#D8D3CC;text-wrap:pretty">{{ s.contactIntro }}</div>
+        <a href="{{ formUrl }}" target="_blank" rel="noopener" data-cta="hubspot-formulier" style="display:{{ formDisplay }};align-items:center;justify-content:center;min-height:52px;padding:0 20px;border-radius:12px;background:#3164FD;color:#FFFFFF;font-size:16px;font-weight:600;text-decoration:none" style-active="background:#2550D6">Neem contact met mij op</a>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ contactBtns }}" as="b" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;min-height:56px;padding:0 18px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);font-size:17px;font-weight:600">{{ b }}</div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:12px;line-height:18px;letter-spacing:1.2px;text-transform:uppercase;color:#D8D3CC">{{ s.pickCountry }}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ ctyList }}" as="c" hint-placeholder-count="6">
+              <button onClick="{{ c.go }}" style="min-height:40px;padding:0 14px;border-radius:20px;border:1px solid rgba(255,255,255,.22);background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer">{{ c.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:12px;line-height:18px;letter-spacing:1.2px;text-transform:uppercase;color:#D8D3CC">{{ s.salesLabel }}</div>
+          <sc-if value="{{ salesEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:16px 18px;border-radius:14px;border:1px dashed rgba(255,255,255,.25);font-size:15px;color:#D8D3CC">{{ s.tbd }}</div></sc-if>
+          <sc-for list="{{ sales }}" as="p" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08)">
+              <div style="font-size:18px;line-height:24px;font-weight:600">{{ p.name }}</div>
+              <div style="font-size:14px;line-height:20px;color:#D8D3CC">{{ p.role }}</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+                <a href="{{ p.telHref }}" style="display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:20px;background:#3164FD;color:#FFFFFF;font-size:14px;font-weight:600;text-decoration:none">{{ p.tel }}</a>
+                <a href="{{ p.mailHref }}" style="display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:20px;border:1px solid rgba(255,255,255,.28);color:#FFFFFF;font-size:14px;font-weight:600;text-decoration:none">{{ p.mail }}</a>
+              </div>
+            </div>
+          </sc-for>
+          <a href="{{ cty.generalHref }}" style="display:{{ cty.generalDisplay }};align-items:center;justify-content:space-between;min-height:52px;padding:0 18px;border-radius:12px;border:1px solid rgba(255,255,255,.18);color:#FFFFFF;font-size:15px;text-decoration:none"><span>{{ s.salesGeneral }}</span><span style="font-weight:600">{{ cty.general }}</span></a>
+          <a href="{{ cty.mailHref }}" style="display:{{ cty.mailDisplay }};align-items:center;justify-content:space-between;min-height:52px;padding:0 18px;border-radius:12px;border:1px solid rgba(255,255,255,.18);color:#FFFFFF;font-size:15px;text-decoration:none"><span>E-mail</span><span style="font-weight:600;color:#8FB8FF">{{ cty.mail }}</span></a>
+        </div>
+        <div style="display:{{ cty.addrDisplay }};flex-direction:column;gap:4px;padding:20px;border-radius:16px;background:#F4F4F4;color:#232222">
+          <div style="font-size:19px;font-weight:600">{{ cty.entity }}</div>
+          <div style="font-size:15px;line-height:22px;color:#6B6B6B">{{ cty.addr }}</div>
+          <a href="{{ cty.webHref }}" style="font-size:17px;color:#3164FD">{{ cty.web }}</a>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844}}">
+class Component extends DCLogic {
+  // HubSpot-contactformulier (Nederlandstalig); knop alleen in NL zichtbaar
+  FORM_URL = 'https://share-eu1.hsforms.com/1kK9eedFYQYmgnnYWYQICBw2dm0ob?utm_source=beurs&utm_medium=mobiel&utm_campaign=vakbeurs-energie-2026';
+  state = { route: 'home', lang: 'nl', copy: null, langList: null, country: 'nl', open: {}, dig: null, qr: '' };
+  SALES = [
+    { name: 'Koen Pape', role: 'Regional Sales Manager', tel: '+31 6 5275 8128', mail: 'koen.pape@qvantum.com' },
+    { name: 'Sebastiaan Rietveld', role: 'Regional Sales Manager', tel: '+31 6 4216 6470', mail: 'sebastiaan.rietveld@qvantum.com' },
+    { name: 'Pascal Boy', role: 'Regional Sales Manager', tel: '+31 6 1430 6345', mail: 'pascal.boy@qvantum.com' },
+  ];
+  toggle(key) { this.setState(s => ({ open: { ...s.open, [key]: !s.open[key] } })); }
+  kw(prefix, n, t, imgs) { return Array.from({ length: n }, (_, i) => { const key = prefix + (i + 1), o = !!this.state.open[key]; return { t: t[prefix + 'keyword' + (i + 1)] || '', d: t[prefix + 'details' + (i + 1)] || '', img: imgs ? imgs[i] : '', sign: o ? '–' : '+', display: o ? 'flex' : 'none', toggle: () => this.toggle(key) }; }); }
+  s4imgs = ['assets/img/s4-kw5-crop.png', 'assets/img/s4-2-crop.png', 'assets/img/s4-3-crop.png', 'assets/img/s4-4-crop.png', 'assets/img/s4-6-crop.png', 'assets/img/s4-plaat-overview-crop.png', 'assets/img/s4-5-crop.png'];
+  // Toepassingen: dezelfde tekst als de interactieve plaat (i18n/plate.js, zes talen); structuur (id, num, producten) uit de plaat zelf.
+  loadApps() { import('./i18n/plate.js').then(mod => { this.PLATE = mod.PLATE; this.forceUpdate(); }); fetch('Interactieve plaat.dc.html').then(r => r.text()).then(src => { const grab = (n, open, close) => { const i = src.indexOf(n + ' = ' + open); if (i < 0) return null; const st = i + n.length + 3; let d = 0, q = null, j = st; for (; j < src.length; j++) { const ch = src[j]; if (q) { if (ch === '\\') j++; else if (ch === q) q = null; continue; } if (ch === '\'' || ch === '"' || ch === '`') q = ch; else if (ch === open) d++; else if (ch === close) { d--; if (d === 0) break; } } try { return (new Function('return ' + src.slice(st, j + 1)))(); } catch (e) { return null; } }; this.APPS_BASE = grab('C_NL', '[', ']') || []; this.ROUTES = grab('ROUTES', '{', '}') || {}; this.forceUpdate(); }).catch(() => {}); }
+  makeQr(text) { const Q = window.qrcode; if (!Q) return ''; try { const q = Q(0, 'M'); q.addData(text); q.make(); const n = q.getModuleCount(), cells = []; for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) cells.push('M' + c + ' ' + r + 'h1v1h-1z'); return 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + n + ' ' + n + '" shape-rendering="crispEdges"><path fill="#232222" d="' + cells.join('') + '"/></svg>'); } catch (e) { return ''; } }
+
+  // Stroming in principeplaten (SVG via <object>; Web Animations API, respecteert prefers-reduced-motion)
+  flowPlate(o) { const doc = o && o.contentDocument; if (!doc || doc.__qvFlow) return; doc.querySelectorAll('[data-hot]').forEach(h => h.style.display = 'none'); const ps = doc.querySelectorAll('[data-flow]'); if (!ps.length) return; doc.__qvFlow = true; if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; ps.forEach(p => p.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: p.getAttribute('data-flow') === 'back' ? 72 : -72 }], { duration: 2400, iterations: Infinity, easing: 'linear' })); }
+  wirePlates() { document.querySelectorAll('object[data-plate]').forEach(o => { if (!o.__qvWired) { o.__qvWired = true; o.addEventListener('load', () => this.flowPlate(o)); } this.flowPlate(o); }); }
+  componentDidUpdate() { this.wirePlates(); }
+  componentDidMount() {
+    this.wirePlates();
+    try { const st = JSON.parse(localStorage.getItem('qv-mobiel') || '{}'); const q = new URLSearchParams(location.search); const lang = q.get('lang') || st.lang; if (lang) this.setState({ lang, contactCountry: null }); const hr = location.hash ? decodeURIComponent(location.hash.slice(1)) : null; const r0 = hr || st.route || 'home'; this.setState({ route: r0 }); try { history.replaceState({ route: r0 }, '', location.pathname + location.search + '#' + encodeURIComponent(r0)); } catch (e) {} window.addEventListener('popstate', this.onPop); if (st.country) this.setState({ country: st.country }); } catch (e) {}
+    import('./i18n/copy.js').then(m => this.setState({ copy: m.COPY, langList: m.LANGS }));
+    import('./i18n/sections.js').then(m => { this.PRODUCTS = m.PRODUCTS; this.PLATES = m.PLATES; this.REFCASES = m.REFCASES; this.MAPS = m.MAPS; this.COUNTRIES = m.COUNTRIES; this.VISIBILITY = m.VISIBILITY; this.DIGITAL = m.DIGITAL; this.ACCESSORIES = m.ACCESSORIES; this.forceUpdate(); });
+    import('./i18n/specs.js').then(m => { this.SPECS = m; this.forceUpdate(); });
+    this.loadApps();
+    const s = document.createElement('script'); s.src = 'https://unpkg.com/qrcode-generator@1.4.4/qrcode.js'; s.onload = () => this.setState({ qr: this.makeQr(location.href.split('?')[0]) }); document.head.appendChild(s);
+  }
+  persist() { try { localStorage.setItem('qv-mobiel', JSON.stringify({ route: this.state.route, lang: this.state.lang, country: this.state.country })); } catch (e) {} }
+  go(route, replace) { if (route === this.state.route) return; try { (replace ? history.replaceState : history.pushState).call(history, { route }, '', location.pathname + location.search + '#' + encodeURIComponent(route)); } catch (e) {} this.setState({ route }, () => { this.persist(); window.scrollTo(0, 0); }); }
+  back() { if (history.state && history.state.route && history.length > 1 && this.state.route !== 'home') { history.back(); return; } this.go(this.parentOf(this.state.route)); }
+  parentOf(r) { if (r.startsWith('product:') || r === 'accessories') return 'products'; if (r.startsWith('case:')) return 'portfolio'; if (r.startsWith('app:')) return 'apps'; return 'home'; }
+  onPop = (e) => { const route = (e.state && e.state.route) || (location.hash ? decodeURIComponent(location.hash.slice(1)) : 'home'); this.setState({ route }, () => { this.persist(); window.scrollTo(0, 0); }); };
+  visProducts(lang) { const V = this.VISIBILITY || {}, hide = (V.hideProducts || {})[lang] || []; return (this.PRODUCTS || []).filter(p => !hide.includes(p.id)); }
+  visCases(lang) { const V = this.VISIBILITY || {}, allow = (V.refcases || {})[lang], hide = (V.hideRefcases || {})[lang] || []; const NEW = ['vakantiepark', 'stroom', 'vreeswijk', 'lawford']; const RC = this.REFCASES || []; return RC.filter((r, i) => (NEW.includes(r.id) || !allow || allow.includes(i + 1 - NEW.filter(n => RC.findIndex(x => x.id === n) < i).length)) && !hide.includes(r.id)); }
+  specVals(pdef) {
+    const S = this.SPECS, id = pdef && pdef.id, sp = S && id ? S.SPECS[id] : null, lang = this.state.lang;
+    if (!sp) return { hasSpecs: false, specCols: [], specRows: [], specFn: '', specTech: '', specGrid: '1fr' };
+    const L = k => S.specLabel(k, lang), V = v => S.specValue(v, lang);
+    const rows = sp.rows.map(r => r[0] === '#' ? { isHead: true, label: L(r[1]) + (r[2] ? ' ' + r[2] : ''), unit: '', vals: [], pad: '14px 0 6px', weight: 600, border: 'none', size: '13px', color: '#6B6B6B', tt: 'uppercase', ls: '1.2px' }
+      : { isHead: false, label: L(r[0]) + (r[4] ? ' ' + r[4] : ''), unit: r[1], vals: r[3] == null ? [{ v: V(r[2]), span: 'span 2' }] : [{ v: V(r[2]), span: 'span 1' }, { v: V(r[3]), span: 'span 1' }], pad: '9px 0', weight: 400, border: '1px solid #E5E6DF', size: '14px', color: '#232222', tt: 'none', ls: '0' });
+    return { hasSpecs: true, specCols: sp.cols, specRows: rows, specFn: L(sp.fn), specTech: L('tech'), specGrid: sp.cols.length > 1 ? '1.5fr 1fr 1fr' : '1.5fr 1fr' };
+  }
+  renderVals() {
+    const { route, lang, copy, langList, country } = this.state;
+    const t = copy ? { ...(copy.nl || {}), ...(copy[lang] || {}) } : {};
+    const P = this.visProducts(lang), RC = this.visCases(lang);
+    const products = P.map(p => ({ id: p.id, title: t[p.k + '_title'] || p.id, subtitle: t[p.k + '_subtitle'] || '', spec: t[p.k + '_haedline_spec'] || '', img: p.img || p.render || '', bullets: Array.from({ length: p.bullets }, (_, i) => t[p.k + '_bullet_' + (i + 1)] || '').filter(Boolean), open: () => this.go('product:' + p.id) }));
+    const pdef = P.find(p => 'product:' + p.id === route); const prodBase = products.find(p => 'product:' + p.id === route);
+    const plates = ((pdef && this.PLATES && this.PLATES[pdef.id]) || []).map(p => ({ svg: p.svg, label: t[p.k] || '' })); const prod = prodBase ? { ...prodBase, ...this.specVals(pdef), plates, hasPlates: plates.length > 0, platesTitle: t.products_plates_title || '' } : { plates: [], hasPlates: false, platesTitle: '', title: '', subtitle: '', spec: '', img: '', bullets: [], hasSpecs: false, specCols: [], specRows: [], specGrid: '1fr', specFn: '', specTech: '' };
+    const mkCase = r => ({ id: r.id, c: r.c, title: t[r.k + '_title'] || r.id, subtitle: t[r.k + '_subtitle'] || '', size: t[r.k + '_valuelabel1'] || '', a: r.a, aPos: r.aPos || 'center', rows: [1, 2, 3, 4, 5].map(i => ({ l: t[r.k + '_label' + i] || '', v: t[r.k + '_valuelabel' + i] || '' })).filter(x => x.v), bullets: [t[r.k + '_bullet'], t[r.k + '_bullet_2'], t[r.k + '_bullet_3'], t[r.k + '_bullet_4'], t[r.k + '_bullet_5']].filter(Boolean), quote: t[r.k + '_quote'] || '', quoteDisplay: t[r.k + '_quote'] ? 'flex' : 'none', name: t[r.k + '_namequote'] || '', open: () => this.go('case:' + r.id) });
+    const all = RC.map(mkCase); const cids = [...new Set(RC.map(r => r.c))]; const cur = cids.includes(country) ? country : (cids[0] || 'nl');
+    const MP = this.MAPS || []; const cname = id => { const m = MP.find(x => x.id === id); return m ? m.label : id.toUpperCase(); };
+    const countries = cids.map(id => ({ label: cname(id), go: () => this.setState({ country: id }, () => this.persist()), bg: id === cur ? '#FFFFFF' : 'rgba(255,255,255,.10)', fg: id === cur ? '#232222' : '#FFFFFF' }));
+    const cases = all.filter(c => c.c === cur);
+    const cs = all.find(c => 'case:' + c.id === route) || { title: '', subtitle: '', a: '', aPos: 'center', rows: [], bullets: [], quote: '', quoteDisplay: 'none', name: '' };
+    const Dg = this.DIGITAL || [], Ac = this.ACCESSORIES || [];
+    const digitals = Dg.map(d => ({ id: d.id, label: t[d.tile] || d.id, tag: t[d.tag] || '', img: d.img, border: this.state.dig === d.id ? '#FFFFFF' : 'rgba(255,255,255,.22)', toggle: () => this.setState(s => ({ dig: s.dig === d.id ? null : d.id })) }));
+    const dd = Dg.find(d => d.id === this.state.dig);
+    const dig = dd ? { show: true, title: t[dd.title] || '', subtitle: t[dd.subtitle] || '', groups: (dd.groups || (dd.kw ? [{ h: '', b: dd.kw }] : [])).map(g => ({ h: t[g.h] || '', b: (g.b || []).map(k => t[k] || '').filter(Boolean) })) } : { show: false, title: '', subtitle: '', groups: [] };
+    const accs = Ac.map(a => { const o = !!this.state.open['acc' + a.id]; return { name: t[a.tile] || a.id, tag: t[a.tag] || '', img: a.img, sign: o ? '–' : '+', display: o ? 'flex' : 'none', toggle: () => this.toggle('acc' + a.id), panels: (a.panels || []).map(pn => ({ title: t[pn.title] || '', sub: t[pn.subtitle] || t[pn.intro] || '', subDisplay: (t[pn.subtitle] || t[pn.intro]) ? 'block' : 'none', bullets: (pn.bullets || []).map(k => t[k] || '').filter(Boolean) })) }; });
+    const PL = (this.PLATE || {})[lang] || (this.PLATE || {}).nl; const A = (this.APPS_BASE || []).map((c, i) => ({ ...c, ...((PL && PL.C[i]) || {}) }));
+    const RT = this.ROUTES || {}; const prodRoute = n => { const r = RT[n] || ''; return r.startsWith('product:') ? r : r.startsWith('acc:') ? 'accessories' : r === 'digital:service' ? 'digital' : ''; };
+    const apps = A.map(a => { const o = !!this.state.open['app' + a.id]; return { num: a.num, short: a.short, label: a.label, title: a.title, body: a.body, points: a.points || [], sign: o ? '–' : '+', display: o ? 'flex' : 'none', toggle: () => this.toggle('app' + a.id), products: (a.products || []).map(pr => { const r = prodRoute(pr.name); return { src: pr.src, name: pr.name, cursor: r ? 'pointer' : 'default', go: () => r && this.go(r) }; }) }; });
+    const facs = [{ name: t.story_s2_fac1, a: t.story_s2_fac1details, b: t.story_s2_fac1details_2 }, { name: t.story_s2_fac2, a: t.story_s2_fac2details, b: t.story_s2_fac2details_2 }];
+    const isStory = route === 'story', isImpact = route === 'impact', isDigital = route === 'digital', isAcc = route === 'accessories';
+    const isHome = route === 'home', isProducts = route === 'products', isProduct = route.startsWith('product:'), isPortfolio = route === 'portfolio', isCase = route.startsWith('case:'), isContact = route === 'contact';
+    const goBack = () => this.back(), backDisplay = route === 'home' ? 'none' : 'flex';
+    const LI = { nl: 0, uk: 1, de: 2, se: 3, pl: 4, fr: 5 }[lang] ?? 0, CO = this.COUNTRIES || [], cty = CO.find(c => c.id === (this.state.contactCountry || lang)) || CO[0] || { name: [], contacts: [], entity: '', addr: '', web: '', general: '' };
+    const sec = isHome ? 'home' : isProducts || isProduct || isAcc ? 'products' : isPortfolio || isCase ? 'portfolio' : isStory || isImpact || isDigital ? 'story' : 'contact';
+    const navDef = [['home', t.explore_nav_home || 'Home'], ['story', t.explore_tile_story || 'Ons verhaal'], ['products', t.explore_tile_products || 'Producten'], ['portfolio', t.explore_tile_portfolio || 'Referenties'], ['contact', t.explore_tile_contact || 'Contact']];
+    const nav = navDef.map(([id, label]) => ({ label, go: () => this.go(id), bg: sec === id ? 'rgba(255,255,255,.14)' : 'transparent', fg: sec === id ? '#FFFFFF' : '#C9BFB2' }));
+    const tileDef = [['story', t.explore_tile_story], ['impact', t.menu_impact], ['products', t.explore_tile_products], ['digital', t.explore_tile_digital], ['accessories', t.menu_accessories], ['portfolio', t.explore_tile_portfolio], ['contact', t.explore_tile_contact]];
+    const tiles = tileDef.map(([id, label]) => ({ label: label || id, go: () => this.go(id), span: id === 'contact' ? 'span 2' : 'span 1', h: id === 'contact' ? '84px' : '120px', count: '' }));
+    const langs = (langList || [['nl', 'NL'], ['uk', 'EN']]).map(([id, code]) => ({ code, go: () => this.setState({ lang: id, contactCountry: null }, () => this.persist()), bg: lang === id ? '#FFFFFF' : 'rgba(255,255,255,.10)', fg: lang === id ? '#232222' : '#FFFFFF' }));
+    return { goBack, backDisplay, isHome, isProducts, isProduct, isPortfolio, isCase, isContact, isStory, isImpact, isDigital, isAcc, digitals, dig, accs, apps, facs, s1: this.kw('story_s1_', 4, t), s4: this.kw('story_s4_', 7, t, this.s4imgs), qrSrc: this.state.qr, qrDisplay: this.state.qr ? 'flex' : 'none', products, prod, countries, cases, cs, nav, tiles, langs,
+      goHome: () => this.go('home'), goProducts: () => this.go('products'), goPortfolio: () => this.go('portfolio'),
+      formUrl: this.FORM_URL, formDisplay: lang === 'nl' ? 'flex' : 'none',
+      sales: (cty.contacts || []).map(p => ({ ...p, telHref: 'tel:' + p.tel.replace(/[^+\d]/g, ''), mailHref: 'mailto:' + p.mail })), salesEmpty: !(cty.contacts && cty.contacts.length), cty: { ...cty, generalHref: /\d/.test(cty.general || '') ? 'tel:' + cty.general.replace(/[^+\d]/g, '') : '#', webHref: (cty.web || '').includes('.') ? 'https://' + cty.web : '#', mailHref: cty.mail ? 'mailto:' + cty.mail : '#', mailDisplay: cty.mail && cty.mail !== '…' ? 'flex' : 'none', generalDisplay: cty.general && cty.general !== '…' ? 'flex' : 'none', addrDisplay: cty.entity && cty.entity !== '…' ? 'flex' : 'none' },
+      ctyList: CO.map(c => { const act = c.id === cty.id; return { name: c.name[LI] || c.name[0], bg: act ? '#FFFFFF' : 'rgba(255,255,255,.10)', fg: act ? '#0B0B0C' : '#FFFFFF', go: () => this.setState({ contactCountry: c.id }) }; }),
+      contactBtns: [t.contact_c1_btn_sales, t.contact_c1_btn_producttech, t.contact_c1_btn_digitalintegrations].filter(Boolean),
+      s: { homeTitle: t.home_title || '', homeSub: t.home_subtitle || '', productsTitle: t.products_title || '', portfolioTitle: t.explore_tile_portfolio || '', contactTitle: t.contact_c1_title || '', salesLabel: (t.contact_sales_prefix || 'Sales') + ' ' + (cty.name[LI] || cty.name[0] || ''), pickCountry: t.contact_pick_country || '', tbd: t.contact_tbd || '', salesGeneral: ({ nl: 'Algemeen nummer', uk: 'General number', de: 'Zentrale', se: 'Växel', pl: 'Numer ogólny', fr: 'Numéro général' })[lang] || 'Algemeen', contactIntro: t.contact_c1_intro || '', hubName: t.contact_hub_name || '', hubWeb: t.contact_hub_web || '', back: t.explore_nav_back || 'Terug', storyLabel: t.explore_tile_story || '', s1Title: t.story_s1_title || '', s1Sub: t.story_s1_subtitle || '', s2Title: t.story_s2_title || '', s4Title: t.story_s4_title || '', s4Sub: t.story_s4_subtitle || '', s6Tile: t.story_s6_tile || '', s6Sub: t.story_s6_subtitle || '', s6Body: t.story_s6_body || '', impactTitle: t.menu_impact || '', digitalTitle: t.explore_tile_digital || '', accTitle: t.menu_accessories || '', qrLabel: t.m_qr_label || (lang === 'nl' ? 'Neem mee op je telefoon' : 'Take it with you on your phone') } };
+  }
+}
+</script>
+</body>
+</html>

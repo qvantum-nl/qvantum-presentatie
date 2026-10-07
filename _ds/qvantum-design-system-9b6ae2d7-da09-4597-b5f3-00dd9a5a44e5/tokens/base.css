@@ -1,0 +1,14 @@
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4,h5,h6,p,figure{margin:0}
+em,i,cite,address{font-style:normal}
+img{max-width:100%;display:block}
+a{color:var(--text-link);text-decoration:none;transition:var(--transition-color)}
+a:hover{color:var(--text-link-hover);text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:var(--beige);color:var(--off-black)}
+.q-container{max-width:var(--container-max);margin:0 auto;padding-inline:var(--page-pad)}
+.q-content{max-width:var(--content-max);margin:0 auto;padding-inline:var(--page-pad)}
+.q-section{padding-block:var(--section-y)}
