@@ -1,0 +1,15 @@
+:root{
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;
+--sp-7:48px;--sp-8:64px;--sp-9:96px;--sp-10:128px;--sp-11:160px;
+
+/* Section rhythm — generous by default; blocks breathe */
+--section-y:var(--sp-9);
+--section-y-tight:var(--sp-7);
+--section-y-loose:var(--sp-11);
+--block-gap:var(--sp-6);
+--gutter:var(--sp-5);
+--page-pad:var(--sp-6);
+--container-max:1440px;
+--content-max:1120px;
+--measure:64ch;
+}

@@ -1,0 +1,55 @@
+:root{
+/* Primary — we lead with black and white. CMYK for print/trade-fair production. */
+--off-black:#232222;/* 35,34,34 — CMYK 0/0/0/100 */
+--off-white:#F4F4F4;/* 244,244,244 — CMYK 0/0/0/5 */
+/* Secondary — brown for headers and labels, beige for backgrounds, white for surfaces and text on colour */
+--brown:#91877A;/* 145,135,122 — CMYK 45/40/50/5 */
+--beige:#E5E6DF;/* 229,230,223 — CMYK 9/6/10/0 */
+--white:#FFFFFF;
+--navy:#002656;--blue:#3164FD;--blue-light:#4AA1FF;--red:#C41230;--orange:#FF8D5A;--yellow:#F7E36E;
+
+/* Derived neutrals — interaction states and hairlines only, never new brand colours */
+--brown-dark:#7C7367;--beige-dark:#D6D7CE;--blue-dark:#1E4BD8;--navy-dark:#001B3D;
+--line:#DEDFD8;--line-strong:#C9CAC1;--muted:#6E6B67;
+
+/* Semantic — surfaces */
+--surface-page:var(--white);
+--surface-alt:var(--off-white);
+--surface-subtle:var(--beige);
+--surface-card:var(--white);
+--surface-footer:var(--beige);
+--surface-inverse:var(--off-black);
+--surface-stat:var(--navy);
+
+/* Semantic — text */
+--text-body:var(--off-black);
+--text-heading:var(--off-black);
+--text-muted:var(--muted);
+--text-on-dark:var(--off-white);
+--text-on-image:var(--white);
+--text-label:var(--off-black);
+--text-link:var(--blue);
+--text-link-hover:var(--blue-dark);
+/* Print and slides lead with off-black too; brown is the accent for labels, second lines and oversized figures */
+--text-heading-print:var(--off-black);
+--accent-print:var(--brown);
+
+/* Semantic — interactive */
+--action-light-bg:var(--beige);
+--action-light-bg-hover:var(--beige-dark);
+--action-light-fg:var(--off-black);
+--action-dark-bg:var(--blue);
+--action-dark-bg-hover:var(--blue-dark);
+--action-dark-fg:var(--white);
+--focus-ring:var(--blue);
+
+/* Semantic — lines */
+--border-hairline:var(--line);
+--border-strong:var(--line-strong);
+--divider-print:var(--brown);
+
+/* Chart series — accent colours carry charts; brown sits last, it belongs to headers and labels */
+--chart-1:var(--navy);--chart-2:var(--blue);--chart-3:var(--red);--chart-4:var(--orange);
+--chart-5:var(--blue-light);--chart-6:var(--yellow);--chart-7:var(--brown);
+--chart-axis:var(--off-black);--chart-grid:var(--beige);
+}
