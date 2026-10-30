@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/colors.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/typography.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/radius.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/motion.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/tokens/base.css">
+<link rel="stylesheet" href="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/styles.css">
+<script src="_ds/qvantum-design-system-9b6ae2d7-da09-4597-b5f3-00dd9a5a44e5/_ds_bundle.js"></script>
+<style>html,body{margin:0;height:100%;background:#0B0B0C;overflow:hidden}a{color:#3164FD}a:hover{color:#1E4BD8}#map svg g{transition:opacity 450ms cubic-bezier(.4,0,.2,1)}@keyframes pflow{to{stroke-dashoffset:-72}}@keyframes pflowBack{to{stroke-dashoffset:72}}@keyframes pflowAlt{0%{stroke-dashoffset:0}50%{stroke-dashoffset:-72}100%{stroke-dashoffset:0}}@media (prefers-reduced-motion:reduce){#map svg *{animation-duration:0s!important}}</style>
+</helmet>
+<div style="position:fixed;inset:0;background:#0B0B0C;font-family:'Host Grotesk',sans-serif;color:#FFFFFF">
+  <div data-screen-label="Plaat" style="position:absolute;left:50%;top:50%;width:1920px;height:{{ stageH }};margin-left:-960px;margin-top:{{ stageMT }};transform:{{ stageTransform }};overflow:hidden;background:#0B0B0C">
+    <div style="position:absolute;inset:0;background-image:url('assets/img/v2-wave-dark.jpg');background-size:cover;background-position:62% 40%;opacity:.28;pointer-events:none"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 35% 50%, rgba(11,11,12,0) 30%, rgba(11,11,12,.55) 100%);pointer-events:none"></div>
+    <div id="map" ref="{{ mapRef }}" style="position:absolute;inset:0;opacity:{{ mapOpacity }};transition:opacity 400ms ease-out"></div>
+    <div style="position:absolute;left:0;top:{{ stageOff }};width:1160px;height:1080px;pointer-events:none">
+      <div ref="{{ plateRef }}" style="position:absolute;inset:0;pointer-events:{{ platePE }};opacity:{{ plateOpacity }};transition:opacity 500ms ease-out"></div>
+      <div style="position:absolute;left:0;top:0;width:1160px;height:1080px;display:{{ ixWijkDisplay }};pointer-events:none">
+        <sc-for list="{{ ixChips }}" as="ch" hint-placeholder-count="0"><div style="position:absolute;left:{{ ch.x }};top:{{ ch.y }};transform:{{ ch.tf }};white-space:nowrap;background:#FFFFFF;border:2px solid #232222;border-radius:8px;color:#232222;padding:5px 12px;font-size:17px;line-height:22px;font-weight:600">{{ ch.t }}</div></sc-for>
+        <sc-for list="{{ ixHots }}" as="h" hint-placeholder-count="0"><button onClick="{{ h.go }}" aria-label="{{ h.label }}" style="position:absolute;left:{{ h.x }};top:{{ h.y }};width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:4px solid #FFFFFF;background:#232222;color:#FFFFFF;font-family:inherit;font-size:24px;font-weight:600;cursor:pointer;pointer-events:auto;display:flex;align-items:center;justify-content:center;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:#91877A" style-active="background:#91877A">{{ h.n }}</button></sc-for>
+      </div>
+      <div style="position:absolute;right:40px;top:104px;width:300px;display:{{ ixLegendDisplay }};flex-direction:column;gap:10px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:10px;color:#FFFFFF;padding:16px 20px;font-size:18px;line-height:24px;text-wrap:pretty">
+        <div style="color:#E5E6DF">{{ ixSeasonNote }}</div>
+        <div style="display:flex;gap:12px;align-items:center"><span style="position:relative;flex:none;width:28px;height:6px;border-radius:2px;background:#A89880"></span>{{ ix.lgGas }}</div>
+        <div style="display:flex;gap:12px;align-items:center"><span style="flex:none;width:28px;height:4px;border-radius:2px;background:#C41230"></span>{{ ix.lgWarm }}</div>
+        <div style="display:flex;gap:12px;align-items:center"><span style="flex:none;width:28px;height:4px;border-radius:2px;background:#3164FD"></span>{{ ix.lgCold }}</div>
+        <div style="display:flex;gap:12px;align-items:center"><span style="flex:none;width:28px;height:4px;border-radius:2px;background:repeating-linear-gradient(90deg,{{ ixFlowColor }} 0 6px,transparent 6px 11px)"></span>{{ ix.lgFlow }}</div>
+        <div style="display:flex;gap:12px;align-items:center;margin-top:4px;padding-top:12px;border-top:1px solid rgba(255,255,255,.22)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M9 11.5V5.5a1.5 1.5 0 013 0v6M12 11V9.5a1.5 1.5 0 013 0V12M15 11.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a6 6 0 01-5-2.7L3.6 14.5a1.5 1.5 0 012.4-1.8L9 15.5"></path></svg>{{ ix.hint }}</div>
+      </div>
+      <div style="position:absolute;left:40px;top:{{ ixToolsTop }};display:{{ ixToolsDisplay }};gap:16px;align-items:center;pointer-events:auto">
+        <div style="display:flex;gap:6px"><sc-for list="{{ seasons }}" as="sn" hint-placeholder-count="2"><button onClick="{{ sn.go }}" style="height:44px;padding:0 18px;border-radius:7px;border:1px solid {{ sn.border }};background:{{ sn.bg }};color:{{ sn.fg }};font-family:inherit;font-size:18px;cursor:pointer">{{ sn.t }}</button></sc-for></div>
+        <div style="display:{{ ixBufDisplay }};gap:6px"><sc-for list="{{ bufOpts }}" as="b" hint-placeholder-count="2"><button onClick="{{ b.go }}" style="height:44px;padding:0 18px;border-radius:7px;border:1px solid {{ b.border }};background:{{ b.bg }};color:{{ b.fg }};font-family:inherit;font-size:18px;cursor:pointer">{{ b.t }}</button></sc-for></div>
+        <button onClick="{{ toggleSchema }}" style="display:{{ schBtnDisplay }};align-items:center;gap:10px;height:44px;padding:0 18px;border:none;border-radius:8px;background:#3164FD;color:#FFFFFF;font-family:inherit;font-size:18px;font-weight:600;cursor:pointer"><span style="width:10px;height:10px;border-radius:50%;background:#FFFFFF"></span>{{ ix.schTitle }}</button>
+      </div>
+      <div style="position:absolute;left:40px;top:230px;width:1080px;height:611px;display:{{ ixSecDisplay }};border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:16px;pointer-events:auto;box-sizing:border-box">
+        <div ref="{{ homeRef }}" style="position:absolute;inset:12px;border-radius:10px;background:#E5E6DF;overflow:hidden"></div>
+      </div>
+      <div onClick="{{ toggleSchema }}" style="position:absolute;left:0;top:0;width:1160px;height:1080px;display:{{ ixSchDisplay }};align-items:center;justify-content:center;background:rgba(11,11,12,.78);pointer-events:auto;cursor:pointer">
+      <div onClick="{{ stop }}" style="width:900px;display:flex;flex-direction:column;gap:16px;border:1px solid rgba(255,255,255,.22);background:#141416;border-radius:12px;color:#FFFFFF;padding:24px 28px 22px;cursor:default">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="font-size:22px;font-weight:600;color:#FFFFFF">{{ ix.schTitle }}</div><button onClick="{{ toggleSchema }}" aria-label="Sluiten" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:transparent;color:#FFFFFF;font-size:22px;line-height:1;cursor:pointer">×</button></div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap"><sc-for list="{{ schSteps }}" as="st" hint-placeholder-count="4"><button onClick="{{ st.go }}" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:7px;border:1px solid {{ st.border }};background:{{ st.bg }};color:{{ st.fg }};font-family:inherit;font-size:16px;white-space:nowrap;cursor:pointer"><svg width="18" height="18" viewBox="-10 -10 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="flex:none"><path d="{{ st.icon }}"></path><circle r="{{ st.r }}" fill="currentColor" stroke="none"></circle></svg>{{ st.t }}</button></sc-for><button onClick="{{ schTogglePlay }}" style="margin-left:auto;display:flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:7px;border:none;background:#3164FD;color:#FFFFFF;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer"><span style="display:inline-block;width:0;height:0;border-style:solid;border-width:{{ schPlayIcon }};border-color:transparent transparent transparent #FFFFFF"></span>{{ schPlayLabel }}</button></div>
+        <div ref="{{ schemaRef }}" style="width:100%;aspect-ratio:480/330"></div>
+        <div style="font-size:19px;line-height:27px;color:#E5E6DF;text-wrap:pretty;min-height:54px">{{ schExp }}</div>
+        <div style="display:flex;gap:20px;font-size:18px;color:#E5E6DF;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:6px"><span style="width:22px;height:4px;border-radius:2px;background:#C41230"></span>{{ ix.schWarm }}</span><span style="display:flex;align-items:center;gap:6px"><span style="width:22px;height:4px;border-radius:2px;background:#3164FD"></span>{{ ix.schCold }}</span><span style="display:flex;align-items:center;gap:6px"><span style="width:22px;height:4px;border-radius:2px;background:rgba(255,255,255,.7)"></span>{{ ix.schOne }}</span></div>
+      </div>
+      </div>
+    </div>
+
+    <div style="position:absolute;left:0;top:{{ stageOff }};width:{{ mapW }};height:1080px;pointer-events:none">
+      <sc-if value="{{ caseRef }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ goCase }}" style="position:absolute;right:40px;top:40px;max-width:320px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:16px 20px;border:none;border-radius:10px;background:#3164FD;color:#FFFFFF;font-family:inherit;font-size:20px;line-height:26px;font-weight:600;cursor:pointer;text-align:left;text-wrap:pretty;pointer-events:auto;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-active="background:#1E4BD8"><span style="font-size:12px;line-height:18px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600;opacity:.85">{{ caseKicker }}</span>{{ caseTitle }}</button>
+      </sc-if>
+      <sc-if value="{{ showGame }}" hint-placeholder-val="{{ false }}">
+        <a href="{{ gameHref }}" target="_top" style="position:absolute;right:40px;top:{{ gameTop }};max-width:320px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:16px 20px;border:none;border-radius:10px;background:#3164FD;color:#FFFFFF;font-family:inherit;font-size:20px;line-height:26px;font-weight:600;cursor:pointer;text-align:left;text-wrap:pretty;text-decoration:none;pointer-events:auto;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-active="background:#1E4BD8"><span style="font-size:12px;line-height:18px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600;opacity:.85">Game</span>Build your own ambient loop</a>
+      </sc-if>
+      <sc-for list="{{ hotspots }}" as="h" hint-placeholder-count="0">
+        <button onClick="{{ h.go }}" aria-label="{{ h.label }}" style="position:absolute;left:{{ h.x }};top:{{ h.y }};width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:4px solid #FFFFFF;background:#232222;color:#FFFFFF;font-family:inherit;font-size:24px;font-weight:600;cursor:pointer;pointer-events:auto;display:{{ h.display }};align-items:center;justify-content:center;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:#91877A" style-active="background:#91877A">{{ h.n }}</button>
+      </sc-for>
+    </div>
+
+    <div style="position:absolute;left:0;top:{{ stageOff }};width:1160px;height:1080px;pointer-events:none;opacity:{{ srcOpacity }};transition:opacity 300ms ease-out 450ms">
+      <sc-for list="{{ srcLabels }}" as="l" hint-placeholder-count="0">
+        <div onPointerDown="{{ l.drag }}" onClick="{{ l.click }}" style="pointer-events: {{ l.pe }}; cursor: {{ l.cursor }}; touch-action: none; position: absolute; left: {{ l.x }}; top: {{ l.y }}; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: {{ l.bg }}; border: 2px solid {{ l.border }}; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; color: {{ l.fg }}">{{ l.m }}</div>
+      </sc-for>
+      <div style="position:absolute;left:{{ wko.x }};top:{{ wko.y }};transform:{{ wko.tf }};width:300px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:10px;color:#FFFFFF;padding:14px 18px;font-size:20px;line-height:26px;text-wrap:pretty">
+        <div style="font-weight:600">{{ s.seasonal }}</div>
+        <div>{{ s.seasonalBody }}</div>
+      </div>
+      </div>
+
+    <button onClick="{{ goHome }}" aria-label="Home" style="position:absolute;left:64px;top:40px;padding:0;border:none;background:transparent;cursor:pointer;display:flex;opacity:{{ headOpacity }};pointer-events:{{ headPE }};transition:opacity 400ms ease-out"><img src="assets/qvantum-logo-white.svg" alt="Qvantum" style="height:60px;width:auto;display:block"></button>
+    <div style="position:absolute;left:64px;top:56px;display:flex;flex-direction:column;gap:20px;opacity:{{ headOpacity }};transition:opacity 400ms ease-out;pointer-events:none">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:84px">
+        <div style="font-size:20px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ s.kicker }}</div>
+        <div style="font-size:72px;line-height:80px">{{ s.title }}</div>
+        <div style="font-size:26px;line-height:36px;max-width:560px;color:#E5E6DF;margin-top:8px">{{ s.sub }}</div>
+      </div>
+
+    </div>
+
+    <sc-if value="{{ gridChart }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;right:800px;top:48px;width:640px;box-sizing:border-box;border:1px solid rgba(255,255,255,.22);background:rgba(20,20,22,.92);border-radius:16px;color:#FFFFFF;padding:24px 28px 22px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px"><div style="font-size:22px;line-height:28px;font-weight:600;text-wrap:pretty">{{ gc.title }}</div><div style="font-size:14px;line-height:18px;color:#C9BFB2;white-space:nowrap">{{ gc.unit }}</div></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ gc.rows }}" as="r" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:17px;line-height:22px;font-weight:{{ r.weight }}">{{ r.name }}</div>
+              <div style="position:relative;height:26px;width:100%">
+                <div style="position:absolute;left:0;top:0;height:26px;width:{{ r.w }};background:{{ r.bg }};border-radius:4px"></div>
+                <div style="display:{{ r.rgDisplay }};position:absolute;left:{{ r.rgLeft }};top:-3px;height:32px;width:{{ r.rgW }};box-sizing:border-box;border:2px dashed rgba(255,255,255,.75);border-radius:4px"></div>
+                <div style="position:absolute;left:calc({{ r.lblLeft }} + 12px);top:0;height:26px;display:flex;align-items:center;gap:8px;font-size:17px;line-height:22px;white-space:nowrap"><span style="font-weight:600">{{ r.val }}</span><span style="display:{{ r.indDisplay }};font-size:13px;color:#C9BFB2">{{ r.ind }}</span></div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="position:relative;height:18px;border-top:1px solid rgba(255,255,255,.3)">
+            <sc-for list="{{ gc.ticks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:{{ t.left }};top:4px;transform:translateX(-50%);font-size:13px;line-height:16px;color:#C9BFB2">{{ t.t }}</div></sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid rgba(255,255,255,.22);padding-top:14px">
+          <sc-for list="{{ gc.lines }}" as="l" hint-placeholder-count="2"><div style="font-size:17px;line-height:23px;text-wrap:pretty">{{ l }}</div></sc-for>
+        </div>
+        <div style="font-size:15px;line-height:20px;color:#E5E6DF;text-wrap:pretty">{{ gc.foot }}</div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ summer }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;right:824px;top:{{ summerTop }};display:flex;flex-direction:column;gap:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:10px;color:#FFFFFF;padding:20px 24px;font-size:20px;line-height:24px">
+        <div style="font-size:20px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ s.summer }}</div>
+        <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#3164FD;border-radius:2px"></span>{{ s.coldToHomes }}</div>
+        <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#C41230;border-radius:2px"></span>{{ s.heatToGround }}</div>
+      </div>
+    </sc-if>
+    <div style="position:absolute;left:64px;bottom:150px;display:flex;flex-direction:column;gap:14px;font-size:20px;line-height:24px;color:#E5E6DF;opacity:{{ headOpacity }};transition:opacity 400ms ease-out;pointer-events:none">
+      <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#C41230;border-radius:2px"></span>{{ s.legSupply }}</div>
+      <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#3164FD;border-radius:2px"></span>{{ s.legReturn }}</div>
+      <div style="display:flex;gap:14px;align-items:center"><span style="width:32px;height:4px;background:#F2B705;border-radius:2px"></span>{{ s.legPower }}</div>
+    </div>
+    <div style="position:absolute;left:0;bottom:40px;width:{{ mapW }};display:flex;justify-content:center;transition:width 500ms ease-out">
+      <div style="display:flex;gap:8px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:12px;padding:8px;align-items:center">
+        <sc-for list="{{ nav }}" as="c" hint-placeholder-count="0">
+          <button onClick="{{ c.go }}" style="min-height:56px;padding:0 14px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};font-family:inherit;font-size:21px;font-weight:600;cursor:pointer;display:flex;gap:10px;align-items:center;white-space:nowrap;transition:background-color 120ms cubic-bezier(.4,0,.2,1)">
+            <span style="color:{{ c.numColor }}">{{ c.num }}</span><span style="display:{{ c.shortDisplay }}">{{ c.short }}</span>
+          </button>
+        </sc-for>
+      </div>
+      </div>
+
+    <button onClick="{{ close }}" aria-label="{{ s.back }}" style="position:absolute;left:8px;top:8px;width:74px;height:74px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(20,20,22,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#FFFFFF;cursor:pointer;display:{{ closeDisplay }};align-items:center;justify-content:center;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:rgba(20,20,22,.9)" style-active="background:rgba(20,20,22,.9)"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 7l20 20M27 7L7 27"></path></svg></button>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:760px;background:rgba(20,20,22,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-left:1px solid rgba(255,255,255,.18);color:#FFFFFF;transform:{{ panelTransform }};transition:transform 550ms cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;padding:40px 72px {{ panelPadB }} 72px;box-sizing:border-box;gap:{{ panelGap }};overflow:hidden">
+      <div style="display:flex;justify-content:flex-end;align-items:center;padding-right:{{ headPadR }}">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="font-size:20px;font-weight:600;color:#C9BFB2;line-height:56px">{{ c.count }}</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:8px"><div style="font-size:20px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ c.label }}</div>
+        <sc-if value="{{ hasConcept }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:15px;background:#3164FD;color:#FFFFFF;font-size:16px;font-weight:600">{{ c.concept }}</span><button onClick="{{ goOther }}" style="border:none;background:transparent;padding:0;color:#3164FD;font-family:inherit;font-size:17px;text-decoration:underline;text-underline-offset:3px;cursor:pointer">{{ c.other }}</button></div></sc-if></div>
+        <div style="font-size:{{ titleSize }};line-height:{{ titleLine }};text-wrap:pretty">{{ c.title }}</div>
+        <div style="font-size:{{ bodySize }};line-height:{{ bodyLine }};text-wrap:pretty;display:{{ bodyDisplay }}">{{ c.body }}</div>
+      </div>
+      <sc-if value="{{ showPhases }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:8px;flex-wrap:{{ phaseWrap }}">
+          <sc-for list="{{ phases }}" as="p" hint-placeholder-count="3">
+            <button onClick="{{ p.go }}" style="flex:1;min-width:0;min-height:64px;padding:0 {{ phasePad }};border:none;border-radius:8px;background:{{ p.bg }};color:{{ p.fg }};font-family:inherit;font-size:{{ phaseFont }};font-weight:600;cursor:pointer;display:flex;gap:10px;align-items:center;justify-content:center;white-space:nowrap;transition:background-color 120ms cubic-bezier(.4,0,.2,1)"><span>{{ p.n }}</span><span>{{ p.t }}</span></button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ showPros }}" hint-placeholder-val="{{ false }}"><button onClick="{{ togglePros }}" style="width:100%;min-height:48px;padding:0 16px;border:1px solid rgba(255,255,255,.4);border-radius:8px;background:transparent;color:#FFFFFF;font-family:inherit;font-size:21px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:rgba(255,255,255,.14)" style-active="background:rgba(255,255,255,.14)">{{ prosLabel }}</button></sc-if>
+      </sc-if>
+      <sc-if value="{{ showCoolSeason }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:8px">
+          <sc-for list="{{ coolSeasons }}" as="p" hint-placeholder-count="2">
+            <button onClick="{{ p.go }}" style="flex:1;min-width:0;min-height:56px;padding:0 16px;border:none;border-radius:8px;background:{{ p.bg }};color:{{ p.fg }};font-family:inherit;font-size:22px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background-color 120ms cubic-bezier(.4,0,.2,1)">{{ p.t }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ phaseNote }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:24px;line-height:34px;background:rgba(255,255,255,.12);border-radius:10px;padding:18px 22px;text-wrap:pretty">{{ phaseNote }}</div>
+      </sc-if>
+      <sc-if value="{{ showTemp2 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:12px 22px 12px;color:#FFFFFF">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="font-size:15px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#C9BFB2">{{ s.tempKicker }}</div><span style="font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#C9BFB2;border:1px solid rgba(201,191,178,.6);border-radius:999px;padding:2px 10px">{{ s.effProv }}</span></div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="position:relative;height:22px;font-size:13px;color:#C9BFB2"><span style="position:absolute;left:0">−20</span><span style="position:absolute;left:20%;transform:translateX(-50%)">0</span><span style="position:absolute;left:40%;transform:translateX(-50%)">20</span><span style="position:absolute;left:60%;transform:translateX(-50%)">40</span><span style="position:absolute;left:80%;transform:translateX(-50%)">60</span><span style="position:absolute;right:0">80 °C</span><div style="position:absolute;left:0;right:0;top:18px;height:1px;background:rgba(255,255,255,.35)"></div></div>
+            <sc-if value="{{ mk.bands }}" hint-placeholder-val="{{ false }}"><div style="position:relative;height:24px"><div style="position:absolute;left:30%;width:70%;top:0;height:24px;display:flex;gap:2px;border-radius:5px;overflow:hidden"><sc-for list="{{ tempBands }}" as="b" hint-placeholder-count="4"><div style="flex:{{ b.w }};background:{{ b.c }};display:flex;align-items:center;justify-content:center;font-size:14px;color:{{ b.fg }}"><span style="font-weight:600">{{ b.t }}</span></div></sc-for></div></div></sc-if>
+            <div style="position:relative;height:16px"><div style="position:absolute;left:0;width:60%;top:3px;height:10px;border-radius:5px;background:#9CC3FF"></div><div style="position:absolute;left:{{ mk.exLeft }};width:{{ mk.exW }};top:0;height:16px;border:2px dashed rgba(255,255,255,.75);border-radius:6px;box-sizing:border-box;display:{{ mk.exDisplay }}"></div><div style="position:absolute;left:{{ mk.left }};width:{{ mk.w }};top:0;height:16px;border:2px solid #FFFFFF;border-radius:6px;box-sizing:border-box"></div></div>
+            <div style="position:relative;height:12px"><div style="position:absolute;left:40%;width:60%;top:1px;height:10px;border-radius:5px;background:#F4905F"></div></div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px;line-height:18px;color:#E5E6DF;white-space:nowrap"><span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:8px;border-radius:4px;background:#9CC3FF"></span>{{ s.tempSrcRange }}</span><span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:8px;border-radius:4px;background:#F4905F"></span>{{ s.tempOutRange }}</span><span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:10px;border-radius:4px;border:2px solid #FFFFFF;box-sizing:border-box"></span>{{ mk.label }}</span></div>
+            <sc-if value="{{ mk.seasonsShown }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:7px;font-size:13px;line-height:18px;color:#C9BFB2;white-space:nowrap"><span style="width:16px;height:10px;border-radius:4px;border:2px dashed rgba(255,255,255,.75);box-sizing:border-box;display:{{ mk.exDisplay }}"></span>{{ mk.seasons }}</div></sc-if>
+          </div>
+          <sc-if value="{{ mk.chain }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;line-height:16px"><sc-for list="{{ mk.chainItems }}" as="ci" hint-placeholder-count="0"><span style="display:flex;align-items:center;gap:8px"><span style="padding:3px 10px;border-radius:999px;background:{{ ci.bg }};color:{{ ci.fg }};border:1px solid rgba(255,255,255,.3);font-weight:600;white-space:nowrap">{{ ci.t }}</span><svg width="18" height="10" viewBox="0 0 18 10" style="display:{{ ci.arrow }};flex:none"><path d="M0 5H15M11 1l4 4-4 4" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></sc-for></div>
+            <sc-if value="{{ mk.full }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;line-height:19px;color:#E5E6DF;text-wrap:pretty">{{ mk.chainNote }}</div></sc-if>
+          </sc-if>
+          <div style="height:1px;background:rgba(255,255,255,.22)"></div>
+          <sc-if value="{{ mk.full }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:34px;line-height:36px">{{ eff.spf }}</span><span style="font-size:13px;color:#C9BFB2">{{ s.effSpf }} · {{ s.effInd }}</span></div>
+            <div style="font-size:13px;line-height:18px;color:#E5E6DF">{{ eff.line }}</div>
+          </sc-if>
+          <sc-if value="{{ mk.compact }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:13px;line-height:18px;color:#E5E6DF"><span style="font-size:20px;line-height:20px;color:#FFFFFF">{{ eff.spf }}</span> {{ eff.compactLine }}</div>
+          </sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showCool }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ openCool }}" style="display:flex;align-items:center;gap:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:16px 20px;color:#FFFFFF;text-align:left;font-family:inherit;color:#232222;cursor:pointer;width:100%;min-height:92px" style-active="background:#E5E6DF">
+          <div style="display:flex;gap:20px;align-items:baseline;flex:none"><div style="display:flex;flex-direction:column"><div style="font-size:36px;line-height:40px;color:#FFFFFF">37 °C</div><div style="font-size:14px;color:#C9BFB2">{{ s.coolOut }}</div></div><div style="display:flex;flex-direction:column"><div style="font-size:36px;line-height:40px;color:#C41230">25 °C</div><div style="font-size:14px;color:#C9BFB2">{{ s.coolIn }}</div></div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;min-width:0;flex:1"><div style="font-size:15px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#C9BFB2;text-wrap:pretty">{{ s.coolChartKicker }}</div><div style="font-size:18px;line-height:24px;color:#3164FD">{{ s.coolChartTap }}</div></div>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 17l5-6 4 4 5-8 4 5"></path></svg>
+        </button>
+      </sc-if>
+      <sc-if value="{{ showChart }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ openEm }}" style="display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:18px 22px 14px;color:#FFFFFF;flex:0 1 auto;min-height:0;cursor:{{ emCursor }};position:relative">
+          <div style="display:flex;gap:18px;font-size:16px;flex-wrap:wrap;color:#E5E6DF">
+            <div style="display:flex;gap:7px;align-items:center"><span style="width:14px;height:14px;border-radius:3px;background:#9CC3FF"></span>{{ s.offpeak }}</div>
+            <div style="display:flex;gap:7px;align-items:center"><span style="width:14px;height:14px;border-radius:3px;background:#3164FD"></span>{{ s.normal }}</div>
+            <div style="display:flex;gap:7px;align-items:center"><span style="width:14px;height:14px;border-radius:3px;background:#F4905F"></span>{{ s.peak }}</div>
+            <div style="display:flex;gap:7px;align-items:center"><span style="width:20px;height:2px;background:#FFFFFF"></span>{{ s.hpLoad }}</div>
+          </div>
+          <div style="height:190px;display:flex;align-items:flex-end;gap:4px;border-bottom:1px solid rgba(255,255,255,.35);position:relative">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="0">
+              <div style="flex:1;height:{{ b.h }};background:{{ b.c }};border-radius:3px 3px 0 0;opacity:.85"></div>
+            </sc-for>
+            <svg viewBox="0 0 240 180" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+              <polyline points="{{ loadPts }}" fill="none" stroke="#FFFFFF" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"></polyline>
+            </svg>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;color:#C9BFB2"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showSources }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:15px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#C9BFB2">{{ s.sources }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px 12px">
+            <sc-for list="{{ srcLabels }}" as="l" hint-placeholder-count="0">
+              <div onClick="{{ l.click }}" style="display:flex;gap:8px;align-items:center;font-size:14px;line-height:17px;padding:1px 0;border-top:1px solid rgba(255,255,255,.2);cursor:{{ l.cursor }}"><span style="flex:none;width:26px;height:26px;border-radius:50%;border:2px solid #FFFFFF;background:{{ l.listBg }};color:{{ l.listFg }};box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">{{ l.m }}</span><span style="color:{{ l.listText }}">{{ l.t }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showPros }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ togglePros }}" style="display:none;align-self:flex-start;min-height:56px;padding:0 22px;border:none;border-radius:8px;background:{{ prosBg }};color:{{ prosFg }};font-family:inherit;font-size:22px;font-weight:600;cursor:pointer;transition:background-color 120ms cubic-bezier(.4,0,.2,1)">{{ prosLabel }}</button>
+      </sc-if>
+      <sc-if value="{{ hasPoints }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ pointsShown }}" as="p" hint-placeholder-count="0">
+          <div style="font-size:23px;line-height:30px;padding:11px 0;border-top:1px solid rgba(255,255,255,.2)">{{ p }}</div>
+        </sc-for>
+      </div>
+      </sc-if>
+      <div style="display:flex;gap:16px;margin-top:auto;align-items:flex-end">
+        <sc-if value="{{ c.hasNote }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:22px;line-height:30px;font-weight:600;background:rgba(255,255,255,.12);border-radius:10px;padding:16px 20px">{{ c.note }}</div>
+        </sc-if>
+        <sc-for list="{{ products }}" as="q" hint-placeholder-count="0">
+          <button onClick="{{ q.go }}" aria-label="{{ q.aria }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:14px 18px;color:#FFFFFF 12px;flex:1 1 0;max-width:180px;min-width:0;box-sizing:border-box;font-family:inherit;color:#232222;cursor:{{ q.cursor }};transition:background-color 120ms cubic-bezier(.4,0,.2,1)" style-hover="background:{{ q.hoverBg }}" style-active="background:{{ q.hoverBg }}">
+            <div style="display:flex;align-items:flex-end;justify-content:center;background:#F4F4F4;border-radius:8px;padding:8px 12px;overflow:hidden;box-sizing:border-box;width:100%"><div style="width:{{ q.w }};max-width:100%;height:{{ imgH }};background-image:url('{{ q.src }}');background-size:contain;background-repeat:no-repeat;background-position:center bottom"></div></div>
+            <div style="font-size:22px;font-weight:600;color:#FFFFFF;text-align:center;text-wrap:pretty">{{ q.label }}</div>
+            <div style="display:{{ q.linkDisplay }};font-size:17px;line-height:20px;color:#8FB8FF">{{ s.more }}</div>
+          </button>
+        </sc-for>
+      </div>
+      </div>
+    <sc-if value="{{ prosOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ togglePros }}" style="position:absolute;left:0;top:0;width:1920px;height:{{ stageH }};z-index:30;background:rgba(35,34,34,.72);display:flex;align-items:center;justify-content:center;cursor:pointer">
+        <div style="width:1500px;max-height:960px;background:#FFFFFF;border-radius:12px;padding:44px 52px;box-sizing:border-box;display:flex;flex-direction:column;gap:28px;color:#232222">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px"><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:18px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#91877A">{{ c.label }}</div><div style="font-size:44px;line-height:52px">{{ ix.prosBtn }}</div></div><div style="font-size:20px;color:#91877A">{{ ix.back }}</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 48px">
+            <div style="display:flex;flex-direction:column"><div style="font-size:18px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#91877A;padding-bottom:10px">{{ ix.pros }}</div><sc-for list="{{ prosL }}" as="p" hint-placeholder-count="0"><div style="display:flex;gap:14px;align-items:flex-start;font-size:22px;line-height:30px;padding:12px 0;border-top:1px solid #DEDFD8;text-wrap:pretty"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#3164FD" stroke-width="1.6" style="flex:none;margin-top:2px"><circle cx="16" cy="16" r="14"></circle><path d="M10 16l4 4 8-8"></path></svg><span>{{ p }}</span></div></sc-for></div>
+            <div style="display:flex;flex-direction:column"><div style="font-size:18px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#91877A;padding-bottom:10px">{{ ix.cons }}</div><sc-for list="{{ consL }}" as="p" hint-placeholder-count="0"><div style="display:flex;gap:14px;align-items:flex-start;font-size:22px;line-height:30px;padding:12px 0;border-top:1px solid #DEDFD8;text-wrap:pretty"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="#C41230" stroke-width="1.6" style="flex:none;margin-top:2px"><circle cx="16" cy="16" r="14"></circle><path d="M16 9v9M16 22v1"></path></svg><span>{{ p }}</span></div></sc-for></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ aquaOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeAqua }}" style="position:absolute;left:0;top:0;width:1920px;height:{{ stageH }};z-index:30;background:rgba(35,34,34,.72);display:flex;align-items:center;justify-content:center;cursor:pointer">
+        <div onClick="{{ stop }}" style="width:1560px;background:#FFFFFF;border-radius:12px;padding:36px 44px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;color:#232222;cursor:default">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px">
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#91877A">{{ ovKicker }}</div><div style="font-size:42px;line-height:48px">{{ ovTitle }}</div></div>
+            <button onClick="{{ closeAqua }}" aria-label="Sluiten" style="width:56px;height:56px;border-radius:50%;border:1px solid #DEDFD8;background:#F4F4F4;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M4 4L16 16M16 4L4 16" stroke="#232222" stroke-width="2" stroke-linecap="round"></path></svg></button>
+          </div>
+          <div style="display:flex;gap:10px"><sc-for list="{{ aquaTabs }}" as="tb" hint-placeholder-count="2"><button onClick="{{ tb.go }}" style="height:48px;padding:0 20px;border:none;border-radius:8px;background:{{ tb.bg }};color:{{ tb.fg }};font-family:inherit;font-size:19px;font-weight:600;cursor:pointer">{{ tb.t }}</button></sc-for></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px;align-items:start">
+            <div style="border-radius:10px;overflow:hidden;background:#E5E6DF;aspect-ratio:16/9"><div ref="{{ aquaRef0 }}" style="display:{{ aquaImg0 }};width:100%;height:100%"></div><div ref="{{ aquaRef1 }}" style="display:{{ aquaImg1 }};width:100%;height:100%"></div><div ref="{{ aquaRef2 }}" style="display:{{ aquaImg2 }};width:100%;height:100%"></div><div ref="{{ aquaRef3 }}" style="display:{{ aquaImg3 }};width:100%;height:100%"></div></div>
+            <div style="display:flex;flex-direction:column;gap:18px;font-size:21px;line-height:30px;text-wrap:pretty"><div>{{ aquaBody }}</div><div style="display:{{ ovNoteDisplay }};font-size:17px;line-height:24px;color:#6E6C6A">{{ ovNote }}</div><button onClick="{{ goRef }}" style="display:{{ aquaRefDisplay }};align-self:flex-start;align-items:center;height:48px;padding:0 20px;border:none;border-radius:8px;background:#3164FD;color:#FFFFFF;font-family:inherit;font-size:19px;font-weight:600;cursor:pointer">{{ ovRefLabel }}</button></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ coolOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeCool }}" style="position:absolute;left:0;top:0;width:1920px;height:{{ stageH }};z-index:30;background:rgba(35,34,34,.72);display:flex;align-items:center;justify-content:center;cursor:pointer">
+        <div style="width:1500px;max-height:980px;background:#FFFFFF;border-radius:12px;padding:40px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;color:#232222">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px">
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:18px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#C9BFB2">{{ s.coolChartKicker }}</div><div style="font-size:44px;line-height:52px">{{ s.coolChartTitle }}</div><div style="font-size:22px;line-height:30px;color:#C9BFB2">{{ s.coolChartSub }}</div></div>
+            <div style="display:flex;gap:40px;flex:none"><div style="display:flex;flex-direction:column;align-items:flex-end"><div style="font-size:64px;line-height:68px;white-space:nowrap">37 °C</div><div style="font-size:18px;color:#C9BFB2">{{ s.coolOut }}</div></div><div style="display:flex;flex-direction:column;align-items:flex-end"><div style="font-size:64px;line-height:68px;color:#C41230;white-space:nowrap">25 °C</div><div style="font-size:18px;color:#C9BFB2">{{ s.coolIn }}</div></div></div>
+          </div>
+          <div style="display:flex;gap:16px">
+            <div style="display:flex;flex-direction:column;justify-content:space-between;height:400px;font-size:16px;color:#C9BFB2;text-align:right;width:52px;flex:none"><span>40 °C</span><span>30 °C</span><span>20 °C</span><span>10 °C</span></div>
+            <svg viewBox="0 0 600 150" preserveAspectRatio="none" width="100%" style="flex:1;min-width:0;width:100%;height:400px;display:block;overflow:visible">
+              <line x1="0" y1="0" x2="600" y2="0" stroke="#DEDFD8" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="0" y1="50" x2="600" y2="50" stroke="#DEDFD8" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="0" y1="100" x2="600" y2="100" stroke="#DEDFD8" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="0" y1="150" x2="600" y2="150" stroke="#FFFFFF" stroke-width="1.5" vector-effect="non-scaling-stroke"></line>
+              <polyline points="{{ coolOutPts }}" fill="none" stroke="#232222" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+              <polyline points="{{ coolInPts }}" fill="none" stroke="#C41230" stroke-width="4" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+            </svg>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:18px;color:#C9BFB2;padding-left:68px"><sc-for list="{{ coolDays }}" as="d" hint-placeholder-count="6"><span>{{ d }}</span></sc-for></div>
+          <div style="display:flex;gap:32px;font-size:20px;flex-wrap:wrap"><div style="display:flex;gap:10px;align-items:center"><span style="width:28px;height:3px;background:#232222"></span>{{ s.coolLegOut }}</div><div style="display:flex;gap:10px;align-items:center"><span style="width:28px;height:4px;background:#C41230"></span>{{ s.coolLegIn }}</div><div style="margin-left:auto;color:#C9BFB2">{{ s.coolSource }}</div></div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;markersVerplaatsbaar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { sel: null, k: 1, hot: [], ready: false };
+  lang = (() => { const l = new URLSearchParams(location.search).get('lang') || 'nl'; return ['nl', 'uk', 'de', 'se', 'pl', 'fr'].includes(l) ? l : 'nl'; })();
+  // Teksten komen uit i18n/plate.js (zes talen); tot die geladen is, de NL-fallback hieronder.
+  T = null;
+  T_NL = { S: { L: [], ventNotes: ['', ''], netNotes: ['', ''], ventPhases: ['', ''], coolPhases: ['', ''], netPhases: ['', ''], coolDays: [], inex: {} }, C: [{}, {}, {}, {}, {}, {}, {}, {}, {}] };
+  plateRef = React.createRef(); schemaRef = React.createRef(); homeRef = React.createRef(); aquaRefs = [React.createRef(), React.createRef(), React.createRef(), React.createRef()];
+  // Aquathermie-platen inline laden en de stroming (witte streepjes, data-flow) laten lopen; zelfde tempo als de principeplaten in de Beurspresentatie
+  buildAqua() { const F = ['illustrations/principles/aqua-damwand.svg', 'illustrations/principles/aqua-teo.svg', 'illustrations/principles/datacenter-lucht.svg', 'illustrations/principles/datacenter-net.svg']; this.aquaRefs.forEach((r, i) => { const el = r.current; if (!el || el.__loaded) return; el.__loaded = true; fetch(F[i], { cache: 'no-cache' }).then(x => x.text()).then(t => { if (!el.isConnected) { el.__loaded = false; return; } el.innerHTML = t; const svg = el.querySelector('svg'); if (!svg) return; svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%'); svg.style.display = 'block'; this.setLabels(svg); svg.querySelectorAll('[data-hot]').forEach(h => h.style.display = 'none'); if (this.still) return; svg.querySelectorAll('[data-flow]').forEach(p => p.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: p.getAttribute('data-flow') === 'back' ? 72 : -72 }], { duration: 2400, iterations: Infinity, easing: 'linear' })); }); }); }
+  // InEx (toepassing 9). Fase 0 = wijk (iso, illustrations/inex/wijk.svg), 1–3 = doorsnedes woning / woontoren / twee blokken in een beige kader, dezelfde familie als de principeplaten. Teksten via [data-k] uit S.inex; data-up = hoofdletters, data-pre/-post = vaste tekst eromheen.
+  SEC_FILES = [null, 'illustrations/inex/woning.svg', 'illustrations/inex/woontoren.svg', 'illustrations/inex/blokken.svg'];
+  setLabels(svg) { const S = this.S.inex || {}; svg.querySelectorAll('[data-k]').forEach(t => { const k = t.getAttribute('data-k'); let v = S[k]; if (v == null) return; if (t.hasAttribute('data-up')) v = v.toUpperCase(); t.textContent = (t.getAttribute('data-pre') || '') + v + (t.getAttribute('data-post') || ''); }); }
+  // Temperatuurblok per bronsysteem (i18n/sources.js): marker op de bronbalk = jaarbereik, regel winter/zomer, efficiëntie (jaar-SPF als hoofdgetal, COP W35/W55, koeling), alles indicatief en voorlopig
+  tempVals(S, c, open, phase) { const SRC = this.SRC, c0 = SRC && SRC.SCREEN_SOURCE[c.id], cfg = typeof c0 === 'string' ? { src: c0 } : c0, srcKey = cfg && (Array.isArray(cfg.src) ? cfg.src[Math.min(phase || 0, cfg.src.length - 1)] : cfg.src), sd = cfg && SRC.SOURCES[srcKey]; if (!open || !sd || !S.tempBands) return { showTemp2: false, mk: {}, eff: {} };
+    const dec = this.lang === 'uk' ? '.' : ',', num = v => v.toFixed(1).replace('.', dec), rng = a => num(a[0]) + ' – ' + num(a[1]), sg = v => v < 0 ? '−' + Math.abs(v) : v > 0 ? '+' + v : '0', pl = v => v < 0 ? '−' + Math.abs(v) : String(v), pct = v => (v + 20) + '%', wd = a => (a[1] - a[0]) + '%';
+    const chainI = cfg.byPhase ? phase : 0, chain = cfg.chain ? ((S.netChain || [])[chainI] || null) : null, nmOf = k => (S.srcNames || {})[k] || k, nm = cfg.byPhase ? ((S.netPhases || [])[phase] || nmOf(srcKey)) : nmOf(srcKey), cool = { none: S.coolNone, passive: S.coolPassive, net: S.coolNet }[sd.cooling] || '', compact = !!cfg.compact || (cfg.compactPhases || []).includes(phase), ex = cfg.extra ? SRC.SOURCES[cfg.extra] : null;
+    const lbl = (n, d) => n + ' ' + sg(d.year[0]) + ' ' + S.tTo + ' ' + sg(d.year[1]) + ' °C', rngN = a => a ? rng(a) : (S.effTbd || 'n.t.b.'), ACC = ['#9CC3FF', '#FFFFFF', '#F4905F'];
+    return { showTemp2: true, mk: { left: pct(sd.year[0]), w: wd(sd.year), label: lbl(nm, sd), seasons: (ex ? lbl(nmOf(cfg.extra), ex) + ' · ' : '') + S.tWinter + ' ' + pl(sd.winter[0]) + ' ' + S.tTo + ' ' + pl(sd.winter[1]) + ' °C, ' + S.tAvg + ' ' + pl(sd.winterAvg) + ' °C · ' + S.tSummer + ' ' + pl(sd.summer[0]) + ' ' + S.tTo + ' ' + pl(sd.summer[1]) + ' °C' + (sd.regen ? ' (' + S.regen + ')' : ''), bands: !!cfg.bands, full: !compact, compact, seasonsShown: !compact && !cfg.noSeasons, exDisplay: ex ? 'flex' : 'none', exLeft: ex ? pct(ex.year[0]) : '0%', exW: ex ? wd(ex.year) : '0%', exLabel: ex ? lbl(nmOf(cfg.extra), ex) : '', chain: !!chain, chainItems: (chain || []).map((t, j, a) => ({ t, arrow: j < a.length - 1 ? 'block' : 'none', bg: j === 1 ? 'rgba(255,255,255,.16)' : 'transparent', fg: '#FFFFFF' })), chainNote: chain ? ((S.netChainNote || [])[chainI] || '') : '' },
+      eff: { spf: rngN(sd.spf), line: 'COP ' + S.effW35 + ' ' + rngN(sd.copW35) + ' · ' + S.effW55 + ' ' + rngN(sd.copW55) + ' · ' + S.effCool + ': ' + cool + ' · ' + S.effInd, compactLine: S.effSpf + ' · ' + S.effInd + ' · COP W35 ' + rngN(sd.copW35) + ' · W55 ' + rngN(sd.copW55) + ' · ' + S.effCool + ': ' + (sd.cooling === 'net' ? (S.coolNetShort || cool) : cool) } }; }
+  // Netimpact (scherm 8): elektrisch piekvermogen per 10 MW warmtevraag; as 0–4,5 MW. Getallen vast (Fraunhofer IEE/ISE 2026; ZLT indicatief 1,5–1,7), teksten uit S.gridChart.
+  gridChartVals(g) { if (!g) return { rows: [], title: '', unit: '', foot: '', lines: [], ticks: [] }; const MAX = 4.5, pct = v => (v / MAX * 100).toFixed(1) + '%', dec = this.lang === 'uk' ? '.' : ',', num = v => v.toFixed(1).replace('.', dec);
+    const D = [[4.0, null, '#9CC3FF'], [2.0, null, '#3164FD'], [1.6, [1.5, 1.7], '#F4905F']];
+    return { title: g.title, unit: g.unit, foot: g.foot, lines: g.lines, ticks: [0, 1, 2, 3, 4].map(v => ({ t: String(v), left: pct(v) })),
+      rows: D.map(([v, rg, col], i) => ({ name: g.rows[i], w: pct(v), lblLeft: pct(rg ? rg[1] : v), bg: col, val: (rg ? g.ca + ' ' : '') + num(v), ind: rg ? g.ind : '', indDisplay: rg ? 'inline' : 'none', rgDisplay: rg ? 'block' : 'none', rgLeft: rg ? pct(rg[0]) : '0%', rgW: rg ? pct(rg[1] - rg[0]) : '0%', weight: rg ? 600 : 400 })) }; }
+  // Streepjeskleuren volgen het kleppenschema: net = water in de gasleiding (winter 20 °C, zomer 15 °C); in = inademen (netkleur); out = uitademen (winter 8 °C koud, zomer 26 °C heet)
+  seasonCols() { const W = (this.state.season || 'winter') === 'winter'; return W ? { net: '#F08A96', in: '#F08A96', out: '#1E4BD8' } : { net: '#9CC3FF', in: '#9CC3FF', out: '#C41230' }; }
+  get still() { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  buildHome() { const el = this.homeRef.current; if (!el) return; const ph = this.state.phase || 0; if (!this.SEC_FILES[ph]) { el.__key = null; return; } const season = this.state.season || 'winter', buf = this.state.bufIn ? 'in' : 'out'; const key = ph + '|' + season + '|' + buf + '|' + this.lang + '|' + !!this.T; if (el.__key === key) return; el.__key = key;
+    const run = () => { const svg = el.querySelector('svg'); if (!svg) return; (el.__anims || []).forEach(a => a.cancel()); el.__anims = []; this.setLabels(svg); this.applySeason(svg); if (ph === 1) this.animWoning(el, svg, key); else if (ph === 2) this.animTower(el, svg); else this.animBlocks(el, svg); };
+    if (el.__ph === ph && el.__svg) { run(); return; }
+    el.__ph = ph; el.__svg = false; el.innerHTML = ''; fetch(this.SEC_FILES[ph], { cache: 'no-cache' }).then(r => r.text()).then(t => { if (el.__ph !== ph) return; el.innerHTML = t; const s = el.querySelector('svg'); if (!s) return; s.setAttribute('width', '100%'); s.setAttribute('height', '100%'); s.querySelectorAll('[data-hot]').forEach(x => x.addEventListener('click', () => { if (x.getAttribute('data-hot') === 'kleppen') this.setState({ schemaOpen: true }); })); el.__svg = true; run(); }); }
+  // Seizoen in een doorsnede: sneeuwvlok/zon, label, kleur van buffervulling en bufferleiding
+  applySeason(svg) { const S = this.S.inex || {}, W = (this.state.season || 'winter') === 'winter'; svg.querySelectorAll('[data-season]').forEach(g => { g.style.display = g.getAttribute('data-season') === (W ? 'winter' : 'summer') ? '' : 'none'; }); const l = svg.querySelector('#season-lbl'); if (l) l.textContent = (W ? S.schWinter : S.schSummer) || ''; const sub = svg.querySelector('#season-sub'); if (sub) sub.textContent = (W ? S.hmSubW : S.hmSubS) || ''; svg.querySelectorAll('.tank-fill').forEach(r => r.setAttribute('fill', W ? '#F4CDD2' : '#D5DFFE')); svg.querySelectorAll('.buf-pipe').forEach(p => p.setAttribute('stroke', W ? '#C41230' : '#2F5BFF')); const c = this.seasonCols(); svg.querySelectorAll('.main-flow, .rise-up, .rise-down, .loop-cw, .loop-ccw').forEach(d => d.setAttribute('stroke', c.net)); svg.querySelectorAll('.svc-in').forEach(d => d.setAttribute('stroke', c.in)); svg.querySelectorAll('.svc-out').forEach(d => d.setAttribute('stroke', c.out)); }
+  tankOf(svg, id) { const g = svg.querySelector('[data-tank="' + id + '"]'); if (!g) return null; const body = g.querySelector('rect'), f = g.querySelector('.tank-fill'); const bottom = +body.getAttribute('y') + +body.getAttribute('height') - 3, hMax = +body.getAttribute('height') - 6; return { f, bottom, h0: hMax * .15, h1: hMax * .9, half: hMax * .5 }; }
+  tankStill(t, h) { t.f.setAttribute('y', t.bottom - h); t.f.setAttribute('height', h); }
+  tankAnim(el, t, a, b, T) { const x = t.f.animate([{ y: (t.bottom - a) + 'px', height: a + 'px' }, { y: (t.bottom - b) + 'px', height: b + 'px', offset: .5 }, { y: (t.bottom - a) + 'px', height: a + 'px' }], { duration: T, iterations: Infinity, easing: 'ease-in-out' }); x.startTime = 0; el.__anims.push(x); }
+  // Twee streepjeskopieën die om de beurt zichtbaar zijn: richting wisselt elke halve periode. L = veelvoud van de dash-periode.
+  altFlow(el, a, b, T, L) { if (!a || !b) return; const sync = x => { x.startTime = 0; el.__anims.push(x); }; sync(a.animate([{ opacity: 1, strokeDashoffset: 0 }, { opacity: 1, strokeDashoffset: -L, offset: .49 }, { opacity: 0, strokeDashoffset: -L, offset: .51 }, { opacity: 0, strokeDashoffset: -L, offset: .99 }, { opacity: 1, strokeDashoffset: -L }], { duration: T, iterations: Infinity })); sync(b.animate([{ opacity: 0, strokeDashoffset: 0 }, { opacity: 0, strokeDashoffset: 0, offset: .49 }, { opacity: 1, strokeDashoffset: 0, offset: .51 }, { opacity: 1, strokeDashoffset: -L }], { duration: T, iterations: Infinity })); }
+  constFlow(el, svg, sel, L, dur) { svg.querySelectorAll(sel).forEach(d => el.__anims.push(d.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -L }], { duration: dur, iterations: Infinity, easing: 'linear' }))); }
+  // Woning: aansluitleiding en bufferleiding wisselen elke 6 s van richting, de buffer vult en leegt mee; cv en straatleiding stromen constant
+  animWoning(el, svg, key) { const S = this.S.inex || {}, W = (this.state.season || 'winter') === 'winter', T = 12000, inB = !!this.state.bufIn; const q = s => svg.querySelector(s);
+    q('#buf-out').style.display = inB ? 'none' : ''; q('#buf-in').style.display = inB ? '' : 'none';
+    const tk = this.tankOf(svg, inB ? 'tk-in' : 'tk-out'), lbl = q('#svc-lbl'), st = q(inB ? '#st-in' : '#st-out');
+    const setPhase = inhale => { if (lbl) lbl.textContent = (inhale ? S.schIn : S.schOut) + ' · ' + (W ? (inhale ? '20' : '8') : (inhale ? '15' : '26')) + ' °C'; if (st) st.textContent = inhale ? (S.hmLoad || '') : (S.hmBack || ''); };
+    if (this.still) { svg.querySelectorAll('.svc-out, .buf-out').forEach(e => e.style.opacity = 0); if (tk) this.tankStill(tk, tk.half); setPhase(true); return; }
+    this.altFlow(el, q('.svc-in'), q('.svc-out'), T, 264); const bo = svg.querySelectorAll('.buf-out'); svg.querySelectorAll('.buf-in').forEach((a, i) => this.altFlow(el, a, bo[i], T, 264));
+    if (tk) this.tankAnim(el, tk, tk.h0, tk.h1, T);
+    this.constFlow(el, svg, '.main-flow', 384, 6000); this.constFlow(el, svg, '.cv-fwd', 272, 4000);
+    const tick = () => { if (!svg.isConnected || el.__key !== key) return; const inhale = ((document.timeline.currentTime || 0) % T) / T < .5; if (inhale !== el.__inhale) { el.__inhale = inhale; setPhase(inhale); } requestAnimationFrame(tick); }; el.__inhale = null; requestAnimationFrame(tick); }
+  // Woontoren: stijgleiding wisselt elke 6 s van richting; dak- en grondbuffer vullen tegengesteld; woningleidingen en PVT constant
+  animTower(el, svg) { const T = 12000, rt = this.tankOf(svg, 'tk-roof'), gt = this.tankOf(svg, 'tk-ground'); const ups = svg.querySelectorAll('.rise-up'), downs = svg.querySelectorAll('.rise-down');
+    if (this.still) { downs.forEach(d => d.style.opacity = 0); if (rt) this.tankStill(rt, rt.half); if (gt) this.tankStill(gt, gt.half); return; }
+    ups.forEach((u, i) => this.altFlow(el, u, downs[i], T, 290)); if (rt) this.tankAnim(el, rt, rt.h0, rt.h1, T); if (gt) this.tankAnim(el, gt, gt.h1, gt.h0, T);
+    this.constFlow(el, svg, '.fl-home', 240, 4000); this.constFlow(el, svg, '.pv-flow', 290, 5000); this.constFlow(el, svg, '.main-flow', 384, 6000); }
+  // Twee blokken: de lus keert elke 10 s om; buffers blijven gevuld
+  animBlocks(el, svg) { const T = 20000, rt = this.tankOf(svg, 'tk-roof'), gt = this.tankOf(svg, 'tk-ground');
+    const cws = svg.querySelectorAll('.loop-cw'), ccws = svg.querySelectorAll('.loop-ccw'); if (rt) this.tankStill(rt, rt.h1); if (gt) this.tankStill(gt, gt.h1); if (this.still) { ccws.forEach(d => d.style.opacity = 0); return; }
+    cws.forEach((c, i) => { if (ccws[i]) this.altFlow(el, c, ccws[i], T, 580); else { const x = c.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -290, offset: .5 }, { strokeDashoffset: 0 }], { duration: T, iterations: Infinity, easing: 'ease-in-out' }); x.startTime = 0; el.__anims.push(x); } });
+    const si = svg.querySelector('.svc-in'), so = svg.querySelector('.svc-out'); if (si && so) this.altFlow(el, si, so, T, 580);
+    this.constFlow(el, svg, '.fl-home', 240, 4000); this.constFlow(el, svg, '.pv-flow', 290, 5000); this.constFlow(el, svg, '.main-flow', 384, 6000); }
+  // Klepschema (spec B): vier situaties van 8 s (winter in/uit, zomer in/uit); Winter/Zomer kiest het startpunt. Koudemiddelcircuit neutraal wit; groen is in de InEx-tekeningen gereserveerd voor stroom. Kleuren als op de wijkplaat (rood warm, blauw koud).
+  buildSchema() { const el = this.schemaRef.current; if (!el) return; const step = this.state.schStep || 0, play = !!this.state.schPlay; const key = (play ? 'play' : 'step' + step) + '|' + this.lang + '|' + !!this.T; if (el.__key === key) return; el.__key = key; const S = this.S.inex || {};
+    const G = 'rgba(255,255,255,.2)', N = '#002656', R = '#C41230', B = '#3164FD', w = 3, T = 8000, TX = '#E5E6DF', RF = 'rgba(255,255,255,.7)';
+    const COLD = '#1E4BD8', COOL = '#9CC3FF', WARM = '#F08A96', HOT = '#C41230'; // temperatuurkleuren voor de streepjes: koud · normaal · warm · heet
+    const pipe = (d, c, extra = '') => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="butt" stroke-linejoin="round" ${extra}></path>`;
+    const dash = (d, cls, c = '#FFFFFF', id = '') => `<path class="${cls}"${id ? ' id="' + id + '"' : ''} d="${d}" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 9"></path>`;
+    const valve = (x, y, d) => `<circle cx="${x}" cy="${y}" r="5" fill="#141416" stroke="rgba(255,255,255,.55)" stroke-width="1.2"></circle><path d="${d}" stroke="rgba(255,255,255,.55)" stroke-width="1" fill="none"></path>`;
+    const IN_A = 'M47 210H90V157', IN_B = 'M140 157V230H157V210H320', OUT_A = 'M320 210H148A8 8 0 0 0 132 210H90V157', OUT_B = 'M140 157V230V250H62V210H47';
+    // per situatie: [kleur A (naar verdamper), kleur B (van verdamper), netkleur, tankkleur, temperaturen]
+    const ST = [ { a: WARM, b: COOL, grid: WARM, tank: '#B7D9FF', tGrid: '20 °C', tTank: '14 °C', tRet: '', inh: true, W: true },
+                 { a: COOL, b: COLD, grid: WARM, tank: '#B7D9FF', tGrid: '20 °C', tTank: '14 °C', tRet: '8 °C', inh: false, W: true },
+                 { a: COOL, b: WARM, grid: COOL, tank: '#F4CDD2', tGrid: '15 °C', tTank: '21 °C', tRet: '', inh: true, W: false },
+                 { a: WARM, b: HOT, grid: COOL, tank: '#F4CDD2', tGrid: '15 °C', tTank: '21 °C', tRet: '26 °C', inh: false, W: false } ];
+    el.innerHTML = `<svg viewBox="28 24 344 252" style="display:block;width:100%;height:100%;font-family:inherit">
+      <defs><clipPath id="tankClip"><rect x="320" y="165" width="42" height="90" rx="6"></rect></clipPath></defs>
+      <rect x="68" y="38" width="107" height="217" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1" stroke-dasharray="4 4"></rect>
+      ${pipe('M47 210H90', G)}${pipe('M90 210H132A8 8 0 0 1 148 210H320', G)}${pipe('M90 157V210', G)}${pipe('M140 157V230', G)}${pipe('M140 230H157V210', G)}${pipe('M140 230V250H62V210', G)}
+      <g id="g-in">${dash(IN_A, 'd-flow', WARM, 'in-a')}${dash(IN_B, 'd-flow', COOL, 'in-b')}</g>
+      <g id="g-out" opacity="0">${dash(OUT_A, 'd-flow', COOL, 'out-a')}${dash(OUT_B, 'd-flow', COLD, 'out-b')}</g>
+      <path id="s-grid" d="M47 35V265" stroke="#A89880" stroke-width="6" stroke-linecap="butt"></path>${dash('M47 35V265', 'd-grid', WARM, 'd-grid')}
+      <circle cx="62" cy="210" r="2.4" fill="#FFFFFF"></circle><circle cx="157" cy="210" r="2.4" fill="#FFFFFF"></circle>
+      <rect x="85" y="65" width="60" height="27" rx="4" fill="${R}"></rect><text x="115" y="82" font-size="9" font-weight="600" fill="#FFFFFF" text-anchor="middle">${S.schCond || ''}</text>
+      <rect x="85" y="133" width="60" height="25" rx="4" fill="${B}"></rect><text x="115" y="149" font-size="9" font-weight="600" fill="#FFFFFF" text-anchor="middle">${S.schEvap || ''}</text>
+      <path d="M98 92V133H130V92Z" fill="none" stroke="${G}" stroke-width="${w}" stroke-linejoin="round"></path>${dash('M98 92H130V133H98Z', 'd-green', RF)}
+      <circle cx="98" cy="112" r="6" fill="#141416" stroke="${RF}" stroke-width="1.6"></circle><path d="M95 115L101 109" stroke="${RF}" stroke-width="1.4"></path>
+      <path d="M126 108L130 116L134 108Z" fill="${RF}"></path><path d="M126 118H134" stroke="${RF}" stroke-width="1.6"></path>
+      ${valve(90, 210, 'M90 205V210M85 210H95')}${valve(140, 230, 'M140 225V235M140 230H145')}
+      <path id="bar-l" d="M96 206V214" stroke="${R}" stroke-width="1.8"></path><path id="bar-r" d="M136 236H144" stroke="${R}" stroke-width="1.8"></path>
+      <text x="90" y="226" font-size="6.5" fill="${TX}" text-anchor="middle">${S.schValveL || ''}</text><text x="149" y="246" font-size="6.5" fill="${TX}">${S.schValveR || ''}</text><text x="152" y="200" font-size="6.5" fill="${TX}" opacity=".8">${S.schCross || ''}</text><text id="t-heat" x="115" y="58" font-size="7" fill="${TX}" text-anchor="middle"></text>
+      <rect x="320" y="165" width="42" height="90" rx="6" fill="#FFFFFF" stroke="${N}" stroke-width="1.6"></rect><rect id="tf" x="320" y="210" width="42" height="45" fill="#B7D9FF" clip-path="url(#tankClip)"></rect><rect x="320" y="165" width="42" height="90" rx="6" fill="none" stroke="${N}" stroke-width="1.6"></rect>
+      <text id="t-tank" x="370" y="265" font-size="8" fill="${TX}" text-anchor="end">${S.schTank || ''} · 1,4 bar · 14 °C</text>
+      <text id="t-grid" x="30" y="273" font-size="8" fill="${TX}">${S.schGrid || ''} · 1,5 bar · 20 °C</text>
+      <text id="t-ret" x="72" y="246" font-size="8" font-weight="600" fill="${TX}"></text>
+      <text id="t-mode" x="372" y="38" font-size="11" font-weight="600" fill="${TX}" text-anchor="end"></text>
+      <path id="t-arrow" d="M341 196L347 206H335Z" fill="rgba(0,38,86,.22)"></path>
+    </svg>`;
+    const q = s => el.querySelector(s), still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const apply = (i, p) => { const s = ST[i]; q('#g-in').setAttribute('opacity', s.inh ? 1 : 0); q('#g-out').setAttribute('opacity', s.inh ? 0 : 1);
+      q(s.inh ? '#in-a' : '#out-a').setAttribute('stroke', s.a); q(s.inh ? '#in-b' : '#out-b').setAttribute('stroke', s.b); q('#d-grid').setAttribute('stroke', s.grid); q('#t-arrow').setAttribute('d', s.inh ? 'M341 196L347 206H335Z' : 'M341 224L347 214H335Z'); 
+      q('#bar-l').setAttribute('d', s.inh ? 'M96 206V214' : 'M84 206V214'); q('#bar-r').setAttribute('d', s.inh ? 'M136 236H144' : 'M146 226V234');
+      const lvl = s.inh ? .2 + .6 * p : .8 - .6 * p, hh = 88 * lvl; q('#tf').setAttribute('y', 255 - hh); q('#tf').setAttribute('height', hh); q('#tf').setAttribute('fill', s.tank);
+      q('#t-tank').textContent = (S.schTank || '') + ' · 1,4 bar · ' + s.tTank; q('#t-grid').textContent = (S.schGrid || '') + ' · 1,5 bar · ' + s.tGrid; q('#t-ret').textContent = s.tRet;
+      q('#t-mode').textContent = (s.W ? (S.schWinter || '') : (S.schSummer || '')) + ' · ' + (s.inh ? (S.schIn || '') : (S.schOut || '')).toLowerCase(); q('#t-heat').textContent = s.W ? (S.schHeat || '') : (S.schCool || ''); };
+    const start = step;
+    if (still) { apply(start, .5); return; }
+    el.querySelectorAll('.d-grid, .d-flow, .d-green').forEach(d => d.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -120 }], { duration: 4200, iterations: Infinity, easing: 'linear' }));
+    const t0 = performance.now() - start * T; let last = -1;
+    const tick = () => { if (!el.isConnected || el.__key !== key) return; const t = (performance.now() - t0) % (4 * T), i = play ? Math.floor(t / T) : step, p = (t % T) / T; apply(i, p); if (play && i !== last && i !== (this.state.schStep || 0)) this.setState({ schStep: i, season: i < 2 ? 'winter' : 'summer' }); last = i; requestAnimationFrame(tick); }; tick(); }
+  componentDidUpdate() { this.buildSchema(); this.buildHome(); this.buildAqua(); if (this.plateSvg) this.applyPlatePhase(); }
+  get S() { return (this.T || this.T_NL).S; }
+  get C() { const C = (this.T || this.T_NL).C; return this.C_NL.map((c, i) => ({ ...c, ...C[i] })); }
+  COOL_OUT = [[0,19],[4,16],[8,20],[11,29],[12,31],[13,29.5],[15,30],[18,27],[21,24],[24,22],[28,20],[32,21],[34,22],[36,22],[38,21],[40,24],[42,22],[44,21],[48,20],[52,19],[55,19.5],[57,23],[59,26],[61,25],[63,23.5],[66,23],[70,21],[72,19],[76,15],[80,20],[82,28],[84,31],[86,32],[88,31],[90,30],[92,27],[94,24],[96,21],[100,18],[102,18],[104,24],[106,33],[108,36],[109,37],[110,36],[112,34],[114,32],[116,30],[118,27],[120,24],[122,22],[124,22],[128,26],[130,31],[132,33],[134,29],[136,27],[138,26],[140,24],[142,22]];
+  COOL_IN = [[0,23.8],[6,23.6],[12,23.9],[18,24.1],[24,23.8],[30,23.7],[36,24.0],[42,24.2],[48,23.9],[54,23.8],[60,24.3],[66,24.1],[72,23.8],[78,23.7],[84,24.5],[88,24.8],[94,24.4],[100,23.9],[104,24.2],[108,25.0],[112,25.2],[116,24.8],[120,24.4],[124,24.2],[128,25.1],[132,25.3],[136,25.0],[140,24.9],[142,24.8]];
+  coolPts(a) { return a.map(([h, t]) => (h / 142 * 600).toFixed(1) + ',' + ((40 - t) / 30 * 150).toFixed(1)).join(' '); }
+  mapRef = React.createRef();
+  vb = [-360, 0, 3555.6, 2000];
+  // Koppeling naar de productinfo in de Beurspresentatie (via postMessage naar het bovenliggende venster)
+  ROUTES = { QA: 'product:qa', QG: 'product:qg', 'QG-C': 'product:qgc', QE: 'product:qeng', 'QE + QS': 'acc:qs', 'QG-30': 'product:qg30', QH: 'product:qh175', QGm: 'product:qgm', QT: 'acc:qt', 'Q-Connect': 'digital:connect', 'Q-Service': 'digital:service' };
+  CASES = { woning: 'austerlitz', ambient: 'stroom', vent: 'mathilda', cool: 'vakantiepark', net: 'ditzum', grid: 'vorden' };
+  openProduct(name) { const route = this.ROUTES[name]; if (!route || window.self === window.top) return; window.parent.postMessage({ type: 'qv-go', route }, '*'); }
+  C_NL = [
+    { id: 'woning', num: '1',
+      products: [{src:'assets/products/qa.png',name:'QA',w:'110px'}, {src:'assets/products/qg.png',name:'QG',w:'110px'}, {src:'assets/products/qe.png',name:'QE',w:'110px'}],
+      on: ['dh1', 'dh2', 'dh3'], zoom: ['dh1', 'dh2', 'dh3'] },
+    { id: 'shared', num: '2', products: [{src:'assets/products/qg.png',name:'QG',w:'110px'}, {src:'assets/products/q-support.svg',name:'Q-Service',w:'110px'}],
+      on: ['src-boreholes', 'th'], zoom: ['src-boreholes', 'th'] },
+    { id: 'ambient', num: '3', products: [{src:'assets/products/qg.png',name:'QG-C',w:'110px'}],
+      on: ['mr', 'elec-mr', 'mr-link', 'field-mr'], zoom: ['mr', 'elec-mr', 'field-mr'] },
+    { id: 'vent', num: '4',
+      products: [{src:'assets/products/qe.png',name:'QE',w:'110px'}, {src:'assets/products/qeqs.png',name:'QE + QS',w:'110px'}],
+      on: ['pf', 'elec-pf'], zoom: ['pf'] },
+    { id: 'plant', num: '5', products: [{src:'assets/products/qg30.svg',name:'QG-30',w:'170px'}, {src:'assets/products/q-support.svg',name:'Q-Service',w:'110px'}],
+      on: ['hr'], zoom: ['hr', 'cut-hr'] },
+    { id: 'cool', num: '6', products: [{src:'assets/products/qg.png',name:'QG',w:'110px'}, {src:'assets/products/qg30.svg',name:'QG-30',w:'170px'}],
+      on: ['mr', 'mr-link', 'field-mr'], zoom: ['mr', 'field-mr'] },
+    { id: 'net', num: '7', products: [{src:'assets/products/qg.png',name:'QG',w:'84px'}, {src:'assets/products/qg30.svg',name:'QG-30',w:'130px'}, {src:'assets/products/qh.png',name:'QH',w:'84px'}, {src:'assets/products/qgm.png',name:'QGm',w:'84px'}],
+      on: ['loop-street', 'loop-flow', 'ec', 'aqua', 'src-pvt', 'src-boreholes', 'th-future', 'field-mr', 'mr-link', 'mr-future', 'hr-future', 'hr', 'mr', 'th', 'dh1', 'dh2', 'dh3'], zoom: ['ground', 'xsrc-ground'] },
+    { id: 'grid', num: '8', products: [{src:'assets/products/qt.png',name:'QT',w:'110px'}, {src:'assets/products/smart-control.svg',name:'Q-Connect',w:'110px'}, {src:'assets/products/q-support.svg',name:'Q-Service',w:'110px'}],
+      on: ['grid-station', 'grid-cable', 'elec-mr', 'elec-hr', 'elec-pf', 'src-pvt-trafo', 'src-pvt-station', 'src-pvt-0', 'src-pvt-1', 'src-pvt-2', 'src-pvt-3', 'hr', 'mr', 'th', 'dh1', 'dh2', 'dh3', 'ec', 'pf', 'bridge'], zoom: ['grid-station', 'mr', 'ec'] },
+    // 9: hergebruik gasnet (InEx) — eigen wijkplaat (illustrations/inex/wijk.svg) met doorsnedes per gebouwtype
+    { id: 'inex', num: '9', products: [{src:'assets/products/qg.png',name:'QG',w:'110px'}], on: [], zoom: [], plate: 'illustrations/inex/wijk.svg' },
+  ];
+  // Wijkplaat: seizoen (boorveld wisselt van kleur en richting, lucht/water alleen 's winters). De plaat staat alleen in fase 0 in beeld.
+  applyPlatePhase() { const svg = this.plateSvg; if (!svg) return; const W = (this.state.season || 'winter') === 'winter';
+    // Boorveld: zomer laadt (warm, rood), winter levert (koelt af naar donkerblauw); leiding en putdeksels verkleuren geleidelijk, deksel voor deksel
+    { const col = W ? '#1E4BD8' : '#C41230'; svg.querySelectorAll('.bhe-pipe').forEach(p => { p.style.transition = 'stroke 2500ms ease-in-out'; p.style.stroke = col; }); svg.querySelectorAll('.bhe-dot').forEach((d, i) => { if (d.__col === col) return; d.__col = col; if (this.still) { d.setAttribute('fill', col); return; } d.animate([{ fill: getComputedStyle(d).fill }, { fill: col }], { duration: 2200, delay: i * 140, fill: 'forwards', easing: 'ease-in-out' }); }); } svg.querySelectorAll('#src-ashp, #ashp-unit').forEach(a => { a.style.transition = 'opacity 450ms ease-out'; a.style.opacity = W ? '1' : '.3'; }); svg.querySelectorAll('.src-ashp').forEach(d => (d.getAnimations ? d.getAnimations() : []).forEach(a => { if (W) a.play(); else a.pause(); }));
+    const c = this.seasonCols(), sk = W ? 'w' : 's'; svg.querySelectorAll('.ring-flow').forEach(d => d.setAttribute('stroke', c.net));
+    svg.querySelectorAll('.br-a, .br-b').forEach(d => { if (d.__season === sk) return; d.__season = sk; if (d.__a) d.__a.cancel(); const A = d.classList.contains('br-a'); if (this.still) { d.setAttribute('stroke', A ? c.in : c.out); return; }
+      // In- en uitademen even lang (0–.48 en .5–.98), met aan beide keerpunten dezelfde korte kleurwissel; zo springt de kleur bij het begin van de cyclus niet
+      const kf = A ? [{ strokeDashoffset: 0, stroke: c.in }, { strokeDashoffset: -138, stroke: c.in, offset: .48 }, { strokeDashoffset: -138, stroke: c.out, offset: .5 }, { strokeDashoffset: 0, stroke: c.out, offset: .98 }, { strokeDashoffset: 0, stroke: c.in }] : [{ strokeDashoffset: -138, stroke: c.out }, { strokeDashoffset: 0, stroke: c.out, offset: .48 }, { strokeDashoffset: 0, stroke: c.in, offset: .5 }, { strokeDashoffset: -138, stroke: c.in, offset: .98 }, { strokeDashoffset: -138, stroke: c.out }];
+      d.__a = d.animate(kf, { duration: 12000, iterations: Infinity, easing: 'ease-in-out' }); d.__a.startTime = 0; });
+    svg.querySelectorAll('.src-bhe').forEach(d => { if (d.__dir === W) return; d.__dir = W; if (d.__a) d.__a.cancel(); if (this.still) return; d.__a = d.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: (W ? -1 : 1) * 230 }], { duration: 5000, iterations: Infinity, easing: 'linear' }); }); }
+  loadPlate() {
+    const c = this.C.find(x => x.plate); const el = this.plateRef.current; if (!c || !el || el.__loaded) return; el.__loaded = true;
+    fetch(c.plate, { cache: 'no-cache' }).then(r => r.text()).then(t => {
+      el.innerHTML = t; const svg = el.querySelector('svg'); if (!svg) return; svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%'); this.plateSvg = svg;
+      const anchors = {}; svg.querySelectorAll('#anchors [data-hot]').forEach(a => { anchors[a.getAttribute('data-hot')] = [+a.getAttribute('cx'), +a.getAttribute('cy')]; }); this.setState({ ixAnchors: anchors });
+      this.applyPlatePhase(); if (this.still) return; const T = 12000;
+      const run = (sel, kf, opt) => svg.querySelectorAll(sel).forEach(d => d.animate(kf, opt));
+      run('.ring-flow', [{ strokeDashoffset: 0 }, { strokeDashoffset: -164 }], { duration: 4800, iterations: Infinity, easing: 'linear' });
+      run('.src-dc, .src-ashp', [{ strokeDashoffset: 0 }, { strokeDashoffset: -230 }], { duration: 5000, iterations: Infinity, easing: 'linear' });
+      // woningen en blokken ademen in twee groepen (A/B in tegenfase); de dakleiding tussen de blokken keert elke 10 s
+      run('.loop-bridge', [{ strokeDashoffset: 0 }, { strokeDashoffset: -180, offset: .5 }, { strokeDashoffset: 0 }], { duration: 20000, iterations: Infinity, easing: 'ease-in-out' });
+    });
+  }
+  componentDidMount() {
+    import('./i18n/plate.js').then(m => { this.T = m.plateFor(this.lang); this.forceUpdate(); }); import('./i18n/sources.js').then(m => { this.SRC = m; this.forceUpdate(); });
+    try { const s = JSON.parse(localStorage.getItem('plaat-marker-offsets') || 'null'); if (s) this.setState({ mOff: s }); } catch (_) {}
+    // Podium 1920 breed; is het venster hoger dan 16:9, dan groeit het podium mee naar beneden (paneel, nummerbalk en legenda volgen; de plaat blijft verticaal gecentreerd via stageOff)
+    this.fit = () => { const k = Math.min(window.innerWidth / 1920, window.innerHeight / 1080); this.setState({ k, sh: Math.max(1080, Math.round(window.innerHeight / k)) }); };
+    this.fit(); window.addEventListener('resize', this.fit);
+    fetch('illustrations/v3/00-overview.svg', { cache: 'no-cache' }).then(r => r.text()).then(t => {
+      const el = this.mapRef.current; if (!el) return;
+      el.innerHTML = t; const svg = el.querySelector('svg'); this.svg = svg; const bgEl = svg.querySelector('#background'); if (bgEl) bgEl.style.display = 'none';
+      // Stroming (0.13): over elke warmte-/koude-/stroomleiding een gestreepte kopie; richting en zichtbaarheid per scène in applyLayers (alleen de actieve route beweegt)
+      const FLOW = { '#C41230': ['pflow', 'rgba(255,255,255,.85)'], '#3164FD': ['pflowBack', 'rgba(255,255,255,.85)'], '#F2B705': ['pflowAlt', 'rgba(255,255,255,.9)'] };
+      svg.querySelectorAll('polyline[stroke]').forEach((e, n) => {
+        const col = (e.getAttribute('data-col') || e.getAttribute('stroke') || '').toUpperCase(); let fl = FLOW[col]; if (!fl) return; // data-col: logische kleur bij een gradient-stroke (boorpijpen scène 2)
+        // toekomstleidingen (gestippeld in het overzicht) krijgen ook stroming; die loopt alleen als de laag in een scène getrokken wordt getoond
+        const w = +e.getAttribute('stroke-width') || 4; if (w < 2.5) return;
+        const layer = e.closest('svg > g'); const lid = layer ? layer.id : '';
+        // Rood stroomt van bron naar afnemer: dakheader → schacht omlaag, veld → verdeler. Blauw andersom.
+        const rev = lid === 'cut-mrroof' || lid === 'mr-link' || lid === 'hr-roof' || lid === 'src-pvt-pipes';
+        if (rev && fl[0] !== 'pflowAlt') fl = [fl[0] === 'pflow' ? 'pflowBack' : 'pflow', fl[1]];
+        const dd = e.getAttribute('data-dir'); if (dd) fl = [dd === 'back' ? 'pflowBack' : 'pflow', fl[1]]; // stroomkabels: één richting (naar het gebouw; bij PVT van het veld af)
+        const d = e.cloneNode(false); d.setAttribute('stroke', fl[1]); d.setAttribute('stroke-width', String(Math.max(2, w * .55))); d.setAttribute('stroke-linecap', 'round');
+        d.setAttribute('stroke-dasharray', '8 64'); d.setAttribute('data-flow', '1'); d.dataset.dir = fl[0]; d.dataset.el = col === '#F2B705' ? '1' : ''; d.style.animation = fl[0] + ' ' + (col === '#F2B705' ? '3.2s ease-in-out' : '2.4s linear') + ' infinite'; d.style.animationDelay = ((n % 7) * -.35) + 's'; d.style.pointerEvents = 'none';
+        e.after(d);
+      });
+      // Water: de golflijnen in de rivier drijven langzaam stroomafwaarts (wereld +y = scherm (−0,69, 0,4) per eenheid) en vervagen aan begin en eind, zodat de lus niet springt
+      if (!this.still) svg.querySelectorAll('.wave').forEach((w, i) => { const a = w.animate([{ transform: 'translate(0px,0px)', opacity: 0 }, { opacity: .9, offset: .18 }, { opacity: .9, offset: .82 }, { transform: 'translate(-27.7px,16px)', opacity: 0 }], { duration: 7000 + (i % 3) * 900, iterations: Infinity, easing: 'linear' }); a.currentTime = (i * 1150) % 7000; });
+      svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%'); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.setAttribute('viewBox', this.vb.join(' '));
+      this.groups = [...svg.querySelectorAll(':scope > g')];
+      const hot = this.C.map((c, i) => { if (c.plate) { const b = this.bbox(['inex']); return { i, cx: b.x + b.w * .5, cy: b.y + b.h * .42 }; } const b = this.bbox(c.id === 'net' ? ['loop-street'] : c.id === 'grid' ? ['grid-station'] : c.id === 'shared' ? ['th'] : c.zoom); if (c.id === 'net') return { i, cx: 1600, cy: 1510 }; if (c.id === 'grid') return { i, cx: b.x - 50, cy: b.y + b.h + 50 }; return { i, cx: b.x + b.w / 2, cy: c.id === 'shared' ? b.y + b.h * .9 : b.y + b.h / 2 }; });
+      this.applyLayers(null, 0);
+      const L = 'ABCDEFGH'.split('').map((t, j) => [t, [['src-pvt-0', 'src-pvt-1', 'src-pvt-2', 'src-pvt-3'], ['field-mr'], ['ec'], ['aqua'], ['xsrc-dc'], ['xsrc-office'], ['xsrc-infra'], ['wko']][j], [.5, .5, .25, .25, .5, .5, .75, .5][j], [.5, .5, .75, .75, .75, .5, .25, .5][j], [0, 0, -12, -12, 0, 0, 12, 0][j], [0, 0, 6, 6, 14, 0, -6, 0][j]]);
+      const srcLabels = L.map(([t, ids, ax, ay, dx, dy], j) => { const b = this.bbox(ids); return { t, m: 'ABCDEFGH'[j], cx: b.x + b.w * ax, cy: b.y + b.h * ay, dx, dy }; });
+      this.setState({ hot, srcLabels, ready: true });
+      try { const sv = JSON.parse(localStorage.getItem('plaat-sel') || 'null'); if (sv && sv.sel != null && this.C[sv.sel]) this.select(sv.sel, sv.phase); } catch (_) {}
+    });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.fit); cancelAnimationFrame(this.raf); }
+  match(id, list) { return list.some(p => id === p || (id.startsWith(p + '-') && !id.endsWith('-future')) || (p === 'src-pvt' && id.startsWith('src-pvt'))); }
+  bbox(ids) {
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    for (const g of this.groups) if (this.match(g.id, ids)) { const b = g.getBBox(); if (!b.width) continue; x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.width); y1 = Math.max(y1, b.y + b.height); }
+    return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+  }
+  // S8: detaillagen staan alleen aan bij inzoomen; het overzicht toont gebouwen, wegen, water, hoofdlus en nummers
+  // Kenmerkende elementen (boring, bronveld, WKO, QA, putdeksel, dakdoorvoer) blijven in het overzicht staan zodat de nummers zonder lezen te plaatsen zijn; alleen leidingen en kabels komen bij inzoomen
+  DETAIL = new Set(['mr-link', 'src-pvt-pipes', 'loop-branch', 'wko-branch', 'grid-cable', 'elec-pf', 'elec-mr', 'elec-hr']);
+  // S9: in koelbedrijf keren alleen de leidingen van de actieve route om (gebouw, schacht, veld, link, hoogbouw; met WKO ook lus en bron); bronkoppen en bellen houden hun kleur
+  ROUTE = { cool: ['mr', 'cut-mr', 'cut-mrroof', 'mr-link', 'field-mr'], coolWko: ['mr-future', 'loop-street', 'wko-branch', 'wko', 'wko-tsa'] };
+  applyLayers(i, phase) {
+    const svg = this.svg; if (!svg || !this.groups) return; const c = i == null ? null : this.C[i], id = c ? c.id : null, isNet = id === 'net', isCool = id === 'cool', isVent = id === 'vent', isGrid = id === 'grid';
+    const summer = isCool && (this.state.coolSeason || 'summer') === 'summer', flip = new Set(isCool ? [...this.ROUTE.cool, ...(phase === 1 ? this.ROUTE.coolWko : [])] : []);
+    for (const g of this.groups) {
+      const on = summer && flip.has(g.id); if (on === !!g.__flipped) continue; g.__flipped = on;
+      g.querySelectorAll('polyline').forEach(p => { if (p.dataset.flow) return; if (p.dataset.ostroke == null) p.dataset.ostroke = p.getAttribute('stroke') || ''; const o = p.dataset.ostroke; if (!o) return; p.setAttribute('stroke', on && o === '#C41230' ? '#3164FD' : on && o === '#3164FD' ? '#C41230' : o); });
+    }
+    const cf = { plant: ['cut-hr'], ambient: ['cut-mr', 'cut-mrroof'], woning: ['cut-dh2', 'cut-dh3'], cool: ['cut-mr', 'cut-mrroof'], shared: ['cut-thqg'] };
+    for (const g of this.groups) {
+      let op;
+      if (g.id === 'cut-pf-a' || g.id === 'cut-pf-b') op = isVent && g.id === (phase === 1 ? 'cut-pf-b' : 'cut-pf-a') ? '1' : '0';
+      else if (g.id.startsWith('cut-')) op = c && (cf[id] || []).includes(g.id) ? '1' : '0';
+      else if (g.id.endsWith('-future')) { const show = (isNet && g.id !== 'th-future') || (isCool && phase === 1 && g.id === 'mr-future'); g.querySelectorAll('polyline:not([data-flow])').forEach(p => { p.style.strokeDasharray = show ? 'none' : ''; }); op = show ? '1' : '0'; }
+      else if (g.id.startsWith('xsrc-')) op = isNet && phase === 1 ? '1' : '0';
+      else if (i == null) op = this.DETAIL.has(g.id) ? '0' : '';
+      else if (isNet && g.id === 'src-boreholes') op = '0.18';
+      else if (isNet && (g.id === 'dh1-qa' || g.id === 'dh3-duct' || g.id === 'dh2-bore')) op = '0';
+      else if (isGrid && (g.id === 'mr-link' || g.id === 'dh2-bore')) op = '0.18';
+      else { const keep = isNet || g.id === 'background' || g.id === 'ground' || g.id === 'bridge' || this.match(g.id, c.on) || (isCool && phase === 1 && this.match(g.id, this.ROUTE.coolWko)); op = keep ? '' : (g.id.startsWith('tree') ? '0.35' : '0.18'); }
+      g.style.opacity = op;
+    }
+    // 0.13 / 7.10: stroming alleen op de actieve route; overzicht alleen de hoofdlus, traag; ZLT-net één richting, uitwisselingsnet pendelend
+    svg.querySelectorAll('[data-flow]').forEach(d => {
+      const layer = d.closest('svg > g'), lid = layer ? layer.id : '', lop = layer ? layer.style.opacity : '';
+      const vis = i == null ? lid === 'loop-street' : (lop === '' || lop === '1'); d.style.display = vis ? '' : 'none'; if (!vis) return;
+      let name = d.dataset.dir; // zomer: alleen de kleuren wisselen (aanvoer/retour); op de WKO-route is de getekende richting omgekeerd (warm de WKO in 's zomers, eruit 's winters), dus daar altijd omkeren
+      if (isCool && phase === 1 && (lid === 'loop-street' || lid === 'wko-branch' || lid === 'wko' || lid === 'wko-tsa')) name = name === 'pflow' ? 'pflowBack' : name === 'pflowBack' ? 'pflow' : name;
+      if (isNet && phase === 1 && ['loop-street', 'loop-branch', 'xsrc-pipes'].includes(lid) && !d.dataset.el) name = 'pflowAlt';
+      d.style.animationName = name; d.style.animationDuration = i == null ? '6s' : name === 'pflowAlt' ? '4.8s' : d.dataset.el ? '3.2s' : '2.4s';
+    });
+    // WKO in koelbedrijf: de warme bron laadt op (kleurt in 8 s van bleek naar rood), de koude bron raakt leeg (vervaagt); buiten die toestand beide bronnen vol
+    const wkoOn = isCool && phase === 1 && summer; if (wkoOn !== !!this.__wkoOn) { this.__wkoOn = wkoOn; const wk = svg.querySelector('#wko'); if (wk) wk.querySelectorAll('polygon').forEach(p => { const f = (p.getAttribute('fill') || '').toUpperCase(); if (f !== '#C41230' && f !== '#3164FD') return; if (p.__a) p.__a.cancel(); if (!wkoOn || this.still) { p.style.opacity = ''; return; } const warm = f === '#C41230'; p.__a = p.animate(warm ? [{ opacity: .2 }, { opacity: 1 }] : [{ opacity: 1 }, { opacity: .3 }], { duration: 8000, fill: 'forwards', easing: 'ease-in-out' }); }); }
+  }
+  animVb(target) {
+    this.setState({ vbT: target });
+    const from = this.vb.slice(), t0 = performance.now(), dur = 650;
+    cancelAnimationFrame(this.raf);
+    const step = now => { const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      this.vb = from.map((v, j) => v + (target[j] - v) * e); this.svg.setAttribute('viewBox', this.vb.join(' '));
+      if (p < 1) this.raf = requestAnimationFrame(step); };
+    this.raf = requestAnimationFrame(step);
+  }
+  select(i, ph) {
+    let phase = ph ?? (i != null && this.C[i].id === 'net' ? 1 : 0); if (i != null && this.C[i].id === 'net' && phase > 1) phase = 1; this.setState({ sel: i, phase });
+    try { localStorage.setItem('plaat-sel', JSON.stringify({ sel: i, phase })); } catch (_) {}
+    if (!this.svg) return;
+    if (i != null && this.C[i].plate) { this.loadPlate(); this.setState({ prosOpen: false }, () => this.applyPlatePhase()); for (const g of this.groups) g.style.opacity = ''; return; }
+    const R = 1920 / 1080;
+    let target;
+    if (i == null) { target = [-360, 0, 3555.6, 2000]; }
+    else {
+      const c = this.C[i]; const b = this.bbox(c.id === 'net' && phase < 1 ? ['ground'] : c.id === 'cool' && phase === 1 ? ['mr', 'field-mr', 'mr-future', 'wko', 'wko-tsa'] : c.zoom); const pad = 1.3, a = 1160 / 1920;
+      const bw = Math.max(b.w * pad, 640), bh = Math.max(b.h * pad, 500);
+      const w = Math.max(bw / a, bh * R), h = w / R;
+      target = [b.x + b.w / 2 - a * w / 2, b.y + b.h / 2 - h / 2, w, h];
+    }
+    // 0.14: heen eerst de route oplichten, dan zoomen; terug eerst uitzoomen, dan de rest terug
+    const tok = (this.tok = (this.tok || 0) + 1);
+    if (i == null) { this.animVb(target); setTimeout(() => { if (this.tok === tok) this.applyLayers(null, 0); }, 420); }
+    else { this.applyLayers(i, phase); setTimeout(() => { if (this.tok === tok) this.animVb(target); }, 180); }
+  }
+  dragM(m) {
+    return e => {
+      if (!this.props.markersVerplaatsbaar) return;
+      e.preventDefault(); const k = this.state.k, sx = e.clientX, sy = e.clientY, o0 = ((this.state.mOff || {})[m] || [0, 0]).slice();
+      const mv = ev => this.setState(s => ({ mOff: { ...(s.mOff || {}), [m]: [o0[0] + (ev.clientX - sx) / k, o0[1] + (ev.clientY - sy) / k] } }));
+      const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); try { localStorage.setItem('plaat-marker-offsets', JSON.stringify(this.state.mOff)); } catch (_) {} };
+      window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+    };
+  }
+  renderVals() {
+    const { sel, k, hot, vbT, srcLabels = [], phase = 2, sh = 1080 } = this.state; const open = sel != null; const n = this.C.length; const S = this.S; const off = (sh - 1080) / 2;
+    const c = open ? this.C[sel] : this.C[0];
+    const sc = 1920 / 3555.6;
+    const tar = [.04,.035,.022,.022,.035,.04,.055,.16,.21,.14,.1,.09,.115,.1,.095,.1,.23,.24,.18,.12,.09,.085,.045,.03];
+    const load = [[0,1.5],[1,1],[2,.3],[3,6.5],[3.5,3.5],[4.5,5],[5,.3],[5.5,2.6],[6,5.8],[6.6,3],[7,0],[12.4,0],[12.7,1.6],[13,0],[14,1.1],[14.4,0],[19,0],[19.1,6],[19.8,5],[20.3,1],[21.5,1],[21.7,2.8],[22,1],[23,.8],[24,1.3]];
+    const tv = this.tempVals(S, c, open, phase), hasSrc = !!tv.showTemp2; const aquaTab = this.state.aquaTab || 0, openAqua = k => () => this.setState({ aquaOpen: k, aquaTab: 0 }), ovK = this.state.aquaOpen === 'dc' ? 'dc' : 'aqua', ovBase = ovK === 'dc' ? 2 : 0, emb = window.self !== window.top;
+    return {
+      s: S,
+      mapRef: this.mapRef,
+      stageTransform: `scale(${k})`, stageH: sh + 'px', stageMT: (-sh / 2) + 'px', stageOff: off + 'px',
+      mapW: open ? '1160px' : '1920px',
+      mapOpacity: open && c.plate ? 0 : 1, plateOpacity: open && c.plate && phase === 0 ? 1 : 0, plateRef: this.plateRef, ix: S.inex || {}, platePE: open && c.plate && phase === 0 ? 'auto' : 'none',
+      seasons: ['winter', 'summer'].map(k => { const on = (this.state.season || 'winter') === k; return { t: k === 'winter' ? (S.inex || {}).schWinter : (S.inex || {}).schSummer, bg: on ? '#FFFFFF' : 'rgba(255,255,255,.10)', fg: on ? '#232222' : '#FFFFFF', border: on ? '#FFFFFF' : 'rgba(255,255,255,.3)', go: () => this.setState({ season: k }) }; }),
+      schemaRef: this.schemaRef, seasonColor: (this.state.season || 'winter') === 'winter' ? '#9CC3FF' : '#F4905F', seasonFlow: (this.state.season || 'winter') === 'winter' ? (S.inex || {}).schHeat : (S.inex || {}).schCool,
+      ixWijkDisplay: open && c.plate && phase === 0 ? 'block' : 'none', ixLegendDisplay: open && c.plate && phase === 0 ? 'flex' : 'none', ixToolsDisplay: open && c.plate ? 'flex' : 'none', ixToolsTop: phase === 0 ? '104px' : '166px', ixSecDisplay: open && c.plate && phase > 0 ? 'block' : 'none', ixBufDisplay: phase === 1 ? 'flex' : 'none', schBtnDisplay: phase === 1 ? 'flex' : 'none', ixSchDisplay: open && c.plate && phase === 1 && !!this.state.schemaOpen ? 'flex' : 'none',
+      ixFlowColor: this.seasonCols().net,
+      ixSeasonNote: (this.state.season || 'winter') === 'winter' ? ((S.inex || {}).ovWinter || '') : ((S.inex || {}).ovSummer || ''),
+      ixHots: [['woning', 1], ['toren', 2], ['blokken', 3]].map(([k, ph]) => { const a = ((this.state.ixAnchors || {})[k]) || [0, 0]; return { n: String(ph), label: ((S.inex || {}).phases || [])[ph] || '', x: a[0] + 'px', y: a[1] + 'px', go: () => this.select(sel, ph) }; }),
+      ixChips: [['dc', 'ovDc', 'translate(-50%,-50%)', 50, 50], ['bhe', 'ovBhe', 'translate(0,-50%)', 0, 0], ['ashp', 'ovAshp', 'translate(-100%,-50%)', 170, 40]].map(([k, tk, tf, dx, dy]) => { const a = ((this.state.ixAnchors || {})[k]) || [0, 0]; return { t: (S.inex || {})[tk] || '', x: (a[0] + dx) + 'px', y: (a[1] + dy) + 'px', tf }; }),
+      bufOpts: [['out', 'hmOut'], ['in', 'hmIn']].map(([k, tk]) => { const on = (this.state.bufIn ? 'in' : 'out') === k; return { t: (S.inex || {})[tk] || '', bg: on ? '#FFFFFF' : 'rgba(255,255,255,.10)', fg: on ? '#232222' : '#FFFFFF', border: on ? '#FFFFFF' : 'rgba(255,255,255,.3)', go: () => this.setState({ bufIn: k === 'in' }) }; }),
+      schSteps: [0, 1, 2, 3].map(i => { const on = (this.state.schStep || 0) === i; const sx = S.inex || {}; return { t: ((i % 2 ? sx.schOut : sx.schIn) || '').toLowerCase(), icon: i < 2 ? 'M0 -9V9M-7.8 -4.5L7.8 4.5M-7.8 4.5L7.8 -4.5' : 'M0 -9V-6.5M0 6.5V9M-9 0H-6.5M6.5 0H9M-6.4 -6.4L-4.6 -4.6M4.6 4.6L6.4 6.4M-6.4 6.4L-4.6 4.6M4.6 -4.6L6.4 -6.4', r: i < 2 ? 0 : 3.6, go: () => this.setState({ schStep: i, schPlay: false, season: i < 2 ? 'winter' : 'summer' }), bg: on ? '#FFFFFF' : 'rgba(255,255,255,.10)', fg: on ? '#232222' : '#FFFFFF', border: on ? '#FFFFFF' : 'rgba(255,255,255,.3)' }; }),
+      schTogglePlay: () => this.setState(s => ({ schPlay: !s.schPlay })), schPlayLabel: this.state.schPlay ? ((S.inex || {}).schPause || '') : ((S.inex || {}).schPlay || ''), schPlayIcon: this.state.schPlay ? '0' : '7px 0 7px 11px', schExp: ((S.inex || {}).schExp || [])[this.state.schStep || 0] || '', toggleSchema: () => this.setState(s => ({ schemaOpen: !s.schemaOpen })), stop: e => e.stopPropagation(), homeRef: this.homeRef,
+      showPros: open && !!c.plate, hasConcept: open && !!c.concept, titleSize: open && c.concept ? '46px' : '56px', titleLine: open && c.concept ? '54px' : '64px', goOther: () => this.select(this.C.findIndex(x => x.id === (c.id === 'net' ? 'inex' : 'net'))), bodyDisplay: open && c.id === 'net' ? 'none' : 'block', bodySize: c.plate ? '21px' : '26px', bodyLine: c.plate ? '29px' : '38px', prosOpen: open && !!c.plate && !!this.state.prosOpen, togglePros: () => this.setState(s => ({ prosOpen: !s.prosOpen })), prosLabel: (S.inex || {}).prosBtn, prosBg: 'rgba(255,255,255,.14)', prosFg: '#FFFFFF', prosL: (S.inex || {}).prosL || [], consL: (S.inex || {}).consL || [],
+      headOpacity: open ? 0 : 1, headPE: open ? 'none' : 'auto', goHome: () => { if (window.self !== window.top) window.parent.postMessage({ type: 'qv-go', route: 'home' }, '*'); },
+      panelTransform: open ? 'translateX(0)' : 'translateX(101%)', panelGap: open && c.plate ? '12px' : '22px', panelPadB: open && c.plate ? '24px' : '40px',
+      headPadR: window.self !== window.top ? (new URLSearchParams(location.search).get('back') === '1' ? '440px' : '72px') : '0px', // 72 hamburger, +368 voor de terug-pil van de kiosk; vorige/volgende staan niet meer in de kop
+      closeDisplay: open ? 'flex' : 'none',
+      hotspots: hot.map(h => ({ n: this.C[h.i].num || '', label: this.C[h.i].title, x: ((h.cx + 360) * sc) + 'px', y: (h.cy * sc) + 'px', display: open || !this.C[h.i].num ? 'none' : 'flex', go: () => this.select(h.i) })),
+      nav: this.C.map((x, i) => ({ num: x.num, short: x.short, go: () => this.select(sel === i ? null : i),
+        bg: sel === i ? '#FFFFFF' : 'transparent', fg: sel === i ? '#232222' : '#FFFFFF', numColor: sel === i ? '#232222' : '#C9BFB2', shortDisplay: !open || sel === i || !x.num ? 'inline' : 'none' })),
+      c: { ...c, count: c.num ? `${c.num} / ${this.C.length}` : '', hasNote: !!c.note },
+      products: c.products.map(q => { const linked = !!this.ROUTES[q.name] && window.self !== window.top; return { ...q, label: q.name, go: () => this.openProduct(q.name), aria: S.info + ' ' + q.name, linkDisplay: linked ? 'block' : 'none', cursor: linked ? 'pointer' : 'default', hoverBg: linked ? '#E5E6DF' : '#F4F4F4' }; }),
+      close: () => this.select(null),
+      prev: () => this.select(((sel ?? 0) - 1 + n) % n),
+      next: () => this.select(((sel ?? -1) + 1) % n),
+      showChart: open && c.id === 'grid', ...tv,
+      tempBands: (S.tempBands || []).map((t, j) => ({ t, r: (S.tempRanges || [])[j] || '', w: [2, 2, 2, 1][j], c: ['#9CC3FF', '#3164FD', '#F4905F', '#C41230'][j], fg: j === 0 ? '#232222' : '#FFFFFF' })),
+      tempMarks: [{ t: S.tempSrc || '', x: '12.5%' }, { t: S.tempOut || '', x: '37.5%' }], openEm: () => this.openProduct('Q-Connect'), emCursor: window.self !== window.top ? 'pointer' : 'default', showCool: open && c.id === 'cool', coolOpen: !!this.state.coolOpen, openCool: () => this.setState({ coolOpen: true }), closeCool: () => this.setState({ coolOpen: false }), coolOutPts: this.coolPts(this.COOL_OUT), coolInPts: this.coolPts(this.COOL_IN), coolDays: S.coolDays || [],
+      srcOpacity: open && c.id === 'net' && phase === 1 ? 1 : 0,
+      // Referentiecase per toepassing (knop in het paneel, alleen binnen de Beurspresentatie): route case:<id> naar het bovenliggende venster
+      caseRef: open && emb && (S.caseRefs || {})[c.id] ? S.caseRefs[c.id] : '', caseKicker: ((S.caseRefs || {})[c.id] || '').split(/\s*:\s*/)[0], caseTitle: ((S.caseRefs || {})[c.id] || '').split(/\s*:\s*/).slice(1).join(': '), goCase: () => { const id = this.CASES[c.id]; if (id) window.parent.postMessage({ type: 'qv-go', route: 'case:' + id }, '*'); },
+      aquaRef0: this.aquaRefs[0], aquaRef1: this.aquaRefs[1], aquaRef2: this.aquaRefs[2], aquaRef3: this.aquaRefs[3], aquaOpen: !!this.state.aquaOpen && open && c.id === 'net', closeAqua: () => this.setState({ aquaOpen: false }), stop: e => e.stopPropagation(), ovKicker: S[ovK + 'Kicker'] || '', ovTitle: S[ovK + 'Title'] || '', ovNote: S[ovK + 'Note'] || '', ovNoteDisplay: S[ovK + 'Note'] ? 'block' : 'none', ovRefLabel: S.aquaRef || '', aquaTabs: (S[ovK + 'Tabs'] || []).map((t, j) => ({ t, go: () => this.setState({ aquaTab: j }), bg: aquaTab === j ? '#232222' : '#E5E6DF', fg: aquaTab === j ? '#FFFFFF' : '#232222' })), aquaImg0: ovBase + aquaTab === 0 ? 'block' : 'none', aquaImg1: ovBase + aquaTab === 1 ? 'block' : 'none', aquaImg2: ovBase + aquaTab === 2 ? 'block' : 'none', aquaImg3: ovBase + aquaTab === 3 ? 'block' : 'none', aquaBody: (S[ovK + 'Bodies'] || [])[aquaTab] || '', aquaRefDisplay: ovK === 'aqua' && aquaTab === 0 && emb ? 'inline-flex' : 'none', goRef: () => { window.parent.postMessage({ type: 'qv-go', route: 'case:vreeswijk' }, '*'); },
+      showPhases: open && (c.id === 'net' || c.id === 'vent' || c.id === 'cool' || !!c.plate), phasePad: c.plate ? '8px' : '16px',
+      // Spel "Build your own ambient loop" (game/index.html naast de presentatie): alleen op plaat 7, in uk/nl/de; opent in het bovenste venster
+      showGame: open && c.id === 'net' && ['uk', 'nl', 'de'].includes(this.lang), gameHref: 'game/index.html?lang=' + this.lang, gameTop: emb && (S.caseRefs || {})[c.id] ? '160px' : '40px',
+      showCoolSeason: false, coolSeasons: [['winter', (S.inex || {}).schWinter], ['summer', (S.inex || {}).schSummer]].map(([k, t]) => { const on = (this.state.coolSeason || 'summer') === k; return { t, bg: on ? '#FFFFFF' : 'rgba(255,255,255,.14)', fg: on ? '#232222' : '#FFFFFF', go: () => this.setState({ coolSeason: k }, () => this.applyLayers(sel, phase)) }; }), phaseWrap: c.plate ? 'nowrap' : 'wrap', phaseFont: c.plate ? '19px' : '22px',
+      wko: (() => { const l = srcLabels.find(s => s.m === 'H'); if (!l || !vbT) return { x: '0px', y: '0px', tf: 'none' }; const o = (this.state.mOff || {}).H || [0, 0]; const x = (l.cx - vbT[0]) / vbT[2] * 1920 + l.dx + o[0], y = (l.cy - vbT[1]) / vbT[3] * 1080 + l.dy + o[1]; const flip = false; return { x: (x - 20) + 'px', y: (y + 40) + 'px', tf: 'none' }; })(),
+      phaseNote: open && c.plate ? (((S.inex || {}).notes || [])[phase] || '') : open && c.id === 'vent' ? S.ventNotes[phase] : open && c.id === 'cool' ? (hasSrc ? '' : S.coolNote) : '', gridNote: false, gridChart: open && c.id === 'grid' && !!S.gridChart, gc: this.gridChartVals(S.gridChart),
+      phases: (c.plate ? ((S.inex || {}).phases || []) : c.id === 'vent' ? S.ventPhases : c.id === 'cool' ? S.coolPhases : S.netPhases).map((t, j) => { const ph = j; return { t, n: j + 1, go: () => this.select(sel, ph), bg: phase === ph ? '#FFFFFF' : 'rgba(255,255,255,.14)', fg: phase === ph ? '#232222' : '#FFFFFF' }; }),
+      summer: open && c.id === 'cool' && (this.state.coolSeason || 'summer') === 'summer', summerTop: emb && (S.caseRefs || {})[c.id] ? '160px' : '56px',
+      srcLabels: srcLabels.map((l, j) => { const o = (this.state.mOff || {})[l.m] || [0, 0]; const act = l.m === 'D' || l.m === 'E', mv = this.props.markersVerplaatsbaar; return { t: (S.L || [])[j] || '', m: l.m, click: act ? openAqua(l.m === 'E' ? 'dc' : 'aqua') : null, pe: mv || act ? 'auto' : 'none', cursor: mv ? 'grab' : act ? 'pointer' : 'default', bg: act ? '#3164FD' : '#FFFFFF', fg: act ? '#FFFFFF' : '#232222', border: act ? '#3164FD' : '#232222', listBg: act ? '#3164FD' : 'transparent', listFg: '#FFFFFF', listText: act ? '#8FB8FF' : '#FFFFFF', x: vbT ? ((l.cx - vbT[0]) / vbT[2] * 1920 + l.dx + o[0]) + 'px' : '0px', y: vbT ? ((l.cy - vbT[1]) / vbT[3] * 1080 + l.dy + o[1]) + 'px' : '0px', drag: this.dragM(l.m) }; }),
+      markerPE: this.props.markersVerplaatsbaar ? 'auto' : 'none', markerCursor: this.props.markersVerplaatsbaar ? 'grab' : 'default',
+      showSources: open && c.id === 'net' && phase === 1, netBalance: (S.netNotes || [])[1] || '',
+      pointsShown: open && (c.plate || c.id === 'cool' || c.id === 'net' || c.id === 'vent' || c.id === 'grid' || hasSrc) ? [] : c.points,
+      hasPoints: !(open && (c.plate || c.id === 'cool' || c.id === 'net' || c.id === 'vent' || c.id === 'grid' || hasSrc)),
+      imgH: c.id === 'grid' || c.plate || hasSrc ? '64px' : '112px',
+      bars: tar.map((t, h) => ({ h: (t / .25 * 100) + '%', c: (h >= 7 && h < 10) || (h >= 16 && h < 19) ? '#F4905F' : (h < 7 || h >= 22) ? '#9CC3FF' : '#3164FD' })),
+      loadPts: load.map(([h, kw]) => `${(h / 24 * 240).toFixed(1)},${(180 - kw / 7 * 170).toFixed(1)}`).join(' '),
+    };
+  }
+}
+</script>
+</body>
+</html>

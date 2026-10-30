@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><script src="../analytics.js?v=1793339689"></script><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build your own ambient loop</title>
+<link rel="stylesheet" href="styles.css?v=1793339689">
+</head>
+<body>
+<div id="stage">
+  <div class="bg-wave"></div>
+  <div class="bg-scrim"></div>
+  <svg id="city" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"></svg>
+
+  <a id="backLogo" href="../Beurspresentatie.dc.html" aria-label="Back"><img class="logo" src="assets/qvantum-logo-white.svg" alt="Qvantum"></a>
+  <div class="heading"><div id="kicker" class="kicker"></div><div id="title" class="title"></div></div>
+  <div id="hint" class="hint"></div>
+  <div class="pills"><button id="season-winter" class="pill on"></button><button id="season-summer" class="pill"></button><button id="flexBtn" class="pill flex"></button></div>
+  <div class="topbar"><button id="resetBtn" class="btn outline"></button><button id="helpBtn" class="btn"></button><a id="backBtn" class="btn" href="../Beurspresentatie.dc.html"></a></div>
+  <div id="panel" class="panel"></div>
+  <div id="toast" class="toast hidden"></div>
+
+  <div id="start" class="overlay">
+    <div class="card-lg">
+      <div id="startKicker" class="kicker"></div>
+      <h1 id="startTitle"></h1>
+      <p id="startBody"></p>
+      <div><button id="startBtn" class="btn primary" style="font-size:22px;padding:0 28px"></button></div>
+    </div>
+  </div>
+  <div id="backbone" class="overlay hidden">
+    <div class="card-lg solid"><h2 id="bbTitle" style="font-size:36px;line-height:44px;font-weight:400;margin:0"></h2><p id="bbBody"></p><div><button id="bbOk" class="btn primary"></button></div></div>
+  </div>
+  <div id="confirm" class="overlay hidden">
+    <div class="card-lg solid" style="width:640px"><h2 id="cfTitle" style="font-size:36px;line-height:44px;font-weight:400;margin:0"></h2><p id="cfBody"></p><div class="row" style="justify-content:flex-start;gap:12px"><button id="cfOk" class="btn primary"></button><button id="cfCancel" class="btn outline"></button></div></div>
+  </div>
+  <div id="help" class="overlay hidden">
+    <div id="helpBody" class="card-lg solid" style="gap:14px"></div>
+  </div>
+</div>
+<script type="module" src="main.js?v=1793339689"></script>
+</body>
+</html>
