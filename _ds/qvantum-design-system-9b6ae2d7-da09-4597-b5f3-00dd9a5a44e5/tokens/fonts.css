@@ -1,0 +1,5 @@
+@font-face{font-family:"Host Grotesk";src:url("../assets/fonts/HostGrotesk-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Host Grotesk";src:url("../assets/fonts/HostGrotesk-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+/* Portal ships Regular and SemiBold only. Medium (500) and Bold (700) are not declared:
+   any 500/700 request would synthesise a weight. Italic cuts exist in the package but are unused. */
+:root{--font-sans:"Host Grotesk",Arial,Helvetica,sans-serif;--font-body:var(--font-sans);--font-display:var(--font-sans)}
