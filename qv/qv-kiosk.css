@@ -1,0 +1,67 @@
+/* Qvantum huisstijllaag, kioskschaal (beurspresentatie). Bouwt op qv-tokens.css (HQ, ongewijzigd) en gebruikt alleen die tokens
+   voor kleur, letter, vorm en beweging. Alleen de maten zijn hier opgeschaald: het canvas is 1920 x 1080 op een 55"-scherm,
+   gelezen op 1-3 meter, dus geen tekst kleiner dan 16 px en tikvlakken van minimaal 64 px.
+   Geen blur over het hele scherm, geen animatie die blijft doorlopen, niets op hover alleen (N150, touchscreen). */
+:root{
+  --qk-h1:112px;      /* opening (Home) */
+  --qk-h2:72px;       /* schermtitel */
+  --qk-h3:40px;       /* blok, kaarttitel */
+  --qk-h4:30px;       /* tegeltitel */
+  --qk-lead:32px;
+  --qk-body:24px;
+  --qk-small:20px;
+  --qk-label:18px;    /* labels: hoofdletters, spatiering 0,14em (HQ: 12 px op het web) */
+  --qk-ctl:64px;      /* knop- en tikhoogte; HQ minimum is 48 px */
+  --qk-ic:64px;       /* ronde pijlknop */
+  --qk-edge:64px;     /* marge tot de rand van het canvas */
+  --qk-blur:blur(10px);
+}
+.qk{font-family:var(--qv-font);color:var(--qv-fg)}
+.qk-label{font-size:var(--qk-label);font-weight:var(--qv-strong);line-height:1.3;letter-spacing:var(--qv-label-track);text-transform:uppercase;color:var(--qv-fg2)}
+.qk-h1,.qk-h2,.qk-h3,.qk-h4{font-weight:var(--qv-head-weight);letter-spacing:var(--qv-head-track);text-wrap:balance;margin:0}
+.qk-h1{font-size:var(--qk-h1);line-height:1.04}
+.qk-h2{font-size:var(--qk-h2);line-height:1.06}
+.qk-h3{font-size:var(--qk-h3);line-height:1.15;letter-spacing:-.02em}
+.qk-h4{font-size:var(--qk-h4);line-height:1.2;letter-spacing:-.015em}
+.qk-lead{font-size:var(--qk-lead);line-height:1.4;color:var(--qv-fg2);text-wrap:pretty}
+
+/* Ronde pijlknop: gevuld (hoofdactie) of met lijn */
+.qk-ic{flex:none;width:var(--qk-ic);height:var(--qk-ic);border-radius:50%;display:grid;place-items:center;background:var(--qv-fg);color:var(--qv-bg);transition:background-color .35s,color .35s,transform .5s var(--qv-ease)}
+.qk-ic svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.qk-ic--line{background:transparent;color:var(--qv-fg);box-shadow:inset 0 0 0 1.5px var(--qv-fg)}
+.qk-ic--s{width:56px;height:56px}
+.qk-ic--s svg{width:22px;height:22px}
+
+/* Tegel: knop met label, titel en pijlknop. --photo: boven een foto, zonder blur (dekkend genoeg om te lezen) */
+.qk-tile{display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-height:var(--qk-ctl);padding:24px 24px 22px 28px;border:1px solid var(--qv-hair);border-radius:var(--qv-r);background:var(--qv-tile);color:var(--qv-fg);font-family:inherit;text-align:left;cursor:pointer;transition:background-color .35s var(--qv-ease)}
+.qk-tile--photo{background:rgba(35,34,34,.72)}
+.qk-tile:active{background:var(--qv-tile-h)}
+.qk-tile--photo:active{background:rgba(35,34,34,.9)}
+.qk-tile:active .qk-ic--line{background:var(--qv-fg);color:var(--qv-bg)}
+.qk-tile-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+
+/* Glaspaneel: bescheiden blur, alleen voor kleine vlakken */
+.qk-glass{background:var(--qv-glass-dark);-webkit-backdrop-filter:var(--qk-blur);backdrop-filter:var(--qk-blur);border:1px solid var(--qv-hair);border-radius:var(--qv-r)}
+
+/* Korte onthulling bij het openen van een scherm: vervagen en 22 px schuiven, een keer */
+@keyframes qkIn{from{opacity:0;translate:0 var(--qv-shift)}}
+.qk-in{animation:qkIn var(--qv-dur) var(--qv-ease) var(--d,0ms) backwards}
+@media (prefers-reduced-motion:reduce){.qk-in{animation:none}}
+
+/* Schermwissel: korte vervaging van het hele scherm (alleen opacity: licht voor de N150) */
+@keyframes qkFade{from{opacity:0}}
+.qk-fade{animation:qkFade .45s var(--qv-ease) backwards}
+@media (prefers-reduced-motion:reduce){.qk-fade{animation:none}}
+
+/* Hoofdactie: tekst met ronde pijlknop (HQ .qv-cta), op kioskschaal */
+.qk-cta{display:inline-flex;align-items:center;gap:20px;min-height:var(--qk-ctl);padding:0;border:0;background:none;color:var(--qv-fg);font:var(--qv-strong) 24px/1.25 var(--qv-font);text-align:left;cursor:pointer}
+.qk-cta .qk-ic{transition:transform .5s var(--qv-ease)}
+.qk-cta:active .qk-ic{transform:translateX(3px)}
+
+/* Pil (HQ .qv-btn) op kioskschaal: tweede keuze en paneelknoppen */
+.qk-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:var(--qk-ctl);padding:10px 28px;border-radius:var(--qv-pill);border:1.5px solid var(--qv-fg);background:transparent;color:var(--qv-fg);font:var(--qv-strong) 22px/1.25 var(--qv-font);text-align:center;cursor:pointer;transition:background-color .3s,color .3s}
+.qk-btn:active,.qk-btn--fill{background:var(--qv-fg);color:var(--qv-bg)}
+
+/* Keuze (HQ .qv-chip): gekozen = rand in tekstkleur */
+.qk-chip{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 20px;border-radius:var(--qv-r);border:1.5px solid transparent;background:var(--qv-tile);color:var(--qv-fg);font:400 20px/1.2 var(--qv-font);cursor:pointer}
+.qk-chip[aria-pressed="true"]{border-color:var(--qv-fg)}

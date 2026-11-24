@@ -1,0 +1,674 @@
+{
+ "unitsPerCell": 144,
+ "scale": 0.3333333333333333,
+ "cellPx": 48.0,
+ "source": "site/illustrations/v3/00-overview.svg (eenmalig gekopieerd via game/tools/extract-assets.py)",
+ "assets": [
+  {
+   "id": "woontoren",
+   "file": "assets/woontoren.svg",
+   "label": "Woontoren (start) met 6 x QA-50",
+   "kind": "bestaand",
+   "footprint": [
+    2,
+    2
+   ],
+   "anchor": [
+    1496.1,
+    831.0
+   ],
+   "viewBox": [
+    1294.1,
+    55.0,
+    404.0,
+    752.0
+   ],
+   "unitsPerCell": 144,
+   "note": "hr uit de plaat (zonder hr-roof), zes QA-50 lucht-waterwarmtepompen nagetekend van de productfoto; standaard voor de UK.",
+   "port": null
+  },
+  {
+   "id": "woontoren-drycoolers",
+   "file": "assets/woontoren-drycoolers.svg",
+   "label": "Woontoren, variant met drycoolers",
+   "kind": "bestaand",
+   "footprint": [
+    2,
+    2
+   ],
+   "anchor": [
+    1496.1,
+    831.0
+   ],
+   "viewBox": [
+    1294.1,
+    55.0,
+    404.0,
+    752.0
+   ],
+   "unitsPerCell": 144,
+   "note": "hr + hr-roof uit de plaat, plus twee extra dakunits (zes in totaal); optie naast de QA-50-variant.",
+   "port": null
+  },
+  {
+   "id": "appartementen",
+   "file": "assets/appartementen.svg",
+   "label": "Appartementengebouw",
+   "kind": "bestaand",
+   "footprint": [
+    2,
+    2
+   ],
+   "anchor": [
+    1759.3,
+    1047.0
+   ],
+   "viewBox": [
+    1557.3,
+    422.2,
+    404.0,
+    600.8
+   ],
+   "unitsPerCell": 144,
+   "note": "mr uit de plaat (met PVT op het dak).",
+   "port": null
+  },
+  {
+   "id": "kantoor",
+   "file": "assets/kantoor.svg",
+   "label": "Kantoor",
+   "kind": "bestaand",
+   "footprint": [
+    2,
+    2
+   ],
+   "anchor": [
+    1018.0,
+    531.0
+   ],
+   "viewBox": [
+    829.9,
+    19.0,
+    376.3,
+    480.0
+   ],
+   "unitsPerCell": 144,
+   "note": "xsrc-office uit de plaat, zonder de drycooler op het dak (gebouwen aan de lus hebben er geen).",
+   "port": null
+  },
+  {
+   "id": "datacenter-1mw",
+   "file": "assets/datacenter-1mw.svg",
+   "label": "Datacenter 1 MW",
+   "kind": "bestaand",
+   "footprint": [
+    3,
+    3
+   ],
+   "anchor": [
+    498.4,
+    903.0
+   ],
+   "viewBox": [
+    303.4,
+    503.8,
+    390.1,
+    299.2
+   ],
+   "unitsPerCell": 144,
+   "note": "xsrc-dc uit de plaat, gecentreerd op de kavel van 3 x 3.",
+   "port": null
+  },
+  {
+   "id": "kantoor-sport",
+   "file": "assets/kantoor-sport.svg",
+   "label": "Kantoor met sportschool",
+   "kind": "nieuw",
+   "footprint": [
+    2,
+    2
+   ],
+   "anchor": [
+    0.0,
+    288.0
+   ],
+   "viewBox": [
+    -191.1,
+    -209.0,
+    382.3,
+    466.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Afgeleid van xsrc-office: zelfde raamstroken, hoge glazen plint voor de sportschool, luifel; luchtbehandeling op het dak, geen drycoolers.",
+   "port": null
+  },
+  {
+   "id": "ziekenhuis",
+   "file": "assets/ziekenhuis.svg",
+   "label": "Ziekenhuis",
+   "kind": "nieuw",
+   "footprint": [
+    3,
+    3
+   ],
+   "anchor": [
+    0.0,
+    432.0
+   ],
+   "viewBox": [
+    -338.0,
+    -101.0,
+    686.4,
+    512.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Laag en breed: hoofdgebouw met drie lagen, twee vleugels, twee drycoolers en luchtbehandeling op het dak, luifel bij de entree. Geen rood kruis.",
+   "port": null
+  },
+  {
+   "id": "supermarkt",
+   "file": "assets/supermarkt.svg",
+   "label": "Supermarkt",
+   "kind": "nieuw",
+   "footprint": [
+    2,
+    1
+   ],
+   "anchor": [
+    124.7,
+    216.0
+   ],
+   "viewBox": [
+    -109.5,
+    -39.0,
+    350.6,
+    250.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Eén laag, groot dak met koelinstallatie (drycoolers en condensors), glazen pui met luifel, laaddok.",
+   "port": null
+  },
+  {
+   "id": "datacenter-10mw",
+   "file": "assets/datacenter-10mw.svg",
+   "label": "Datacenter 10 MW (hyperscale)",
+   "kind": "nieuw",
+   "footprint": [
+    3,
+    3
+   ],
+   "anchor": [
+    0.0,
+    432.0
+   ],
+   "viewBox": [
+    -358.9,
+    -65.0,
+    721.2,
+    496.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Afgeleid van xsrc-dc: twee hallen met lamellengevels, twaalf dakunits, trafostation. Niet in het palet (besluit 28 okt 2026).",
+   "port": null
+  },
+  {
+   "id": "woonwijk",
+   "file": "assets/woonwijk.svg",
+   "label": "Woonwijk",
+   "kind": "bestaand",
+   "footprint": [
+    4,
+    3
+   ],
+   "anchor": [
+    1024.9,
+    1319.0
+   ],
+   "viewBox": [
+    518.1,
+    737.0,
+    889.0,
+    590.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Vier rijtjes th uit de plaat (12 woningen getekend); rekent als ca. 40 woningen, zie te verifiëren.",
+   "port": null
+  },
+  {
+   "id": "opslag-gesloten",
+   "file": "assets/opslag-gesloten.svg",
+   "label": "Seizoensopslag: gesloten bodemlussen",
+   "kind": "bestaand+nieuw",
+   "footprint": [
+    2,
+    3
+   ],
+   "anchor": [
+    -124.7,
+    360.0
+   ],
+   "viewBox": [
+    -271.8,
+    -64.0,
+    418.4,
+    383.6
+   ],
+   "unitsPerCell": 144,
+   "note": "Negen putdeksels (stijl boreCap van de plaat), techniekruimte ec aan de kant van de aftakking, leidingen eindigen op de deksels. Geen doorsnede, geen eigen grondplaat.",
+   "port": [
+    0.722,
+    0.056
+   ]
+  },
+  {
+   "id": "opslag-wko",
+   "file": "assets/opslag-wko.svg",
+   "label": "Seizoensopslag: WKO (open)",
+   "kind": "bestaand+nieuw",
+   "footprint": [
+    2,
+    3
+   ],
+   "anchor": [
+    -124.7,
+    360.0
+   ],
+   "viewBox": [
+    -196.3,
+    -64.0,
+    342.9,
+    376.2
+   ],
+   "unitsPerCell": 144,
+   "note": "Twee grote putdeksels, warm en koud, techniekruimte ec aan de kant van de aftakking; geen ondergrond, geen eigen grondplaat.",
+   "port": [
+    0.722,
+    0.056
+   ]
+  },
+  {
+   "id": "opslag-gesloten-zuid",
+   "file": "assets/opslag-gesloten-zuid.svg",
+   "label": "Seizoensopslag: gesloten bodemlussen (aansluiting zuid)",
+   "kind": "bestaand+nieuw",
+   "footprint": [
+    2,
+    3
+   ],
+   "anchor": [
+    -124.7,
+    360.0
+   ],
+   "viewBox": [
+    -354.4,
+    27.4,
+    522.3,
+    281.6
+   ],
+   "unitsPerCell": 144,
+   "note": "Negen putdeksels (stijl boreCap van de plaat), techniekruimte ec aan de kant van de aftakking, leidingen eindigen op de deksels. Geen doorsnede, geen eigen grondplaat.",
+   "port": [
+    0.722,
+    2.944
+   ]
+  },
+  {
+   "id": "opslag-wko-zuid",
+   "file": "assets/opslag-wko-zuid.svg",
+   "label": "Seizoensopslag: WKO (open) (aansluiting zuid)",
+   "kind": "bestaand+nieuw",
+   "footprint": [
+    2,
+    3
+   ],
+   "anchor": [
+    -124.7,
+    360.0
+   ],
+   "viewBox": [
+    -354.4,
+    80.0,
+    559.4,
+    225.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Twee grote putdeksels, warm en koud, techniekruimte ec aan de kant van de aftakking; geen ondergrond, geen eigen grondplaat.",
+   "port": [
+    0.722,
+    2.944
+   ]
+  },
+  {
+   "id": "pvt-veld",
+   "file": "assets/pvt-veld.svg",
+   "label": "PVT-veld",
+   "kind": "bestaand",
+   "footprint": [
+    3,
+    2
+   ],
+   "anchor": [
+    2169.1,
+    1317.0
+   ],
+   "viewBox": [
+    1910.7,
+    963.8,
+    449.7,
+    311.2
+   ],
+   "unitsPerCell": 144,
+   "note": "src-pvt-* uit de plaat (scène 7): vier rijen PVT met station en trafo, zonder het boorveld; de leidingeinden naar de lus krijgen een putdeksel. Levert in de zomer; cijfers zijn aannames.",
+   "port": [
+    0.417,
+    1.583
+   ]
+  },
+  {
+   "id": "aquathermie",
+   "file": "assets/aquathermie.svg",
+   "label": "Aquathermie (TEO) aan het water",
+   "kind": "bestaand+nieuw",
+   "footprint": [
+    1,
+    2
+   ],
+   "anchor": [
+    1747.6,
+    1520.0
+   ],
+   "viewBox": [
+    1730.6,
+    1323.0,
+    201.6,
+    177.4
+   ],
+   "unitsPerCell": 144,
+   "note": "Pomphuis aqua uit de plaat op de kade, inlaat in de watercel ernaast. Levert in de zomer; cijfers zijn aannames.",
+   "port": [
+    0.361,
+    1.0
+   ]
+  },
+  {
+   "id": "energiedamwand",
+   "file": "assets/energiedamwand.svg",
+   "label": "Energiedamwand",
+   "kind": "nieuw",
+   "footprint": [
+    1,
+    12
+   ],
+   "anchor": [
+    -1371.8,
+    936.0
+   ],
+   "viewBox": [
+    -1388.2,
+    47.0,
+    1522.9,
+    920.0
+   ],
+   "unitsPerCell": 144,
+   "note": "De hele kade: stalen damwand met leidingen in het profiel, wisselt het hele jaar met bodem en water. De Zweth: 1-1,5 kW/m.",
+   "port": [
+    0.889,
+    6.0
+   ]
+  },
+  {
+   "id": "kunstgrasveld",
+   "file": "assets/kunstgrasveld.svg",
+   "label": "Kunstgrasveld (bron)",
+   "kind": "nieuw",
+   "footprint": [
+    4,
+    3
+   ],
+   "anchor": [
+    124.7,
+    504.0
+   ],
+   "viewBox": [
+    -383.1,
+    -9.0,
+    891.0,
+    522.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Collectorslangen onder de mat van een voetbal-/hockeyveld (ca. 7.000 m2); levert in de zomer. Cijfers zijn aannames.",
+   "port": [
+    0.333,
+    2.944
+   ]
+  },
+  {
+   "id": "energiedamwand-icon",
+   "file": "assets/energiedamwand-icon.svg",
+   "label": "Energiedamwand (icoon voor de knop)",
+   "kind": "icoon",
+   "footprint": [
+    1,
+    3
+   ],
+   "anchor": [
+    -249.4,
+    288.0
+   ],
+   "viewBox": [
+    -263.9,
+    47.0,
+    398.6,
+    270.0
+   ],
+   "unitsPerCell": 144,
+   "note": "De hele kade: stalen damwand met leidingen in het profiel, wisselt het hele jaar met bodem en water. De Zweth: 1-1,5 kW/m.",
+   "port": [
+    0.889,
+    1.5
+   ]
+  },
+  {
+   "id": "windpark",
+   "file": "assets/windpark.svg",
+   "label": "Windpark (flexlaag)",
+   "kind": "nieuw",
+   "footprint": [
+    2,
+    5
+   ],
+   "anchor": [
+    -374.1,
+    504.0
+   ],
+   "viewBox": [
+    -525.1,
+    -332.5,
+    691.7,
+    736.4
+   ],
+   "unitsPerCell": 144,
+   "note": "Vier masten aan de achterrand van de plaat; de rotors (rotor.svg) draaien in de flexlaag om de naafpunten (hubs).",
+   "hubs": [
+    [
+     54.6,
+     -220.5
+    ],
+    [
+     -101.3,
+     -130.5
+    ],
+    [
+     -257.2,
+     -40.5
+    ],
+    [
+     -413.1,
+     49.5
+    ]
+   ],
+   "port": null
+  },
+  {
+   "id": "rotor",
+   "file": "assets/rotor.svg",
+   "label": "Rotor (windpark, flexlaag)",
+   "kind": "nieuw",
+   "footprint": [
+    0,
+    0
+   ],
+   "anchor": [
+    0,
+    0
+   ],
+   "viewBox": [
+    -112,
+    -112,
+    224,
+    224
+   ],
+   "unitsPerCell": 144,
+   "note": "Drie bladen om de naaf (0,0); draait in de flexlaag, sneller in het windvenster.",
+   "port": null
+  },
+  {
+   "id": "qa-50",
+   "file": "assets/qa-50.svg",
+   "label": "QA-50 lucht-waterwarmtepomp",
+   "kind": "nieuw",
+   "footprint": [
+    1,
+    1
+   ],
+   "anchor": [
+    0.0,
+    144.0
+   ],
+   "viewBox": [
+    -25.1,
+    24.0,
+    50.2,
+    67.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Nagetekend van de productfoto: rooster met lamellenwisselaar, donkere panelen, ventilatorring. 1,2 x 1,0 x 1,8 m.",
+   "port": null
+  },
+  {
+   "id": "dakunit",
+   "file": "assets/dakunit.svg",
+   "label": "Dakunit QA-50 / centrale lucht-waterunit",
+   "kind": "nieuw",
+   "footprint": [
+    1,
+    1
+   ],
+   "anchor": [
+    0.0,
+    144.0
+   ],
+   "viewBox": [
+    -62.7,
+    12.0,
+    125.4,
+    98.5
+   ],
+   "unitsPerCell": 144,
+   "note": "Losse dakunit, nagetekend van hr-roof, voor de productkaart en de legenda.",
+   "port": null
+  },
+  {
+   "id": "boom",
+   "file": "assets/boom.svg",
+   "label": "Boom (plein)",
+   "kind": "bestaand",
+   "footprint": [
+    1,
+    1
+   ],
+   "anchor": [
+    0.0,
+    144.0
+   ],
+   "viewBox": [
+    -25.0,
+    12.6,
+    50.0,
+    70.4
+   ],
+   "unitsPerCell": 144,
+   "note": "Boom in de stijl van tree-* uit de plaat.",
+   "port": null
+  },
+  {
+   "id": "park",
+   "file": "assets/park.svg",
+   "label": "Parkje (decor)",
+   "kind": "nieuw",
+   "footprint": [
+    2,
+    2
+   ],
+   "anchor": [
+    0.0,
+    288.0
+   ],
+   "viewBox": [
+    -258.4,
+    -24.4,
+    516.8,
+    321.4
+   ],
+   "unitsPerCell": 144,
+   "note": "Decor: gras, slingerend paadje, vijvertje, zeven bomen en een bankje. Staat bij de start binnen de ring; vrij te plaatsen en te verwijderen.",
+   "port": null
+  },
+  {
+   "id": "weg",
+   "file": "assets/weg.svg",
+   "label": "Weg (decor)",
+   "kind": "nieuw",
+   "footprint": [
+    1,
+    1
+   ],
+   "anchor": [
+    0.0,
+    144.0
+   ],
+   "viewBox": [
+    -134.2,
+    -9.0,
+    268.4,
+    162.5
+   ],
+   "unitsPerCell": 144,
+   "note": "Decor: wegtegel van één cel; straatjes (aftakkingen) mogen eronderdoor.",
+   "port": null
+  },
+  {
+   "id": "parkeren",
+   "file": "assets/parkeren.svg",
+   "label": "Parkeerplaats (decor)",
+   "kind": "nieuw",
+   "footprint": [
+    2,
+    1
+   ],
+   "anchor": [
+    124.7,
+    216.0
+   ],
+   "viewBox": [
+    -133.7,
+    -9.0,
+    392.1,
+    234.0
+   ],
+   "unitsPerCell": 144,
+   "note": "Decor: vijf vakken en twee auto's; straatjes (aftakkingen) mogen eronderdoor.",
+   "port": null
+  }
+ ]
+}

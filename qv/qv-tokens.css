@@ -1,0 +1,148 @@
+/* Qvantum style layer: tokens (v1.4, 22 Nov 2026; 1.1 added the tone "stage", 1.4 adds the stand-in font)
+   One place for colour, type, shape and motion values. Measured on the HQ website design of November 2026.
+   Market-neutral: no texts and no country names in this file. Load it before qv-components.css.
+   Tone per band: put data-qv-tone="dark", "light" or "stage" on a .qv-band or on any wrapper. */
+/* Stand-ins while Host Grotesk loads, stretched to the same width and height, so lines break in the same places and the
+   page does not jump when the real font arrives. Measured 22 Nov 2026 on 26 real headings and 4 paragraphs: Host Grotesk is
+   2.9% wider than Helvetica Neue (spread 0.7%), 3.5% wider than Arial (spread 1.2%), and 11% wider than the Mac system font
+   in headings, which is why the system font is no longer the first stand-in. A machine without Helvetica Neue skips the
+   first one and takes Arial. */
+@font-face{
+  font-family:"Host Grotesk Fallback HN";
+  src:local("Helvetica Neue"),local("HelveticaNeue");
+  size-adjust:102.8%;
+  ascent-override:98.2%;
+  descent-override:31.1%;
+  line-gap-override:0%;
+}
+@font-face{
+  font-family:"Host Grotesk Fallback";
+  src:local("Arial"),local("ArialMT");
+  size-adjust:103.5%;
+  ascent-override:97.6%;
+  descent-override:30.9%;
+  line-gap-override:0%;
+}
+:root{
+  /* colour */
+  --qv-ink:#0A0A0A;
+  --qv-dark:#232222;
+  --qv-paper:#F4F3F0;
+  --qv-stage:#E9E7E2;
+  --qv-stage-2:#DFDCD6;
+  --qv-white:#FFFFFF;
+  --qv-accent:#FF8D5A;
+  --qv-accent-soft:rgba(255,141,90,.4);
+  --qv-accent-ring:rgba(255,141,90,.7);
+  --qv-on-dark:#F4F3F0;
+  --qv-on-dark-2:rgba(244,243,240,.72);
+  --qv-on-dark-3:rgba(244,243,240,.26);
+  --qv-line:rgba(244,243,240,.14);
+  --qv-on-paper:#0A0A0A;
+  --qv-on-paper-2:#5E5C58;
+  --qv-on-paper-3:rgba(10,10,10,.22);
+  --qv-rule:rgba(10,10,10,.14);
+  --qv-error:#B42318;
+  --qv-error-on-dark:#FFB4A8;
+
+  /* type */
+  --qv-font:"Host Grotesk","Host Grotesk Fallback HN","Host Grotesk Fallback",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --qv-body:17px;
+  --qv-body-lh:1.55;
+  --qv-h1:clamp(34px,5.4vw,78px);
+  --qv-h1-hero:clamp(34px,4.5vw,66px);
+  --qv-h2:clamp(30px,4.5vw,66px);
+  --qv-h3:clamp(22px,2.1vw,30px);
+  --qv-h4:19px;
+  --qv-head-weight:400;
+  --qv-head-track:-.03em;
+  --qv-strong:500;
+  --qv-label:12px;
+  --qv-label-track:.14em;
+
+  /* shape and space */
+  --qv-wrap:1360px;
+  --qv-gutter:max(16px,5vw);
+  --qv-r:6px;
+  --qv-pill:999px;
+  --qv-ctl:48px;
+  --qv-sec:clamp(72px,9vw,148px);
+  --qv-sec-tight:clamp(56px,6vw,96px);
+
+  /* floating menu */
+  --qv-top:0px;
+  --qv-nav-top:16px;
+  --qv-nav-w:1120px;
+  --qv-nav-h:64px;
+  --qv-glass-dark:rgba(35,34,34,.5);
+  --qv-glass-light:rgba(226,224,220,.74);
+  --qv-glass-solid:rgba(35,34,34,.94);
+  --qv-glass-blur:blur(20px) saturate(1.4);
+
+  /* motion */
+  --qv-ease:cubic-bezier(.2,.7,.2,1);
+  --qv-dur:.9s;
+  --qv-shift:22px;
+  --qv-pin-step:76vh;
+
+  /* tone of the current band: paper unless data-qv-tone says otherwise */
+  --qv-bg:var(--qv-paper);
+  --qv-fg:var(--qv-on-paper);
+  --qv-fg2:var(--qv-on-paper-2);
+  --qv-fg3:var(--qv-on-paper-3);
+  --qv-hair:var(--qv-rule);
+  --qv-tile:var(--qv-stage);
+  --qv-tile-h:var(--qv-stage-2);
+  --qv-field:var(--qv-white);
+  --qv-err:var(--qv-error);
+}
+[data-qv-tone="dark"]{
+  --qv-bg:var(--qv-dark);
+  --qv-fg:var(--qv-on-dark);
+  --qv-fg2:var(--qv-on-dark-2);
+  --qv-fg3:var(--qv-on-dark-3);
+  --qv-hair:var(--qv-line);
+  --qv-tile:rgba(244,243,240,.06);
+  --qv-tile-h:rgba(244,243,240,.11);
+  --qv-field:rgba(244,243,240,.08);
+  --qv-err:var(--qv-error-on-dark);
+}
+[data-qv-tone="light"]{
+  --qv-bg:var(--qv-paper);
+  --qv-fg:var(--qv-on-paper);
+  --qv-fg2:var(--qv-on-paper-2);
+  --qv-fg3:var(--qv-on-paper-3);
+  --qv-hair:var(--qv-rule);
+  --qv-tile:var(--qv-stage);
+  --qv-tile-h:var(--qv-stage-2);
+  --qv-field:var(--qv-white);
+  --qv-err:var(--qv-error);
+}
+
+/* Second light tone, to alternate with "light" on long pages: a slightly darker band with paper tiles. */
+[data-qv-tone="stage"]{
+  --qv-bg:var(--qv-stage);
+  --qv-fg:var(--qv-on-paper);
+  --qv-fg2:var(--qv-on-paper-2);
+  --qv-fg3:var(--qv-on-paper-3);
+  --qv-hair:var(--qv-rule);
+  --qv-tile:var(--qv-paper);
+  --qv-tile-h:var(--qv-white);
+  --qv-field:var(--qv-white);
+  --qv-err:var(--qv-error);
+}
+
+/* Calm register for support and partner pages: smaller headings, tighter sections.
+   Put the class on the same wrapper that carries .qv. */
+.qv--calm{
+  --qv-h1:clamp(32px,4.4vw,60px);
+  --qv-h1-hero:clamp(32px,4.4vw,60px);
+  --qv-h2:clamp(26px,3.2vw,44px);
+  --qv-h3:clamp(20px,1.8vw,26px);
+  --qv-sec:var(--qv-sec-tight);
+  --qv-dur:.45s;
+  --qv-shift:0px;
+}
+@media(max-width:900px){
+  :root{--qv-nav-h:56px}
+}
